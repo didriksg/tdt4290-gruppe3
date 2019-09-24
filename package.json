@@ -16,5 +16,12 @@
   "bugs": {
     "url": "https://github.com/theatok/tdt4290-gruppe3/issues"
   },
-  "homepage": "https://github.com/theatok/tdt4290-gruppe3#readme"
+  "homepage": "https://github.com/theatok/tdt4290-gruppe3#readme",
+  "dependencies": {
+    "react-dom": "^16.9.0"
+  },
+  "devDependencies": {
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1"
+  }
 }
