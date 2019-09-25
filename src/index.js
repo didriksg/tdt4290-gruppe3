@@ -7,7 +7,8 @@ class HelloWorld extends React.Component {
         return <div>
 
             <div className="container">
-                <h1>Hello World{this.props.name}</h1>
+                <h1>Hello World {this.props.name}</h1>
+                
             </div>
         </div>
     }
