@@ -18,43 +18,49 @@ services:
         - ./client:/client
         - ./client/node_modules
 
+      links:
+        - api
+
       networks:
         - app-network
 
 
 
      # Setup for the API
-#    api:
-#      build:
-#        context: .api/
-#        dockerfile: Dockerfile
-#
-#      image: api
-#      container_name: api
-#      restart: always
-#
-#      ports:
-#        - "9000:9000"
-#      volumes:
-#        - ./api:/api/
-#        - ./api/node_modules
-#      networks:
-#        - app-network
+    api:
+      build:
+        context: ./api
+        dockerfile: Dockerfile
+
+      image: api
+      container_name: api
+      restart: always
+
+      ports:
+        - "4000:4000"
+      volumes:
+        - ./api:/api
+        - ./api/node_modules
+
+      depends_on:
+        - mongodb
+
+      networks:
+        - app-network
 
 
     # Setup for MongoDB
-#    mongodb:
-#        image: mongo
-#        restart: always
-#        container_name: mongodb
-#        volumes:
-#          - ./data-node:/data/db
-#        ports:
-#          - 27017:27017
-#        command: mongod --noauth --smallfiles
-#        networks:
-#          - app-network
+    mongodb:
+        container_name: mongodb
+        image: mongo
+        ports:
+          - "27017:27017"
+        networks:
+          - app-network
 
+
+volumes:
+  data-volume:
 
 networks:
   app-network:
