@@ -7,7 +7,10 @@ WORKDIR /api
 # Copy all files with package.json in its name to the container
 COPY package*.json ./
 
-# Run NPM to install dependencies. Include nodemon so backend can be updated without refreshing when developing
+# Run NPM to install dependencies.
+RUN npm install
+
+# Include nodemon so backend can be updated without refreshing when developing
 RUN npm install -g nodemon
 
 # Copy contents to the container
