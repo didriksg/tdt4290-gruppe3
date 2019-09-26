@@ -1,20 +1,24 @@
-version: "2"
+version: "3"
 
 services:
     client:
-        image: webapp-client
-        restart: always
-        ports:
-          - "3000:3000"
-        working_dir: /client/src/app
-        volumes:
-          - ./client:/client
-          - /client/node_modules
-#        links:
-#          - api
-        networks:
-          - webappnetwork
+      build:
+        context: ./client
+        dockerfile: Dockerfile
+
+      image: client
+      container_name: client
+      restart: always
+
+      ports:
+        - "1234:1234"
+      volumes:
+        - ./client:/client
+        - ./client/node_modules
+
+      networks:
+        - app-network
 
 networks:
-  webappnetwork:
+  app-network:
     driver: bridge

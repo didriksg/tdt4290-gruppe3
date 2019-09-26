@@ -1,11 +1,14 @@
 # Use the LTS version of Node
-FROM mhart/alpine-node:10.16.0
+FROM node:10-alpine
 
 # Use /client as working dir
 WORKDIR /client
 
+# add to $PATH
+# ENV PATH /client/node_modules/.bin:$PATH
+
 # Copy package.json file
-COPY packe*.json /client/
+COPY package*.json /client/
 
 # Run NPM to install dependencies
 RUN npm install
@@ -14,7 +17,7 @@ RUN npm install
 COPY . /client/
 
 # Open up port 3000
-EXPOSE 3000
+EXPOSE 1234
 
 # Run the app when you start the container
 CMD ["npm", "start"]
