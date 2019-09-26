@@ -125,3 +125,5 @@ sketch
 client/dist/
 
 dist/
+
+\.idea/
