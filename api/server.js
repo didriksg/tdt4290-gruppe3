@@ -1,15 +1,10 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const config = require('config');
-const bodyParser = require('body-parser');
-const session = require('express-session');
-const passport = require('passport');
 const app = express();
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-    extended: true
-}));
+app.use(express.json());
+
 // Connect to MongoDB via mongoose.
 mongoose
     .connect('mongodb://mongodb:27017/journal', {
