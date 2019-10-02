@@ -1,23 +1,29 @@
 const express = require('express');
-const app = express();
-const bodyParser = require('body-parser');
-const cors = require('cors');
 const mongoose = require('mongoose');
-const PORT = 4000;
+const config = require('config');
+const bodyParser = require('body-parser');
+const session = require('express-session');
+const passport = require('passport');
+const app = express();
 
-app.use(cors());
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+// Connect to MongoDB via mongoose.
+mongoose
+    .connect('mongodb://mongodb:27017/journal', {
+        useNewUrlParser: true,
+        useCreateIndex: true,
+        useUnifiedTopology: true
+    })
+    .then(() => console.log('MongoDB connected..'))
+    .catch(err => console.log(err));
 
-mongoose.connect('mongodb://mongodb:27017/journal', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-}); // port 27017, use journal
-const connection = mongoose.connection;
+// Setup routes.
+app.use('/api/auth', require('./routes/auth'));
+app.use('/api/registerUser', require('./routes/users'));
 
-connection.once('open', function() {
-    console.log("MongoDB database connection established success")
-})
-
-app.listen(PORT, function() {
-    console.log("Server is running on Port: " + PORT);
-});
+// Make app listen a given port
+const PORT = config.get('apiPort');
+app.listen(PORT, () => console.log("Server is running on port: " + PORT));

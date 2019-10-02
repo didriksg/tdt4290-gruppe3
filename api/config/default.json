@@ -1,0 +1,5 @@
+{
+  "jwtSecret": "Denne må endres på serveren.",
+  "jwtExpireInterval": 3600,
+  "apiPort": 4000
+}
