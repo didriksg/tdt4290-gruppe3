@@ -43,8 +43,7 @@ router.post('/', (req, res) => {
                         config.get('jwtSecret'),
                         {expiresIn: config.get('jwtExpireInterval')},
                         (err, token) => {
-                            if (err)
-                                throw err;
+                            if (err) throw err;
 
                             // Respond with the token and credentials.
                             res.json({
@@ -69,8 +68,5 @@ router.get('/user', auth, (req, res) => {
         .select('-password')
         .then(user => res.json(user));
 });
-
-module.exports = router;
-
 
 module.exports = router;

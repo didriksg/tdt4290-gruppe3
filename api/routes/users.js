@@ -41,8 +41,7 @@ router.get('/', (req, res) => {
             bcrypt.genSalt(10, (err, salt) => {
                 bcrypt.hash(newUser.password, salt, (err, hash) => {
                     // Throw the error further up if a problem occurs with hashing.
-                    if (err)
-                        throw err;
+                    if (err) throw err;
 
                     // Save new user and assign a token.
                     newUser.password = hash;
@@ -54,8 +53,7 @@ router.get('/', (req, res) => {
                                 config.get('jwtSecret'),
                                 {expiresIn: config.get('jwtExpireInterval')},
                                 (err, token) => {
-                                    if (err)
-                                        throw err;
+                                    if (err) throw err;
 
                                     res.json({
                                         token,
