@@ -40,7 +40,6 @@ router.get('/', (req, res) => {
             // Create salt and hash password
             bcrypt.genSalt(10, (err, salt) => {
                 bcrypt.hash(newUser.password, salt, (err, hash) => {
-                    console.log(newUser.password);
                     // Throw the error further up if a problem occurs with hashing.
                     if (err)
                         throw err;
