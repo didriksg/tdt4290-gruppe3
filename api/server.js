@@ -11,6 +11,7 @@ const PORT = 4000;
 app.use(cors());
 app.use(bodyParser.json());
 
+
 mongoose.connect('mongodb://mongodb:27017/journal', {
     useNewUrlParser: true,
     useCreateIndex: true,
@@ -22,9 +23,9 @@ connection.once('open', function () {
     console.log("MongoDB database connection established success")
 });
 
-
 // Use routes
-app.use('/api/users', require('./routes/users'));
+app.use('/api/user', require('./routes/users'));
+app.use('/api/auth', require('./routes/authentication'));
 
 
 app.listen(PORT, function () {
