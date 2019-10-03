@@ -4,8 +4,9 @@
 
   "apiPort": 4000,
 
-  "mongodbPort": 27017,
   "mongodbConnectionString": "mongodb://mongodb:",
+  "mongodbPort": 27017,
   "mongodbDatabaseName":  "journal",
+
   "bcryptSaltRounds": 10
 }
