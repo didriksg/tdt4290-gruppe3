@@ -1,0 +1,81 @@
+.casecontainer{
+    display: flex;    
+    justify-content: center;
+    font-family: sans-serif;
+    align-content: center;
+}
+
+.caseelements{
+    border-radius: 5px;
+    margin-top: 2rem;
+    text-align: center;
+    background-color: lightgrey;
+    height: 42rem;
+    width: 30rem;
+    font-family: sans-serif;
+}
+
+
+
+.elementsingrid{
+    display: grid;
+    grid-template-areas: 
+        'gericanr gericainput gericainput '
+        'prio priograd priograd'
+        'henvendtfra sted sted'
+        'aldersgruppe barnvoksen barnvoksen'
+        'beskrivelse beskrivelseboks beskrivelseboks'
+        'beskrivelse beskrivelseboks beskrivelseboks' 
+        'beskrivelse beskrivelseboks beskrivelseboks'
+        'footer footer footer';
+    grid-gap: 1rem;
+    padding: 1rem;
+    justify-content: center;
+}
+
+.elementsingrid > div {
+    background-color: lightgray;
+    text-align: left;
+    
+    padding: 2px 0;
+  }
+
+.gericanr { 
+    grid-area: gericanr; 
+}
+.gericainput { 
+    grid-area: gericainput; 
+}
+
+.prio{
+    grid-area: prio;
+}
+.priograd { 
+    grid-area: priograd; 
+}   
+
+.henvendtfra{
+    grid-area: henvendtfra;
+}
+.sted { 
+    grid-area: sted; 
+}
+
+.aldersgruppe{
+    grid-area: aldersgruppe;
+}
+.barnvoksen{
+    grid-area: barnvoksen;
+}
+
+.beskrivelse{
+    grid-area: beskrivelse;
+}
+.beskrivelseboks{
+    grid-area: beskrivelseboks;
+}
+
+.footer{
+    grid-area: footer;
+}
+

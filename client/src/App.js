@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import LoginScreen from "./components/loginscreen/loginscreen";
+import CaseScreen from './components/casescreen/casescreen.js';
 
 class App extends Component{
 
@@ -7,8 +8,9 @@ class App extends Component{
         return(
             <div>
                 <div className="container">
-                    <LoginScreen/>                    
+                    <CaseScreen/>         
                     <h1>Hello World {this.props.name}</h1>
+                    
                 </div>
             </div>
         )
