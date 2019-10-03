@@ -10,9 +10,10 @@ const jwt = require('jsonwebtoken');
 const auth = function authenticateToken(req, res, next) {
     const token = req.header('x-auth-token');
 
-    if (!token)
+    if (token === undefined) {
         res.status(401)
             .json({msg: 'No valid token was found. Access denied.'});
+    }
 
     try {
         req.user = jwt.verify(token, config.get('jwtSecret'));

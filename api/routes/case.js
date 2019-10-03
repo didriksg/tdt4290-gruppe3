@@ -4,7 +4,7 @@ const router = express.Router();
 const config = require('config');
 const auth = require('../middleware/auth');
 
-// User model
+// Case model
 const Case = require('../models/Case');
 
 // @route   POST api/case/add
@@ -57,7 +57,7 @@ router.post('/add', auth, (req, res) => {
         });
 });
 
-// @route   PUT api/case/update
+// @route   PUT api/case/update/:id
 // @desc    Update a case
 // @access  Private
 router.put('/update/:id', auth, (req, res) => {

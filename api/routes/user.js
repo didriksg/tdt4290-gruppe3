@@ -24,7 +24,7 @@ router.post('/register', (req, res) => {
     // Check for existing user
     User.findOne({email})
         .then((user) => {
-            if (user !== undefined) {
+            if (user !== null) {
                 return res.status(400)
                     .json({msg: 'User already exists'});
             }
@@ -50,7 +50,8 @@ router.post('/register', (req, res) => {
                                         config.get('jwtSecret'),
                                         {expiresIn: config.get('jwtExpireInterval')},
                                         (err, token) => {
-                                            if (err) throw err;
+                                            if (err)
+                                                throw err;
 
                                             res.status(200)
                                                 .json({
@@ -61,9 +62,8 @@ router.post('/register', (req, res) => {
                                                         email: user.email,
                                                     }
                                                 })
-                                        }
-                                    );
-                                })
+                                        });
+                                });
                         })
                         .catch((err) => {
                             throw err;

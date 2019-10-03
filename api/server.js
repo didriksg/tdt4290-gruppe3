@@ -27,6 +27,5 @@ app.use('/api/user', require('./routes/user'));
 app.use('/api/case', require('./routes/case'));
 
 // Make app listen a given port
-
 const apiPort = config.get('apiPort');
 app.listen(apiPort, () => console.log('Server is running on port: ' + apiPort));

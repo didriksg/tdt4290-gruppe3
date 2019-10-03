@@ -67,13 +67,14 @@ router.get('/user', auth, (req, res) => {
     User.findById(req.user.id)
         .select('-password')
         .then((user) => res.status(200).json(user))
-        .catch((err)=> res.status(500).json({msg: 'User data not found..'}));
+        .catch(() => res.status(500).json({msg: 'User data not found..'}));
 });
 
 // @route   GET api/auth/user
 // @desc    Get user data
 // @access  Private
 router.get('/user/:id', auth, (req, res) => {
+    // Return user data, but don't add password.
     User.findById(req.user.id)
         .select('-password')
         .then(user => res.json(user));
