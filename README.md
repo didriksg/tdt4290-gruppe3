@@ -21,6 +21,11 @@ will install and setup the frontend, backend and database.
 3. The app should now be up and running.
 
 
+## Setup the website
+1. Open a terminal and navigate to the client folder for the project
+2. run: `npm install` to install the necessary modules
+3. while in the client folder, run: `npm start`. The website will now run from `http://localhost:1234/`
+
 ## Running tests
 Smart things about running the tests goes here.
 
