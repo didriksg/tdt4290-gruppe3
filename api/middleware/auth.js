@@ -12,14 +12,14 @@ const auth = function authenticateToken(req, res, next) {
 
     if (!token)
         res.status(401)
-            .json({msg: 'No token. Authorization denied.'});
+            .json({msg: 'No valid token was found. Access denied.'});
 
     try {
         req.user = jwt.verify(token, config.get('jwtSecret'));
         next();
     } catch (e) {
         res.status(400)
-            .json({msg: 'Token is not valid.'})
+            .json({msg: 'Provided token is not valid. Access denied.'})
     }
 };
 
