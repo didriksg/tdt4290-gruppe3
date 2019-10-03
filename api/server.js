@@ -16,7 +16,8 @@ mongoose.connect('mongodb://mongodb:27017/journal', {
 
 // Setup routes.
 app.use('/api/auth', require('./routes/auth'));
-app.use('/api/registerUser', require('./routes/users'));
+app.use('/api/user', require('./routes/user'));
+app.use('/api/case', require('./routes/case'));
 
 // Make app listen a given port
 

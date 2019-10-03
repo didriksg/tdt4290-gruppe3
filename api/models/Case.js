@@ -1,24 +1,29 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-// Create user model
+// Create case model
 const CaseSchema = new Schema({
+    gericaNumber: {
+        type: Number,
+        required: true,
+    },
+
     priority: {
         type: Number,
         required: true
     },
 
-    isChildType: {
+    isChildrenCase: {
         type: Boolean,
         required: true,
     },
 
-    startupWeek: {
+    startupDate: {
         type: Date,
         required: true,
     },
 
-    date: {
+    registeredDate: {
         type: Date,
         default: Date.now,
         required: true,
@@ -37,6 +42,13 @@ const CaseSchema = new Schema({
     state: {
         type: Number,
         required: true,
+        default: 0,
+    },
+
+    important: {
+        type: Boolean,
+        required: false,
+        default: false
     },
 
     description: {
@@ -47,6 +59,11 @@ const CaseSchema = new Schema({
     userResponsible: {
         type: mongoose.ObjectId,
         required: false,
+    },
+
+    lastChanged: {
+        type: Date,
+        default: Date.now(),
     },
 });
 
