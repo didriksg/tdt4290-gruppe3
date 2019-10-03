@@ -36,9 +36,8 @@ router.post('/register', (req, res) => {
                 password
             });
 
-
             // Create salt and hash password
-            bcrypt.genSalt(10)
+            bcrypt.genSalt(config.get('bcryptSaltRounds'))
                 .then((salt) => {
                     bcrypt.hash(newUser.password, salt)
                         .then((hash) => {

@@ -6,12 +6,19 @@ const app = express();
 app.use(express.json());
 
 // Connect to MongoDB via mongoose.
-mongoose.connect('mongodb://mongodb:27017/journal', {
+
+const mongodbPort = config.get('mongodbPort');
+const mongodbConnectionString = config.get('mongodbConnectionString');
+const mongodbDatabaseName = config.get('mongodbDatabaseName');
+
+const connectionString = mongodbConnectionString + mongodbPort + '/' + mongodbDatabaseName;
+
+mongoose.connect(connectionString, {
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true
 })
-    .then(() => console.log('MongoDB connected..'))
+    .then(() => console.log('MongoDB connected successfully on port: ' + mongodbPort))
     .catch(err => console.log(err));
 
 // Setup routes.
@@ -21,5 +28,5 @@ app.use('/api/case', require('./routes/case'));
 
 // Make app listen a given port
 
-const port = config.get('apiPort');
-app.listen(port, () => console.log('Server is running on port: ' + port));
+const apiPort = config.get('apiPort');
+app.listen(apiPort, () => console.log('Server is running on port: ' + apiPort));

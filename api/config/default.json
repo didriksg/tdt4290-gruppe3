@@ -1,5 +1,11 @@
 {
   "jwtSecret": "Denne må endres på serveren.",
   "jwtExpireInterval": 3600,
-  "apiPort": 4000
+
+  "apiPort": 4000,
+
+  "mongodbPort": 27017,
+  "mongodbConnectionString": "mongodb://mongodb:",
+  "mongodbDatabaseName":  "journal",
+  "bcryptSaltRounds": 10
 }
