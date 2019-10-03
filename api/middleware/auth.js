@@ -1,7 +1,13 @@
 const config = require('config');
 const jwt = require('jsonwebtoken');
 
-function authenticateToken(req, res, next) {
+/**
+ * Authenticates a given token and add the authenticated user to the incoming request.
+ * @param req The request
+ * @param res The response
+ * @param next Next middleware function.
+ */
+const auth = function authenticateToken(req, res, next) {
     const token = req.header('x-auth-token');
 
     if (!token)
@@ -15,6 +21,6 @@ function authenticateToken(req, res, next) {
         res.status(400)
             .json({msg: 'Token is not valid.'})
     }
-}
+};
 
-module.exports = authenticateToken;
+module.exports = auth;
