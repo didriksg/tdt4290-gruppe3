@@ -34,6 +34,11 @@ const CaseSchema = new Schema({
         required: true,
     },
 
+    referredFrom: {
+        type: String,
+        required: false
+    },
+
     district: {
         type: String,
         required: true,
@@ -48,7 +53,7 @@ const CaseSchema = new Schema({
     important: {
         type: Boolean,
         required: false,
-        default: false
+        default: false,
     },
 
     description: {
