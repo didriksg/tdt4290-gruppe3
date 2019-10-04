@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
-const config = require('config');
 const auth = require('../middleware/auth');
+const sort = require('../utils/sortCasesByPriority');
 
 // Case model
 const Case = require('../models/Case');
@@ -21,6 +21,8 @@ router.post('/add', auth, (req, res) => {
     const category = req.body.category;
     const district = req.body.district;
     const description = req.body.description;
+    const referredFrom = req.body.referredFrom;
+    const important = req.body.important;
 
     // Check if all required fields are provided.
     if (gericaNumber === undefined
@@ -32,7 +34,7 @@ router.post('/add', auth, (req, res) => {
         || district === undefined
     ) {
         return res.status(400)
-            .json({msg: 'Please enter all fields.'});
+            .json({msg: 'Please enter all required fields.'});
     }
 
     const newCase = new Case({
@@ -43,7 +45,9 @@ router.post('/add', auth, (req, res) => {
         registeredDate,
         category,
         district,
-        'description': description
+        'important': important,
+        'description': description,
+        'referredFrom': referredFrom,
     });
 
     // Save case.
@@ -87,6 +91,7 @@ router.put('/update/:id', auth, (req, res) => {
             const state = req.body.state;
             const important = req.body.important;
             const userResponsible = req.body.userResponsible;
+            const referredFrom = req.body.referredFrom;
 
             // Update database entry.
             result.gericaNumber = gericaNumber === undefined ? result.gericaNumber : gericaNumber;
@@ -99,6 +104,7 @@ router.put('/update/:id', auth, (req, res) => {
             result.state = state === undefined ? result.state : state;
             result.userResponsible = userResponsible === undefined ? result.userResponsible : userResponsible;
             result.important = important === undefined ? result.important : important;
+            result.referredFrom = referredFrom === undefined ? result.referredFrom : referredFrom;
             result.lastChanged = Date.now();
 
             // Save changes.
@@ -124,6 +130,14 @@ router.put('/update/:id', auth, (req, res) => {
 router.get('/list', auth, (req, res) => {
     Case.find()
         .then((cases) => {
+            if (cases === null || cases.length === 0) {
+                res.status(404)
+                    .json({msg: 'No cases was found.'});
+                return;
+            }
+
+            // Sort cases by priorirty, then importance.
+            const sortedCases = sort(cases);
             res.status(200)
                 .json(cases);
         })
@@ -133,7 +147,7 @@ router.get('/list', auth, (req, res) => {
         });
 });
 
-// @route   GET api/case/getById
+// @route   GET api/case/:id
 // @desc    Get case with given ID
 // @access  Private
 router.get('/:id', auth, (req, res) => {
