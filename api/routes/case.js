@@ -11,6 +11,7 @@ const Case = require('../models/Case');
 // @desc    Add a new case to database. Request should contain all required elements defined in the `Case` model.
 // @access  Private
 router.post('/add', auth, (req, res) => {
+    console.log(req.body);
     // Extract data from request's body.
     const gericaNumber = req.body.gericaNumber;
     const priority = req.body.priority;
@@ -133,7 +134,7 @@ router.get('/list', auth, (req, res) => {
 });
 
 // @route   GET api/case/getById
-// @desc    Get all cases with a given GericaID
+// @desc    Get case with given ID
 // @access  Private
 router.get('/:id', auth, (req, res) => {
     // Extract ID
@@ -152,6 +153,35 @@ router.get('/:id', auth, (req, res) => {
             res.status(200)
                 .json({
                     case: matchedCase,
+                });
+        })
+        .catch(() => {
+            res.status(404)
+                .json({msg: 'Case with provided ID was not found.'});
+        });
+});
+
+// @route   GET api/case/gericaid
+// @desc    Get case with given GericaID
+// @access  Private
+router.get('/gericaid/:id', auth, (req, res) => {
+    // Extract ID
+    console.log(req.params);
+
+    const id = req.params.id;
+
+    // Check if an ID was provided.
+    if (id === undefined) {
+        res.status(400)
+            .json({msg: 'No correct ID was provided'});
+    }
+
+    // Extract case with given ID. Set a 404 state if no ID was found.
+    Case.find({gericaNumber: id})
+        .then((casesWithGericaId) => {
+            res.status(200)
+                .json({
+                    casesWithGericaId,
                 });
         })
         .catch(() => {
