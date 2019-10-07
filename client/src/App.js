@@ -7,13 +7,12 @@ class App extends Component{
         return(
             <div>
                 <div className="container">
-                    <LoginScreen/>                    
+                    <LoginScreen />                    
                     <h1>Hello World {this.props.name}</h1>
                 </div>
             </div>
-        )
+        );
     }
-
 }
 
 export default App;
