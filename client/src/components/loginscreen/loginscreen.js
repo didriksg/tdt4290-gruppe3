@@ -38,7 +38,7 @@ class LoginScreen extends React.Component{
                     <div className="loginbutton">
                         <form>
                             <NavLink to="/hjemmeside">
-                                <button primary as={NavLink}type="submit">Login</button>
+                                <button type="submit">Login</button>
                             </NavLink>
                         </form>
                     </div>
