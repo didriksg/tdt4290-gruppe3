@@ -6,13 +6,15 @@ import { NavLink } from 'react-router-dom';
 class LoginScreen extends React.Component{
 
     render() {
-        return(
+        return (
             <div className="logincontainer">
-                
-                <div className="loginelements">
-                    
+                <div className="loginelements"> 
                     <div className="logo">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/c/ce/Trondheim_komm.svg" width="70" height="80"/>
+                        <img 
+                            src="https://upload.wikimedia.org/wikipedia/commons/c/ce/Trondheim_komm.svg" 
+                            width="70" 
+                            height="80"
+                        />
                     </div>
 
                     <h1>Enhet for Ergoterapitjeneste</h1>
