@@ -51,9 +51,12 @@ router.post('/add', auth, (req, res) => {
 
     // Save case.
     newCase.save()
-        .then(() => {
+        .then((c) => {
             return res.status(200)
-                .json({msg: 'Case saved to database.'});
+                .json({
+                    _id: c._id,
+                    msg: 'Case saved to database.',
+                });
         })
         .catch(() => {
             return res.status(500)

@@ -13,7 +13,9 @@ const User = require('../models/User');
 // @desc    Register new user
 // @access  Public
 router.post('/register', (req, res) => {
-    const {name, email, password} = req.body;
+    const name  = req.body.name;
+    const email = req.body.email;
+    const password = req.body.password;
 
     // Check that all required data is provided.
     if (name === undefined || email === undefined || password === undefined) {
