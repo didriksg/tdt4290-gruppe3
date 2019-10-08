@@ -1,18 +1,14 @@
-const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+
 const config = require('../config/default');
 
-const router = express.Router();
-
 const User = require('../models/User');
-const auth = require('../middleware/auth');
 
-
-// @route   POST api/auth/login
-// @desc    Authenticate a user.
-// @access  Public
-router.post('/login', (req, res) => {
+/**
+ * Logs a user in by checking the DB for a matching user, validating the password, and returning a JWT.
+ */
+exports.login = function loginUser(req, res) {
     const email = req.body.email;
     const password = req.body.password;
 
@@ -59,26 +55,14 @@ router.post('/login', (req, res) => {
                     );
                 });
         });
-});
+};
 
-// @route   GET api/auth/user
-// @desc    Get user data
-// @access  Private
-router.get('/user', auth, (req, res) => {
+/**
+ * Get the all data about the current user, except the password.
+ */
+exports.getUser = function getUserById(req, res) {
     User.findById(req.user.id)
         .select('-password')
         .then((user) => res.status(200).json(user))
         .catch((err) => res.status(500).json({msg: 'User data not found..'}));
-});
-
-// @route   GET api/auth/user
-// @desc    Get user data
-// @access  Private
-router.get('/user/:id', auth, (req, res) => {
-    // Return user data, but don't add password.
-    User.findById(req.user.id)
-        .select('-password')
-        .then(user => res.json(user));
-});
-
-module.exports = router;
+};
