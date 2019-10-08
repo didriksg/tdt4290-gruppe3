@@ -18,16 +18,18 @@ exports.register = function registerNewUser(req, res) {
 
     // Check that all required data is provided.
     if (name === undefined || email === undefined || password === undefined) {
-        return res.status(400)
+        res.status(400)
             .json({msg: 'Please enter all fields'});
+        return;
     }
 
     // Check for existing user
     User.findOne({email})
         .then((user) => {
             if (user !== null) {
-                return res.status(400)
+                res.status(400)
                     .json({msg: 'User already exists'});
+                return;
             }
 
             // If no user with this email exist, create new user model with given data.
