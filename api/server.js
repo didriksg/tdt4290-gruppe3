@@ -1,15 +1,15 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const config = require('config');
+const config = require('./config/default');
 
 const app = express();
 app.use(express.json());
 
 // Connect to MongoDB via mongoose.
 
-const mongodbPort = config.get('mongodbPort');
-const mongodbConnectionString = config.get('mongodbConnectionString');
-const mongodbDatabaseName = config.get('mongodbDatabaseName');
+const mongodbPort = config['mongodbPort'];
+const mongodbConnectionString = config['mongodbConnectionString'];
+const mongodbDatabaseName = config['mongodbDatabaseName'];
 
 const connectionString = mongodbConnectionString + mongodbPort + '/' + mongodbDatabaseName;
 
@@ -28,5 +28,5 @@ app.use('/api/case', require('./routes/case'));
 
 // Make app listen a given port
 
-const apiPort = config.get('apiPort');
+const apiPort = config['apiPort'];
 app.listen(apiPort, () => console.log('Server is running on port: ' + apiPort));

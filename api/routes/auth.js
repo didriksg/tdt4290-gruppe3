@@ -1,7 +1,7 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const config = require('config');
+const config = require('../config/default');
 
 const router = express.Router();
 
@@ -41,8 +41,8 @@ router.post('/login', (req, res) => {
                     // If successful match, sign a token and return it.
                     jwt.sign(
                         {id: user.id},
-                        config.get('jwtSecret'),
-                        {expiresIn: config.get('jwtExpireInterval')},
+                        config['jwtSecret'],
+                        {expiresIn: config['jwtExpireInterval']},
                         (err, token) => {
                             if (err) throw err;
 
