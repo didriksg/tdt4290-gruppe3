@@ -44,10 +44,10 @@ const genDbData = function generateDummyDataToDatabase() {
         .catch(err => console.log(err));
 };
 
-const genCases = async function generateDummyCases(cases) {
+const genCases = async function generateDummyCases() {
     const availableCategories = categories['categories'];
 
-    for (i = 0; i < numberOfCasesToGenerate; i++) {
+    for (let i = 0; i < numberOfCasesToGenerate; i++) {
         const gericaNumber = randomInt(100000, 999999);
         const priority = randomInt(1, 4);
         const isChildrenCase = Math.random() >= 0.7;
@@ -95,7 +95,7 @@ const genCases = async function generateDummyCases(cases) {
         const progress = ((i + 1) / numberOfCasesToGenerate) * 100;
         process.stdout.write("Adding new cases to database...    Progress " + progress.toFixed(2) + "% \r");
     }
-    console.log('\n', numberOfCasesToGenerate.toString(), 'new cases added to the database.\n')
+    console.log('\n'+numberOfCasesToGenerate.toString(), 'new cases added to the database.\n')
 };
 
 const genUsers = async function generateDummyUsers(users) {
