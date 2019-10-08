@@ -22,9 +22,9 @@ mongoose.connect(connectionString, {
     .catch(err => console.log(err));
 
 // Setup routes.
-app.use('/api/auth', require('./routes/auth'));
-app.use('/api/user', require('./routes/user'));
-app.use('/api/case', require('./routes/case'));
+app.use('/api/auth', require('./routes/authRouter'));
+app.use('/api/user', require('./routes/userRouter'));
+app.use('/api/case', require('./routes/caseRouter'));
 
 // Make app listen a given port
 
