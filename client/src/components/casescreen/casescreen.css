@@ -79,3 +79,9 @@
     grid-area: footer;
 }
 
+.inputboxer{
+    border-radius: 5px;
+    border: 1px solid grey;
+    padding: 0.2rem;
+    
+}
