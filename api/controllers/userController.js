@@ -1,6 +1,4 @@
 const express = require('express');
-const router = express.Router();
-
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
@@ -9,10 +7,11 @@ const config = require('../config/default');
 // User model
 const User = require('../models/User');
 
-// @route   POST api/user/register
-// @desc    Register new user
-// @access  Public
-router.post('/register', (req, res) => {
+
+/**
+ * Register a new user.
+ */
+exports.register = function registerNewUser(req, res) {
     const name  = req.body.name;
     const email = req.body.email;
     const password = req.body.password;
@@ -75,8 +74,5 @@ router.post('/register', (req, res) => {
                     res.status(500)
                         .json({msg: 'Problems hashing password.'});
                 });
-        });
-});
-
-
-module.exports = router;
+        })
+};

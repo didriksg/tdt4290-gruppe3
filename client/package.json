@@ -20,7 +20,7 @@
   "homepage": "https://github.com/theatok/tdt4290-gruppe3#readme",
   "dependencies": {
     "parcel-bundler": "^1.12.3",
-    "react": "^16.9.0",
+    "react": "^16.10.2",
     "react-dom": "^16.9.0",
     "react-router-dom": "^5.1.2",
     "save": "^2.0.0"
