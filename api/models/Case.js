@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 // Create case model
 const CaseSchema = new Schema({
     gericaNumber: {
-        type: Number,
+        type: String,
         required: true,
     },
 
