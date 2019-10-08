@@ -1,19 +1,20 @@
 import React from "react";
-import "./loginscreen.css";
-import { NavLink } from 'react-router-dom';
+import "./LoginScreen.css";
 
 
 class LoginScreen extends React.Component{
 
-    render() {
-        return (
+    render(){
+        return(
             <div className="logincontainer">
-                <div className="loginelements"> 
+                
+                <div className="loginelements">
+                    
                     <div className="logo">
                         <img 
                             src="https://upload.wikimedia.org/wikipedia/commons/c/ce/Trondheim_komm.svg" 
-                            width="70" 
-                            height="80"
+                            width="70" height="80"
+                            alt="Trondheim kommune logo"
                         />
                     </div>
 
@@ -26,28 +27,33 @@ class LoginScreen extends React.Component{
                                 type="text" 
                                 size="42" 
                                 placeholder="Brukernavn"
-                            />
+                            >
+
+                            </input>
+
                             <input 
                                 className="usernamebox" 
                                 type="password" 
                                 size="42" 
-                                placeholder="Passord"
-                            />
+                                placeholder="Passord">
+
+                            </input>
 
                         </form>
+                        
                     </div>
 
                     <div className="loginbutton">
                         <form>
-                            <NavLink to="/hjemmeside">
-                                <button type="submit">Login</button>
-                            </NavLink>
+                        <button type="submit">Login</button>
                         </form>
                     </div>
+
                 </div>
             </div>
-        );
+        )
     }
+
 }
 
 export default LoginScreen;
