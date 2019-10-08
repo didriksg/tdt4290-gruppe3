@@ -29,7 +29,7 @@ exports.add = function addNewCase(req, res) {
         || category === undefined
         || district === undefined
     ) {
-        return res.status(400)
+        res.status(400)
             .json({msg: 'Please enter all required fields.'});
     }
 
@@ -49,14 +49,14 @@ exports.add = function addNewCase(req, res) {
     // Save case.
     newCase.save()
         .then((c) => {
-            return res.status(200)
+            res.status(200)
                 .json({
                     _id: c._id,
                     msg: 'Case saved to database.',
                 });
         })
         .catch(() => {
-            return res.status(500)
+            res.status(500)
                 .json({msg: 'Failed saving case to database'});
         });
 };
