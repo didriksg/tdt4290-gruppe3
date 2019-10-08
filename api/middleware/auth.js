@@ -1,4 +1,4 @@
-const config = require('config');
+const config = require('../config/default');
 const jwt = require('jsonwebtoken');
 
 /**
@@ -16,7 +16,7 @@ const auth = function authenticateToken(req, res, next) {
     }
 
     try {
-        req.user = jwt.verify(token, config.get('jwtSecret'));
+        req.user = jwt.verify(token, config['jwtSecret']);
         next();
     } catch (e) {
         res.status(400)

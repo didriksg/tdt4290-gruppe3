@@ -4,7 +4,7 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-const config = require('config');
+const config = require('../config/default');
 
 // User model
 const User = require('../models/User');
@@ -13,7 +13,9 @@ const User = require('../models/User');
 // @desc    Register new user
 // @access  Public
 router.post('/register', (req, res) => {
-    const {name, email, password} = req.body;
+    const name  = req.body.name;
+    const email = req.body.email;
+    const password = req.body.password;
 
     // Check that all required data is provided.
     if (name === undefined || email === undefined || password === undefined) {
@@ -37,7 +39,7 @@ router.post('/register', (req, res) => {
             });
 
             // Create salt and hash password
-            bcrypt.genSalt(config.get('bcryptSaltRounds'))
+            bcrypt.genSalt(config['bcryptSaltRounds'])
                 .then((salt) => {
                     bcrypt.hash(newUser.password, salt)
                         .then((hash) => {
@@ -47,8 +49,8 @@ router.post('/register', (req, res) => {
                                 .then((user) => {
                                     jwt.sign(
                                         {id: user.id},
-                                        config.get('jwtSecret'),
-                                        {expiresIn: config.get('jwtExpireInterval')},
+                                        config['jwtSecret'],
+                                        {expiresIn: config['jwtExpireInterval']},
                                         (err, token) => {
                                             if (err)
                                                 throw err;

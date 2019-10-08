@@ -1,7 +1,7 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const config = require('config');
+const config = require('../config/default');
 
 const router = express.Router();
 
@@ -13,10 +13,11 @@ const auth = require('../middleware/auth');
 // @desc    Authenticate a user.
 // @access  Public
 router.post('/login', (req, res) => {
-    const {email, password} = req.body;
+    const email = req.body.email;
+    const password = req.body.password;
 
     // Simple validation
-    if (!email || !password) {
+    if (email === undefined || password === undefined) {
         return res.status(400)
             .json({msg: 'Please enter all fields'});
     }
@@ -40,8 +41,8 @@ router.post('/login', (req, res) => {
                     // If successful match, sign a token and return it.
                     jwt.sign(
                         {id: user.id},
-                        config.get('jwtSecret'),
-                        {expiresIn: config.get('jwtExpireInterval')},
+                        config['jwtSecret'],
+                        {expiresIn: config['jwtExpireInterval']},
                         (err, token) => {
                             if (err) throw err;
 
@@ -67,7 +68,7 @@ router.get('/user', auth, (req, res) => {
     User.findById(req.user.id)
         .select('-password')
         .then((user) => res.status(200).json(user))
-        .catch(() => res.status(500).json({msg: 'User data not found..'}));
+        .catch((err) => res.status(500).json({msg: 'User data not found..'}));
 });
 
 // @route   GET api/auth/user
