@@ -15,10 +15,11 @@ import Paper from '@material-ui/core/Paper';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import FilterListIcon from '@material-ui/icons/FilterList';
+import { grey, red } from '@material-ui/core/colors';
 
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
+function createData(gericaid, calories, fat, carbs, protein) {
+  return { gericaid, calories, fat, carbs, protein };
 }
 
 const rows = [
@@ -37,6 +38,7 @@ const rows = [
   createData('Oreo', 1, 18.0, 63, 4.0),
 ];
 
+// Sort function
 function desc(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
     return -1;
@@ -62,7 +64,7 @@ function getSorting(order, orderBy) {
 }
 
 const headCells = [
-  { id: 'name', numeric: false, disablePadding: true, label: 'GericaIdent' },
+  { id: 'gericaid', numeric: false, disablePadding: true, label: 'GericaIdent' },
   { id: 'calories', numeric: true, disablePadding: false, label: 'Prioritet' },
   { id: 'fat', numeric: true, disablePadding: false, label: 'Kategori' },
   { id: 'carbs', numeric: true, disablePadding: false, label: 'Uke motatt' },
@@ -106,7 +108,6 @@ function EnhancedTableHead(props) {
 
 EnhancedTableHead.propTypes = {
   classes: PropTypes.object.isRequired,
-
   onRequestSort: PropTypes.func.isRequired,
   order: PropTypes.oneOf(['asc', 'desc']).isRequired,
   orderBy: PropTypes.string.isRequired,
@@ -148,15 +149,6 @@ const EnhancedTableToolbar = props => {
             Alle saker
           </Typography>
       </div>
-      <div className={classes.actions}>
-        {
-          <Tooltip title="Filter list">
-            <IconButton aria-label="filter list">
-              <FilterListIcon />
-            </IconButton>
-          </Tooltip>
-        }
-      </div>
     </Toolbar>
   );
 };
@@ -195,7 +187,8 @@ export default function OverviewBoard() {
   const [orderBy, setOrderBy] = React.useState('calories');
   const [page, setPage] = React.useState(0);
   
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  // Chooses how many rows to be shown
+  const [rowsPerPage, setRowsPerPage] = React.useState(9);
 
   const handleRequestSort = (event, property) => {
     const isDesc = orderBy === property && order === 'desc';
@@ -238,10 +231,10 @@ export default function OverviewBoard() {
                     <TableRow
                       hover
                       tabIndex={-1}
-                      key={row.name}
+                      key={row.gericaid}
                     >
                       <TableCell component="th" id={labelId} scope="row" padding="none">
-                        {row.name}
+                        {row.gericaid}
                       </TableCell>
                       <TableCell align="right">{row.calories}</TableCell>
                       <TableCell align="right">{row.fat}</TableCell>
@@ -259,7 +252,7 @@ export default function OverviewBoard() {
           </Table>
         </div>
         <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
+          rowsPerPageOptions={[10, 25]}
           component="div"
           count={rows.length}
           rowsPerPage={rowsPerPage}
