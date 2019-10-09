@@ -203,7 +203,6 @@ export default function OverviewBoard() {
     setOrderBy(property);
   };
 
-
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
