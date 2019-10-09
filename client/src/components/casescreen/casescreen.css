@@ -3,14 +3,17 @@
     justify-content: center;
     font-family: sans-serif;
     align-content: center;
+    background-color: lightblue;
 }
 
 .caseelements{
-    border-radius: 5px;
+    border-radius: 10px;
     margin-top: 2rem;
     text-align: center; 
-    background-color: lightgrey;
-    height: 42rem;
+    border: 2px solid lightgray;
+    background-color: white;
+    /*background-color: lightgrey;*/
+    height: 50rem;
     width: 30rem;
     font-family: sans-serif;
 }
@@ -22,11 +25,16 @@
     grid-template-areas: 
         'gericanr gericainput gericainput '
         'prio priograd priograd'
-        'henvendtfra sted sted'
         'aldersgruppe barnvoksen barnvoksen'
+        'registreringsdato dato dato'
+        'oppstartsdato dato dato'
+        'kategori kategorifelt kategorifelt'
+        'henvendtfra sted sted'
+        'bydel bydelbox bydelbox'
         'beskrivelse beskrivelseboks beskrivelseboks'
         'beskrivelse beskrivelseboks beskrivelseboks' 
         'beskrivelse beskrivelseboks beskrivelseboks'
+        'avbrytknapp viktigknapp lagnysakknapp'
         'footer footer footer';
     grid-gap: 1rem;
     padding: 1rem;
@@ -34,11 +42,58 @@
 }
 
 .elementsingrid > div {
-    background-color: lightgray;
+    /*background-color: lightgray;*/
     text-align: left;
-    
     padding: 2px 0;
   }
+
+.avbrytknapp{
+    grid-area: avbrytknapp;
+}
+.abutton{
+    background-color:rgb(255, 50, 50);
+}
+.forma{
+    display: grid;
+}
+
+.viktigknapp{
+    grid-area: viktigknapp;
+}
+.formb{
+    display: grid;
+}
+
+
+.lagnysakknapp{
+    grid-area: lagnysakknapp;   
+}
+.lbutton{
+    background-color:rgb(0, 255, 10);
+}
+.formc{
+    display: grid;
+}
+
+.bydel{
+    grid-area: bydel;
+}
+
+.bydelbox{
+    grid-area: bydelbox;
+}
+
+.oppstartsdato{
+    grid-area: oppstartsdato;
+}
+
+.registreringsdato{
+    grid-area: registreringsdato;
+}
+
+.dato{
+    grid-area: dato;
+}  
 
 .gericanr { 
     grid-area: gericanr; 
@@ -52,7 +107,7 @@
 }
 .priograd { 
     grid-area: priograd; 
-}   
+}
 
 .henvendtfra{
     grid-area: henvendtfra;
@@ -73,6 +128,14 @@
 }
 .beskrivelseboks{
     grid-area: beskrivelseboks;
+}
+
+.kategori{
+    grid-area: kategori;
+}
+
+.kategorifelt{
+    grid-area: kategorifelt;
 }
 
 .footer{
