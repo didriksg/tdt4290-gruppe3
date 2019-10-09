@@ -8,7 +8,7 @@
 .caseelements{
     border-radius: 5px;
     margin-top: 2rem;
-    text-align: center;
+    text-align: center; 
     background-color: lightgrey;
     height: 42rem;
     width: 30rem;
@@ -83,5 +83,19 @@
     border-radius: 5px;
     border: 1px solid grey;
     padding: 0.2rem;
+    font-family: sans-serif;
     
+}
+
+/*this part of the code removes the up and downcounter from the numberfield. weird that it is there by default*/
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type=number] {
+    -moz-appearance:textfield; /* Firefox */
+    width: 18rem;    /*fikser størrelse på inputfeltet number*/
 }
