@@ -2,8 +2,11 @@ import React from "react";
 import "./casescreen.css";
 import RadioButtons from "./RadioButtons.jsx";
 import BarnVoksenSelect from "./BarnVoksenSelect.jsx";
-import DateFields from "./DateFields.jsx";
+import RegisterDate from "./RegisterDate.jsx";
+import StartDate from "./StartDate.jsx";
 import BydelSelect from "./BydelSelect.jsx";
+import KategoriSelect from "./KategoriSelect.jsx";
+import HenvendtSelect from "./HenvendtSelect.jsx";
 
 
 class CaseScreen extends React.Component{
@@ -19,7 +22,7 @@ class CaseScreen extends React.Component{
                     <div className="elementsingrid">
                         
                         
-                        <div className="gericanr">Gericanr:</div> 
+                        <div className="gericanr">IDnr:</div> 
                         <div className="gericainput"> 
                             <input 
                                 className="inputboxer" 
@@ -37,13 +40,7 @@ class CaseScreen extends React.Component{
 
                         <div className="henvendtfra"> Henvendelse fra: </div> 
                         <div className="sted"> 
-                            <input 
-                                className="inputboxer" 
-                                type="text" 
-                                size="40.99999"
-                            >
-                                
-                                </input> 
+                             <HenvendtSelect />
                         </div>              
 
 
@@ -54,9 +51,13 @@ class CaseScreen extends React.Component{
 
 
                         <div className="registreringsdato">Registreringsdato:</div>
+                        <div className="RegDate">
+                            <RegisterDate />
+                        </div>
+
                         <div className="oppstartsdato">Oppstartsdato:</div>
-                        <div className="dato">
-                            <DateFields />
+                        <div className="StartDate">
+                            <StartDate />
                         </div>
 
 
@@ -68,12 +69,7 @@ class CaseScreen extends React.Component{
 
                         <div className="kategori"> Kategori</div>
                         <div className="kategorifelt">
-                            <input
-                                className="inputboxer"
-                                type="text"
-                                size="40.99999"
-                                >
-                            </input>
+                            <KategoriSelect />
                         </div>
 
 

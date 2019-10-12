@@ -31,21 +31,7 @@ export default function MaterialUIPickers() {
             'aria-label': 'change date',
           }}
         />
-        
-        <KeyboardDatePicker
-          disableToolbar
-          variant="inline"
-          format="MM/dd/yyyy"
-          margin="normal"
-          id="date-picker-inline"
-          /*label="Registreringsdato"*/ 
-          value={selectedDate}
-          onChange={handleDateChange}
-          KeyboardButtonProps={{
-            'aria-label': 'change date',
-          }}
-        />
-        
+    
       </Grid>
     </MuiPickersUtilsProvider>
   );

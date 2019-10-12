@@ -13,7 +13,7 @@
     border: 2px solid lightgray;
     background-color: white;
     /*background-color: lightgrey;*/
-    height: 50rem;
+    height: 53rem;
     width: 30rem;
     font-family: sans-serif;
 }
@@ -26,8 +26,8 @@
         'gericanr gericainput gericainput '
         'prio priograd priograd'
         'aldersgruppe barnvoksen barnvoksen'
-        'registreringsdato dato dato'
-        'oppstartsdato dato dato'
+        'registreringsdato RegDate RegDate'
+        'oppstartsdato StartDate StartDate'
         'kategori kategorifelt kategorifelt'
         'henvendtfra sted sted'
         'bydel bydelbox bydelbox'
@@ -69,7 +69,7 @@
     grid-area: lagnysakknapp;   
 }
 .lbutton{
-    background-color:rgb(0, 255, 10);
+    background-color:rgb(0, 128, 0);
 }
 .formc{
     display: grid;
@@ -77,6 +77,8 @@
 
 .bydel{
     grid-area: bydel;
+    display: inline-grid;
+    align-items: center;
 }
 
 .bydelbox{
@@ -85,14 +87,21 @@
 
 .oppstartsdato{
     grid-area: oppstartsdato;
+    display: inline-grid;
+    align-items: center;
 }
 
 .registreringsdato{
     grid-area: registreringsdato;
+    display: inline-grid;
+    align-items: center;
+}
+.RegDate{
+    grid-area: RegDate;
 }
 
-.dato{
-    grid-area: dato;
+.StartDate{
+    grid-area: StartDate;
 }  
 
 .gericanr { 
@@ -104,6 +113,8 @@
 
 .prio{
     grid-area: prio;
+    display: inline-grid;
+    align-items: center;
 }
 .priograd { 
     grid-area: priograd; 
@@ -111,6 +122,8 @@
 
 .henvendtfra{
     grid-area: henvendtfra;
+    display: inline-grid;
+    align-items: center;
 }
 .sted { 
     grid-area: sted; 
@@ -118,6 +131,8 @@
 
 .aldersgruppe{
     grid-area: aldersgruppe;
+    display: inline-grid;
+    align-items: center;
 }
 .barnvoksen{
     grid-area: barnvoksen;
@@ -132,6 +147,8 @@
 
 .kategori{
     grid-area: kategori;
+    display: inline-grid;
+    align-items: center;
 }
 
 .kategorifelt{

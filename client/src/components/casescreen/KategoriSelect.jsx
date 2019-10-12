@@ -37,7 +37,7 @@ export default function SimpleSelect() {
     <form className={classes.root} autoComplete="off">
       <FormControl variant="outlined" className={classes.formControl}>
         <InputLabel ref={inputLabel} htmlFor="outlined-age-simple">
-          Bydel
+          Kategori
         </InputLabel >
         <Select
           value={values.age}
@@ -48,12 +48,11 @@ export default function SimpleSelect() {
             id: 'outlined-age-simple',
           }}
         >
-          <MenuItem value={1}>Midtbyen</MenuItem>
-          <MenuItem value={2}>Østbyen</MenuItem>
-          <MenuItem value={3}>Tiller</MenuItem>
-          <MenuItem value={4}>Heimdal</MenuItem>
-          
-          
+          <MenuItem value={1}>Kategori1</MenuItem>
+          <MenuItem value={2}>Kategori2</MenuItem>
+          <MenuItem value={3}>Kategori3</MenuItem>
+          <MenuItem value={4}>Kategori4</MenuItem>
+
         </Select>
       </FormControl>
       
