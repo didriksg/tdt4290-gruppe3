@@ -6,7 +6,6 @@ import Arkiv from "./components/arkiv/arkiv"
 import MonthlyReport from "./components/monthlyReport/monthlyReport"
 import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
 
-
 const routing = (
     <Router>
         <div>
