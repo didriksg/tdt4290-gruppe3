@@ -23,21 +23,32 @@ import {Link} from 'react-router-dom';
 
 import {makeStyles} from '@material-ui/core/styles'
 
+// Axios 
+
 
 //Data-table methods
+
+// Sample data method
 const columns = [
-    {id: 'name', label: 'Name', minWidth: 170},
-    {id: 'gericaId', label: 'gericaID', minWidth: 100}
+    {id: 'gericaId', label: 'gericaID', minWidth: 100},
+    {id: 'diagnose', label: 'Diagnosegruppe', minWidth: 170},
+    {id: 'aldersgruppe', label: 'Aldersgruppe', minWidth: 170},
+    {id: 'prioritet', label: 'Prioritet', minWidth: 170},
+    {id: 'terapaut', label: 'Terapaut', minWidth: 170},
+    {id: 'innmeldt', label: 'Innmeldt uke', minWidth: 170},
   ]
   
-  function createData(name, gericaId){
-    return {name, gericaId}
+  // Sample data method
+  function createData(gericaId, diagnose, aldersgruppe, prioritet, terapaut, innmeldt){
+    return {gericaId, diagnose, aldersgruppe, prioritet, terapaut, innmeldt}
   }
-  
+
+  // Sample data method
   const rows = [
-    createData('Eivind', 8901),
-    createData('Dennis', 1234),
-    createData('Theo', 8888)
+    createData('010101', "Demens", "Voksen", 4, "Ola Nordmann", 36),
+    createData('000191', "Demens", "Voksen", 2, "Ola Nordmann", 36),
+    createData('999999', "Demens", "Voksen", 1, "Ola Nordmann", 37),
+    
   ];
   
   const useStyles = makeStyles({
@@ -93,7 +104,7 @@ const handleMunicipalityClose = () => {
         <Grid container sm>
           <Grid item sm={10}>
             <Typography variant="title" color="inherit">
-              My header
+              Hjemmeside
             </Typography>
             
           </Grid>
@@ -120,9 +131,16 @@ const handleMunicipalityClose = () => {
       <Grid item sm={12}>
         <Grid container justify="center" spacing={2}>
           <Grid item>
-          <Button variant="outlined" color="primary" style={style.buttons}>Arkiv</Button>
-          </Grid>
-          <Grid item>
+          <Button 
+            variant="outlined" 
+            color="primary" 
+            style={style.buttons} 
+            component={Link} to={"/arkiv"} 
+        >
+            Arkiv
+        </Button>
+        </Grid>
+        <Grid item>
           <Button 
             variant="outlined" 
             color="primary" 
@@ -136,6 +154,7 @@ const handleMunicipalityClose = () => {
           <Button 
             variant="outlined" 
             color="primary" style={style.buttons}
+            component={Link} to={"/rapport"}
           
           >Måndesrapport</Button>
           </Grid>
@@ -145,11 +164,11 @@ const handleMunicipalityClose = () => {
 
     <Divider  />
 
-    <Grid container sm>
+    <Grid justify="center" container sm>
       <Grid item sm>
     <Paper style={style.datatable}>
-      <Typography variant="title" color="inherit">
-        Active cases
+      <Typography variant="h6" color="inherit">
+        Mine aktive saker
       </Typography>
       <Table stickyHeader>
         <TableHead>
@@ -199,11 +218,7 @@ const handleMunicipalityClose = () => {
     </Paper>
     </Grid>
 
-    <Grid item sm>
-      <Paper style={style.datatable}>
-        Hello
-      </Paper>
-    </Grid>
+    
 
     </Grid>
 
