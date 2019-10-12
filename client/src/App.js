@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import LoginScreen from "./components/loginscreen/loginscreen";
+import ProfileScreen from "./components/profilescreen/profilescreen";
 
 class App extends Component{
 
@@ -7,7 +8,7 @@ class App extends Component{
         return(
             <div>
                 <div className="container">
-                    <LoginScreen />                    
+                    <ProfileScreen />                    
                     <h1>Hello World {this.props.name}</h1>
                 </div>
             </div>
