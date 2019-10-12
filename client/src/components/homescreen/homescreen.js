@@ -164,6 +164,14 @@ const handleMunicipalityClose = () => {
           
           >Måndesrapport</Button>
           </Grid>
+          <Grid item>
+          <Button 
+            variant="outlined" 
+            color="primary" style={style.buttons}
+            component={Link} to={"/ny-sak"}
+          
+          >Opprett ny sak</Button>
+          </Grid>
         </Grid>
       </Grid>
     </Grid>
