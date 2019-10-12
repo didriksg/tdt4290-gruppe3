@@ -1,12 +1,12 @@
 import {CLEAR_ERRORS, GET_ERRORS} from "../actions/constants";
 
-const initaState = {
+const initalState = {
     msg: {},
     status: null,
     id: null
 };
 
-export default function (state = initaState, action) {
+export default function (state = initalState, action) {
     switch (action.type) {
         case GET_ERRORS:
             return {

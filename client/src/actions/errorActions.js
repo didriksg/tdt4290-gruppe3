@@ -1,10 +1,10 @@
-import {GET_ERRORS, CLEAR_ERRORS} from "./constants";
+import {CLEAR_ERRORS, GET_ERRORS} from "./constants";
 
 // RETURN ERRORS
 export const returnErrors = (msg, status, id = null) => {
     return {
         type: GET_ERRORS,
-        payload: {msg,status,id}
+        payload: {msg, status, id}
     }
 };
 

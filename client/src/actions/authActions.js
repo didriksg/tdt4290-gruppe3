@@ -1,14 +1,17 @@
 import axios from 'axios';
 import {clearErrors, returnErrors} from "./errorActions";
+import {AUTH_ERROR, LOGIN_FAIL, LOGIN_SUCESS, LOGOUT_SUCESS, USER_LOADED, USER_LOADING} from "../actions/constants";
 
-import {AUTH_ERROR, LOGIN_FAIL, LOGIN_SUCESS, USER_LOADED, USER_LOADING} from "../actions/constants";
+1;
+
+const apiConnectionString = 'http://localhost:4000';
 
 // Check token and load user
 export const loadUser = () => (dispatch, getState) => {
     // Set state to user loading
     dispatch({type: USER_LOADING});
     axios
-        .get('http://localhost:4000/api/auth/user', tokenConfig(getState))
+        .get(apiConnectionString + '/api/auth/user', tokenConfig(getState))
         .then(res => {
             dispatch({
                 type: USER_LOADED,
@@ -34,7 +37,7 @@ export const login = ({email, password}) => dispatch => {
     const body = JSON.stringify({email, password});
     console.log(body);
     axios
-        .post('http://localhost:4000/api/auth/login', body, config)
+        .post(apiConnectionString + '/api/auth/login', body, config)
         .then(res => {
             dispatch(clearErrors());
             dispatch({
@@ -48,6 +51,12 @@ export const login = ({email, password}) => dispatch => {
                 type: LOGIN_FAIL
             });
         })
+};
+
+export const logout = () => {
+    return {
+        type: LOGOUT_SUCESS
+    };
 };
 
 // Setup config/headers and token
