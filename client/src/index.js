@@ -7,7 +7,6 @@ import MonthlyReport from "./components/monthlyReport/monthlyReport"
 import CaseScreen from "./components/casescreen/CaseScreen"
 import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
 
-
 const routing = (
     <Router>
         <div>

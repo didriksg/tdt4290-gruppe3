@@ -1,9 +1,11 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const config = require('./config/default');
+const cors = require('cors');
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 // Connect to MongoDB via mongoose.
 

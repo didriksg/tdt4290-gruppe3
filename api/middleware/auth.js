@@ -11,7 +11,7 @@ const auth = function authenticateToken(req, res, next) {
     const token = req.header('x-auth-token');
 
     if (token === undefined) {
-        res.status(401)
+        return res.status(401)
             .json({msg: 'No valid token was found. Access denied.'});
     }
 

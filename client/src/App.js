@@ -1,21 +1,27 @@
 import React, {Component} from 'react';
-import LoginScreen from "./components/loginscreen/loginscreen";
-import CaseScreen from "./components/casescreen/CaseScreen.jsx";
+import LoginScreen from "./components/loginscreen/LoginScreen";
 
+import { Provider } from 'react-redux';
+import configureStore from './store'
+import {loadUser} from "./actions/authActions";
 
-class App extends Component{
+const store = configureStore();
 
-    render(){
-        return(
-            <div>
-                <div className="container">
+class App extends Component {
+    componentDidMount() {
+        store.dispatch(loadUser());
+    }
 
-                    <LoginScreen />                    
-
-                    <h1>Hello World {this.props.name}</h1>
-                    
+    render() {
+        return (
+            <Provider store={store}>
+                <div>
+                    <div className="container">
+                        <LoginScreen/>
+                        <h1>Hello World {this.props.name}</h1>
+                    </div>
                 </div>
-            </div>
+            </Provider>
         );
     }
 }
