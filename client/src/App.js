@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import LoginScreen from "./components/loginscreen/loginscreen";
+import LoginScreen from "./components/loginscreen/LoginScreen";
+import CaseScreen from "./components/casescreen/CaseScreen.jsx";
 
 import { Provider } from 'react-redux';
 import configureStore from './store'
