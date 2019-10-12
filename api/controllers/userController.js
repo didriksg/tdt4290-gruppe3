@@ -1,6 +1,4 @@
 const express = require('express');
-const router = express.Router();
-
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
@@ -9,26 +7,29 @@ const config = require('../config/default');
 // User model
 const User = require('../models/User');
 
-// @route   POST api/user/register
-// @desc    Register new user
-// @access  Public
-router.post('/register', (req, res) => {
+
+/**
+ * Register a new user.
+ */
+exports.register = function registerNewUser(req, res) {
     const name  = req.body.name;
     const email = req.body.email;
     const password = req.body.password;
 
     // Check that all required data is provided.
     if (name === undefined || email === undefined || password === undefined) {
-        return res.status(400)
+        res.status(400)
             .json({msg: 'Please enter all fields'});
+        return;
     }
 
     // Check for existing user
     User.findOne({email})
         .then((user) => {
             if (user !== null) {
-                return res.status(400)
+                res.status(400)
                     .json({msg: 'User already exists'});
+                return;
             }
 
             // If no user with this email exist, create new user model with given data.
@@ -75,8 +76,5 @@ router.post('/register', (req, res) => {
                     res.status(500)
                         .json({msg: 'Problems hashing password.'});
                 });
-        });
-});
-
-
-module.exports = router;
+        })
+};

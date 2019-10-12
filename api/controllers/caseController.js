@@ -1,17 +1,13 @@
-const express = require('express');
-const router = express.Router();
-
 const auth = require('../middleware/auth');
 const sort = require('../utils/sortCasesByPriority');
 
 // Case model
 const Case = require('../models/Case');
 
-// @route   POST api/case/add
-// @desc    Add a new case to database. Request should contain all required elements defined in the `Case` model.
-// @access  Private
-router.post('/add', auth, (req, res) => {
-    console.log(req.body);
+/**
+ * Add a new case to the database.
+ **/
+exports.add = function addNewCase(req, res) {
     // Extract data from request's body.
     const gericaNumber = req.body.gericaNumber;
     const priority = req.body.priority;
@@ -33,7 +29,7 @@ router.post('/add', auth, (req, res) => {
         || category === undefined
         || district === undefined
     ) {
-        return res.status(400)
+        res.status(400)
             .json({msg: 'Please enter all required fields.'});
     }
 
@@ -53,22 +49,22 @@ router.post('/add', auth, (req, res) => {
     // Save case.
     newCase.save()
         .then((c) => {
-            return res.status(200)
+            res.status(200)
                 .json({
                     _id: c._id,
                     msg: 'Case saved to database.',
                 });
         })
         .catch(() => {
-            return res.status(500)
+            res.status(500)
                 .json({msg: 'Failed saving case to database'});
         });
-});
+};
 
-// @route   PUT api/case/update/:id
-// @desc    Update a case
-// @access  Private
-router.put('/update/:id', auth, (req, res) => {
+/**
+ * Update an existing case by its ID. All fields are optional, and only provided fields are updated.
+ **/
+exports.update = function updateCaseById(req, res) {
     // Extract ID
     const id = req.params.id;
 
@@ -114,7 +110,9 @@ router.put('/update/:id', auth, (req, res) => {
             result.save()
                 .then(() => {
                     res.status(200)
-                        .json({msg: 'Case updated.'})
+                        .json({
+                            "caseId": result._id,
+                        })
                 })
                 .catch(() => {
                     res.status(500)
@@ -125,12 +123,12 @@ router.put('/update/:id', auth, (req, res) => {
             res.status(404)
                 .json({msg: 'Case not found.'});
         });
-});
+};
 
-// @route   GET api/case/list
-// @desc    Get all cases from the database.
-// @access  Private
-router.get('/list', auth, (req, res) => {
+/**
+ * Get all the cases currently existing in the database.
+ **/
+exports.list = function listAllCases(req, res) {
     Case.find()
         .then((cases) => {
             if (cases === null || cases.length === 0) {
@@ -148,12 +146,12 @@ router.get('/list', auth, (req, res) => {
             res.status(500)
                 .json({msg: 'There was a problem getting the cases from the database.'});
         });
-});
+};
 
-// @route   GET api/case/:id
-// @desc    Get case with given ID
-// @access  Private
-router.get('/:id', auth, (req, res) => {
+/**
+ * Get a single case based on its ID.
+ **/
+exports.getCaseById = function getCaseById(req, res) {
     // Extract ID
     const id = req.params.id;
     console.log(req.params);
@@ -176,12 +174,12 @@ router.get('/:id', auth, (req, res) => {
             res.status(404)
                 .json({msg: 'Case with provided ID was not found.'});
         });
-});
+};
 
-// @route   GET api/case/gericaid
-// @desc    Get case with given GericaID
-// @access  Private
-router.get('/gericaid/:id', auth, (req, res) => {
+/**
+ * Get all cases with the provided gerica ID.
+ **/
+exports.getCasesByGericaId = function getCasesByGericaId(req, res) {
     // Extract ID
     console.log(req.params);
 
@@ -205,7 +203,4 @@ router.get('/gericaid/:id', auth, (req, res) => {
             res.status(404)
                 .json({msg: 'Case with provided ID was not found.'});
         });
-});
-
-
-module.exports = router;
+};
