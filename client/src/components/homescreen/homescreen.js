@@ -15,7 +15,8 @@ import {AppBar,
   Dialog,
   DialogTitle,
   DialogContent,
-  DialogActions,   
+  DialogActions, 
+  Card,  
   
 } from '@material-ui/core'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
@@ -67,7 +68,8 @@ const columns = [
     persona: { marginTop:10, marginBottom:10 },
     personaDescription: { marginBottom: 10 },
     buttons: { marginTop: 10, marginBottom: 10 },
-    datatable: { marginTop: 10, marginBottom: 10 }
+    datatable: { marginTop: 10, marginBottom: 10 },
+    mainCard: {marginTop: 5, marginBottom:5}
   }
 
 
@@ -98,6 +100,7 @@ const handleMunicipalityClose = () => {
 
   return (
     <div>
+    <Card style={style.mainCard} raised>
     <AppBar position="static">
       <Toolbar>
         
@@ -114,6 +117,9 @@ const handleMunicipalityClose = () => {
         </Grid>
       </Toolbar>
     </AppBar> 
+    </Card>
+    
+    <Card style={style.mainCard} raised>
 
     <Grid container direction="column" justify="center" >
       <Grid container justify="center">
@@ -238,6 +244,7 @@ const handleMunicipalityClose = () => {
             </Button>
         </DialogActions>
     </Dialog>
+    </Card>
     </div>
   );
 }
