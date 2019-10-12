@@ -1,16 +1,7 @@
 import axios from 'axios';
-import {returnErrors} from "./errorActions";
+import {clearErrors, returnErrors} from "./errorActions";
 
-import {
-    AUTH_ERROR,
-    LOGIN_FAIL,
-    LOGOUT_SUCESS,
-    REGISTER_FAIL,
-    LOGIN_SUCESS,
-    REGISTER_SUCESS,
-    USER_LOADED,
-    USER_LOADING
-} from "../actions/constants";
+import {AUTH_ERROR, LOGIN_FAIL, LOGIN_SUCESS, USER_LOADED, USER_LOADING} from "../actions/constants";
 
 // Check token and load user
 export const loadUser = () => (dispatch, getState) => {
@@ -41,14 +32,17 @@ export const login = ({email, password}) => dispatch => {
 
     // Request body
     const body = JSON.stringify({email, password});
-
+    console.log(body);
     axios
         .post('http://localhost:4000/api/auth/login', body, config)
-        .then( res => dispatch({
-            type: LOGIN_SUCESS,
-            payload: res.data
-        }))
-        .catch(err=>{
+        .then(res => {
+            dispatch(clearErrors());
+            dispatch({
+                type: LOGIN_SUCESS,
+                payload: res.data
+            })
+        })
+        .catch(err => {
             dispatch(returnErrors(err.response.data, err.response.status, 'LOGIN_FAIL'));
             dispatch({
                 type: LOGIN_FAIL

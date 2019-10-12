@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import LoginScreen from "./components/loginscreen/LoginScreen";
-import CaseScreen from "./components/casescreen/CaseScreen.jsx";
 
 import { Provider } from 'react-redux';
 import configureStore from './store'
@@ -18,7 +17,7 @@ class App extends Component {
             <Provider store={store}>
                 <div>
                     <div className="container">
-                        {/*<LoginScreen/>*/}
+                        <LoginScreen/>
                         <h1>Hello World {this.props.name}</h1>
                     </div>
                 </div>

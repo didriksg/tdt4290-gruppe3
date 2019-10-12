@@ -2,6 +2,8 @@ import React from "react";
 import "./loginscreen.css";
 import {connect} from 'react-redux';
 import {login} from '../../actions/authActions'
+import PropTypes from 'prop-types';
+
 
 class LoginScreen extends React.Component{
     state = {
@@ -28,6 +30,10 @@ class LoginScreen extends React.Component{
         this.props.login(user);
     };
 
+    onChange = e => {
+        this.setState({ [e.target.name]: e.target.value });
+    };
+
     render(){
         return(
             <div className="logincontainer">
@@ -50,7 +56,10 @@ class LoginScreen extends React.Component{
                                 className="usernamebox"
                                 type="text"
                                 size="42"
+                                id="email"
+                                name="email"
                                 placeholder="Brukernavn"
+                                onChange={this.onChange}
                             >
 
                             </input>
@@ -59,7 +68,11 @@ class LoginScreen extends React.Component{
                                 className="usernamebox"
                                 type="password"
                                 size="42"
-                                placeholder="Passord">
+                                id="password"
+                                name="password"
+                                placeholder="Passord"
+                                onChange={this.onChange}
+                            >
 
                             </input>
 
@@ -87,5 +100,5 @@ const mapStateToProps = state => ({
 
 export default connect(
     mapStateToProps,
-    {register},
+    {login},
 )(LoginScreen);
