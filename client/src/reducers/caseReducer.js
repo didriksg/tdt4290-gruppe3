@@ -6,7 +6,6 @@ import {
 } from "../actions/constants";
 
 const initialState = {
-    token: localStorage.getItem('token'),
     isLoading: false,
 };
 

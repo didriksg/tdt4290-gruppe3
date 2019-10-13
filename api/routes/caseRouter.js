@@ -1,33 +1,37 @@
-const express = require('express');
-const router = express.Router();
+import express from 'express';
+const caseRouter = express.Router();
 
-const auth = require('../middleware/auth');
-const caseController = require('../controllers/caseController');
+import auth from '../middleware/auth';
+import {add, getCaseById, getCasesByIdNumber, list, update, updateCaseState} from '../controllers/caseController';
 
 // @route   POST api/case/add
 // @desc    Add a new case to database. Request should contain all required elements defined in the `Case` model.
 // @access  Private
-router.post('/add', auth, caseController.add);
+caseRouter.post('/add', auth, add);
 
 // @route   PUT api/case/update/:id
 // @desc    Update a case
 // @access  Private
-router.put('/update/:id', auth, caseController.update);
+caseRouter.put('/update/:id', auth, update);
 
 // @route   GET api/case/list
 // @desc    Get all cases from the database.
 // @access  Private
-router.get('/list', auth, caseController.list);
+caseRouter.get('/list', auth, list);
 
 // @route   GET api/case/:id
 // @desc    Get case with given ID
 // @access  Private
-router.get('/:id', auth, caseController.getCaseById);
+caseRouter.get('/:id', auth, getCaseById);
 
-// @route   GET api/case/gericaid
-// @desc    Get case with given GericaID
+// @route   GET api/case/idNumber
+// @desc    Get case with given idNumber
 // @access  Private
-router.get('/:id', auth, caseController.getCasesByGericaId);
+caseRouter.get('/idNumber/:id', auth, getCasesByIdNumber);
 
+// @route   GET api/case/updateCaseState/:id
+// @desc    Get case with given idNumber
+// @access  Private
+caseRouter.put('/updateCaseState/:id', auth, updateCaseState);
 
-module.exports = router;
+export default caseRouter;

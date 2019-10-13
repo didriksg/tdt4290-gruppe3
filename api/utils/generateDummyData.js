@@ -1,26 +1,21 @@
-const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
+import mongoose from 'mongoose';
+import bcrypt from 'bcryptjs';
 
 // Dummy data users.
-const users = require('../dummy_data/dummyUsers');
+import {users} from '../dummy_data/dummyUsers';
 
 // Categories and config files
-const config = require('../config/default');
-const categories = require('../config/acceptedCategories');
+import {bcryptSaltRounds, mongodbConnectionString, mongodbDatabaseName, mongodbPort} from '../config/default';
+import {categories} from '../config/acceptedCategories';
 
 // Models
-const User = require('../models/User');
-const Case = require('../models/Case');
+import User from '../models/User';
+import Case from '../models/Case';
 
 const availableDistricts = ['Midtbyen', 'Lerkendal', 'Østbyen', 'Heimdal'];
 const numberOfCasesToGenerate = 5;
 
-
 const genDbData = function generateDummyDataToDatabase() {
-    const mongodbPort = config['mongodbPort'];
-    const mongodbConnectionString = config['mongodbConnectionString'];
-    const mongodbDatabaseName = config['mongodbDatabaseName'];
-
     const connectionString = mongodbConnectionString + mongodbPort + '/' + mongodbDatabaseName;
 
     // Create a new connection to the DB.
@@ -48,7 +43,7 @@ const genCases = async function generateDummyCases() {
     const availableCategories = categories['categories'];
 
     for (let i = 0; i < numberOfCasesToGenerate; i++) {
-        const gericaNumber = randomInt(100000, 999999);
+        const idNumber = randomInt(100000, 999999);
         const priority = randomInt(1, 4);
         const isChildrenCase = Math.random() >= 0.7;
 
@@ -79,7 +74,7 @@ const genCases = async function generateDummyCases() {
         const important = Math.random() >= 0.9;
 
         const newCase = new Case({
-            gericaNumber,
+            idNumber: idNumber,
             priority,
             isChildrenCase,
             startupDate,
@@ -95,7 +90,7 @@ const genCases = async function generateDummyCases() {
         const progress = ((i + 1) / numberOfCasesToGenerate) * 100;
         process.stdout.write("Adding new cases to database...    Progress " + progress.toFixed(2) + "% \r");
     }
-    console.log('\n'+numberOfCasesToGenerate.toString(), 'new cases added to the database.\n')
+    console.log('\n' + numberOfCasesToGenerate.toString(), 'new cases added to the database.\n')
 };
 
 const genUsers = async function generateDummyUsers(users) {
@@ -121,7 +116,7 @@ const genUsers = async function generateDummyUsers(users) {
         });
 
         // Create salt and hash password
-        bcrypt.genSalt(config['bcryptSaltRounds'])
+        bcrypt.genSalt(bcryptSaltRounds)
             .then((salt) => {
                 bcrypt.hash(newUser.password, salt)
                     .then(async (hash) => {

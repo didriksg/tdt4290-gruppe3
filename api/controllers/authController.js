@@ -1,14 +1,13 @@
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 
-const config = require('../config/default');
-
-const User = require('../models/User');
+import {jwtSecret, jwtExpireInterval} from '../config/default';
+import {User} from '../models/User';
 
 /**
  * Logs a user in by checking the DB for a matching user, validating the password, and returning a JWT.
  */
-exports.login = function loginUser(req, res) {
+export const login = function loginUser(req, res) {
     const email = req.body.email;
     const password = req.body.password;
 
@@ -40,8 +39,8 @@ exports.login = function loginUser(req, res) {
                     // If successful match, sign a token and return it.
                     jwt.sign(
                         {id: user.id},
-                        config['jwtSecret'],
-                        {expiresIn: config['jwtExpireInterval']},
+                        jwtSecret,
+                        {expiresIn: jwtExpireInterval},
                         (err, token) => {
                             if (err) throw err;
 
@@ -63,7 +62,7 @@ exports.login = function loginUser(req, res) {
 /**
  * Get the all data about the current user, except the password.
  */
-exports.getUser = function getUserById(req, res) {
+export const getUser = function getUserById(req, res) {
     User.findById(req.user.id)
         .select('-password')
         .then((user) => res.status(200).json(user))

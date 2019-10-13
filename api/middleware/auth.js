@@ -1,5 +1,5 @@
-const config = require('../config/default');
-const jwt = require('jsonwebtoken');
+import {jwtSecret} from '../config/default';
+import jwt from 'jsonwebtoken';
 
 /**
  * Authenticates a given token and add the authenticated user to the incoming request.
@@ -16,7 +16,7 @@ const auth = function authenticateToken(req, res, next) {
     }
 
     try {
-        req.user = jwt.verify(token, config['jwtSecret']);
+        req.user = jwt.verify(token, jwtSecret);
         next();
     } catch (e) {
         res.status(400)
@@ -24,4 +24,4 @@ const auth = function authenticateToken(req, res, next) {
     }
 };
 
-module.exports = auth;
+export default auth;

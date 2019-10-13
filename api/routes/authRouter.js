@@ -1,17 +1,17 @@
-const express = require('express');
-const router = express.Router();
+import express from 'express';
+const authRouter = express.Router();
 
-const auth = require('../middleware/auth');
-const authController = require('../controllers/authController');
+import auth from '../middleware/auth';
+import {login, getUser} from '../controllers/authController';
 
 // @route   POST api/auth/login
 // @desc    Authenticate a user.
 // @access  Public
-router.post('/login', authController.login);
+authRouter.post('/login', login);
 
 // @route   GET api/auth/user
 // @desc    Get user data
 // @access  Private
-router.get('/user', auth, authController.getUser);
+authRouter.get('/user', auth, getUser);
 
-module.exports = router;
+export default authRouter;

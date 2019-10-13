@@ -1,5 +1,4 @@
-const firstBy = require('thenby/thenBy.module');
-
+import firstBy from 'thenby/thenBy.module'
 
 /**
  * Sort an array of cases based on agreed upon order.
@@ -32,5 +31,4 @@ const sort = function sortCasesByPriority(cases, doFilter) {
     return sortedCases;
 };
 
-
-module.exports = sort;
+export default sort;
