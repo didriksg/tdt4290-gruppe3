@@ -13,7 +13,10 @@ exports.login = function loginUser(req, res) {
     const password = req.body.password;
 
     // Simple validation
-    if (email === undefined || password === undefined) {
+    if (email === undefined
+        || email === ''
+        || password === undefined
+        || password === '') {
         return res.status(400)
             .json({msg: 'Please enter all fields'});
     }
