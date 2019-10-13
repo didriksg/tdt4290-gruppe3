@@ -1,17 +1,17 @@
-const express = require('express');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
+import express from 'express';
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 
-const config = require('../config/default');
+import {bcryptSaltRounds, jwtExpireInterval, jwtSecret} from '../config/default';
 
 // User model
-const User = require('../models/User');
+import User from '../models/User';
 
 
 /**
  * Register a new user.
  */
-exports.register = function registerNewUser(req, res) {
+export const register = function registerNewUser(req, res) {
     const name  = req.body.name;
     const email = req.body.email;
     const password = req.body.password;
@@ -45,7 +45,7 @@ exports.register = function registerNewUser(req, res) {
             });
 
             // Create salt and hash password
-            bcrypt.genSalt(config['bcryptSaltRounds'])
+            bcrypt.genSalt(bcryptSaltRounds)
                 .then((salt) => {
                     bcrypt.hash(newUser.password, salt)
                         .then((hash) => {
@@ -55,8 +55,8 @@ exports.register = function registerNewUser(req, res) {
                                 .then((user) => {
                                     jwt.sign(
                                         {id: user.id},
-                                        config['jwtSecret'],
-                                        {expiresIn: config['jwtExpireInterval']},
+                                        jwtSecret,
+                                        {expiresIn: jwtExpireInterval},
                                         (err, token) => {
                                             if (err)
                                                 throw err;

@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 // Create case model
@@ -73,4 +73,5 @@ const CaseSchema = new Schema({
 });
 
 
-module.exports = User = mongoose.model('case', CaseSchema);
+const Case = mongoose.model('case', CaseSchema);
+export default Case;

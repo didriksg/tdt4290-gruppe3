@@ -1,12 +1,12 @@
-const sort = require('../utils/sortCasesByPriority');
+import sort from '../utils/sortCasesByPriority';
 
 // Case model
-const Case = require('../models/Case');
+import Case from '../models/Case';
 
 /**
  * Add a new case to the database.
  **/
-exports.add = function addNewCase(req, res) {
+export const add = function addNewCase(req, res) {
     // Extract data from request's body.
     const idNumber = req.body.idNumber;
     const priority = req.body.priority;
@@ -63,7 +63,7 @@ exports.add = function addNewCase(req, res) {
 /**
  * Update an existing case by its ID. All fields are optional, and only provided fields are updated.
  **/
-exports.update = function updateCaseById(req, res) {
+export const update = function updateCaseById(req, res) {
     // Extract ID
     const id = req.params.id;
 
@@ -137,7 +137,7 @@ exports.update = function updateCaseById(req, res) {
 /**
  * Get all the cases currently existing in the database.
  **/
-exports.list = function listAllCases(req, res) {
+export const list = function listAllCases(req, res) {
     const state = req.body.state;
 
     Case.find()
@@ -169,7 +169,7 @@ exports.list = function listAllCases(req, res) {
 /**
  * Get a single case based on its ID.
  **/
-exports.getCaseById = function getCaseById(req, res) {
+export const getCaseById = function getCaseById(req, res) {
     // Extract ID
     const id = req.params.id;
     console.log(req.params);
@@ -197,7 +197,7 @@ exports.getCaseById = function getCaseById(req, res) {
 /**
  * Get all cases with the provided gerica ID.
  **/
-exports.getCasesByIdNumber = function getCasesByIdNumber(req, res) {
+export const getCasesByIdNumber = function getCasesByIdNumber(req, res) {
     // Extract ID
     const id = req.params.id;
 
@@ -221,7 +221,7 @@ exports.getCasesByIdNumber = function getCasesByIdNumber(req, res) {
         });
 };
 
-exports.updateCaseState = function updateCaseState(req, res) {
+export const updateCaseState = function updateCaseState(req, res) {
     // Extract needed info from the request.
     const id = req.params.id;
     const newState = req.body.state;
