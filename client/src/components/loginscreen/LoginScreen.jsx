@@ -1,5 +1,4 @@
 import React from "react";
-import {} from '@material-ui/core'
 import "./loginscreen.css";
 import {connect} from 'react-redux';
 import {login} from '../../actions/authActions'
@@ -7,15 +6,14 @@ import PropTypes from 'prop-types';
 
 
 class LoginScreen extends React.Component {
-    state = {
-        email: '',
-        password: '',
-    };
-
     static propTypes = {
         isAuthenticated: PropTypes.bool,
         error: PropTypes.object.isRequired,
         login: PropTypes.func.isRequired,
+    };
+    state = {
+        email: '',
+        password: '',
     };
 
     onLoginButtonClick = e => {
@@ -38,7 +36,7 @@ class LoginScreen extends React.Component {
             if (error.id === 'LOGIN_FAIL') {
                 this.setState({msg: error.msg.msg});
             } else {
-                this.setState({msg:null});
+                this.setState({msg: null});
             }
         }
     }
