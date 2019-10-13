@@ -129,18 +129,27 @@ exports.update = function updateCaseById(req, res) {
  * Get all the cases currently existing in the database.
  **/
 exports.list = function listAllCases(req, res) {
+    const state = req.body.state;
+
     Case.find()
         .then((cases) => {
+
             if (cases === null || cases.length === 0) {
                 res.status(404)
                     .json({msg: 'No cases was found.'});
                 return;
             }
 
-            // Sort cases by priorirty, then importance.
+            // Select only cases with a provided state. These must be either 0, 1 or 2.
+            if (state !== undefined && state !== '' && [0,1,2].includes(state)) {
+                cases = cases.filter(c => c.state === state);
+            }
+
+
+            // Sort cases by startup date, priority, then importance.
             const sortedCases = sort(cases);
             res.status(200)
-                .json(cases);
+                .json(sortedCases);
         })
         .catch(() => {
             res.status(500)

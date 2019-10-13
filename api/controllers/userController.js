@@ -17,7 +17,12 @@ exports.register = function registerNewUser(req, res) {
     const password = req.body.password;
 
     // Check that all required data is provided.
-    if (name === undefined || email === undefined || password === undefined) {
+    if (name === undefined
+        || name === ''
+        || email === undefined
+        || email === ''
+        || password === undefined
+        || password === '') {
         res.status(400)
             .json({msg: 'Please enter all fields'});
         return;
