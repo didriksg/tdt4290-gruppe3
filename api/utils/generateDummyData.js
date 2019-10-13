@@ -48,7 +48,7 @@ const genCases = async function generateDummyCases() {
     const availableCategories = categories['categories'];
 
     for (let i = 0; i < numberOfCasesToGenerate; i++) {
-        const gericaNumber = randomInt(100000, 999999);
+        const idNumber = randomInt(100000, 999999);
         const priority = randomInt(1, 4);
         const isChildrenCase = Math.random() >= 0.7;
 
@@ -79,7 +79,7 @@ const genCases = async function generateDummyCases() {
         const important = Math.random() >= 0.9;
 
         const newCase = new Case({
-            gericaNumber,
+            idNumber: idNumber,
             priority,
             isChildrenCase,
             startupDate,

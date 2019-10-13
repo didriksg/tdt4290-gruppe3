@@ -27,7 +27,12 @@ router.get('/:id', auth, caseController.getCaseById);
 // @route   GET api/case/gericaid
 // @desc    Get case with given GericaID
 // @access  Private
-router.get('/:id', auth, caseController.getCasesByGericaId);
+router.get('/idNumber/:id', auth, caseController.getCasesByIdNumber);
+
+// @route   GET api/case/updateCaseState/:id
+// @desc    Get case with given GericaID
+// @access  Private
+router.put('/updateCaseState/:id', auth, caseController.updateCaseState);
 
 
 module.exports = router;

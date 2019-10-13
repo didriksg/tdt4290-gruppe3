@@ -1,5 +1,5 @@
 import axios from "axios";
-import {ADD_CASE, CASES_LOADING, CASES_LOADED, CASE_UPDATING, CASE_UPDATED} from "./constants";
+import {ADD_CASE, CASE_UPDATED, CASE_UPDATING, CASES_LOADED, CASES_LOADING} from "./constants";
 import {returnErrors} from "./errorActions";
 import {tokenConfig} from "./authActions";
 
@@ -15,8 +15,7 @@ export const addCase = c => {
                 type: ADD_CASE,
                 payload: res.data
             }))
-            .catch(err => dispatch(returnErrors(err.response.data, err.response.status))
-            );
+            .catch(err => dispatch(returnErrors(err.response.data, err.response.status)));
     };
 };
 
@@ -31,8 +30,7 @@ export const updateCase = c => {
                 type: CASE_UPDATED,
                 payload: res.data
             }))
-            .catch(err => dispatch(returnErrors(err.response.data, err.response.status))
-            );
+            .catch(err => dispatch(returnErrors(err.response.data, err.response.status)));
     };
 };
 
@@ -45,8 +43,7 @@ export const getCases = (state) => {
             .then(res => dispatch({
                 type: CASES_LOADED,
             }))
-            .catch(err => dispatch(returnErrors(err.response.data, err.response.status))
-            );
+            .catch(err => dispatch(returnErrors(err.response.data, err.response.status)));
     };
 };
 
@@ -54,10 +51,26 @@ export const getCasesById = (id) => {
     return (dispatch, getState) => {
         axios
             .get(`${connectionString}/api/case/${id}`, body, tokenConfig(getState))
-            .then(res => dispatch({
+            .then(() => dispatch({
                 type: CASES_LOADING,
             }))
-            .catch(err => dispatch(returnErrors(err.response.data, err.response.status))
-            );
+            .catch(err => dispatch(returnErrors(err.response.data, err.response.status)));
     };
-}
+};
+
+export const updateCaseStatus = (case_id, user_id, state) => {
+    return (dispatch, getState) => {
+        dispatch({type: CASE_UPDATING});
+        const body = JSON.stringify({
+            "user_id": user_id,
+            state,
+        });
+
+        axios
+            .put(`${connectionString}/api/case/updateCaseState/${id}`, body, tokenConfig(getState))
+            .then(res => dispatch({
+                type: CASE_UPDATED
+            }))
+            .catch(err => dispatch(returnErrors(err.response.data, err.response.status)));
+    }
+};

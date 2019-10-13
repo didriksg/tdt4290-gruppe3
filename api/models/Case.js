@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 // Create case model
 const CaseSchema = new Schema({
-    gericaNumber: {
+    idNumber: {
         type: String,
         required: true,
     },

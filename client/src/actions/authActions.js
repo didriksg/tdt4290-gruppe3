@@ -1,8 +1,12 @@
 import axios from 'axios';
 import {clearErrors, returnErrors} from "./errorActions";
-import {AUTH_ERROR, LOGIN_FAIL, LOGIN_SUCESS, LOGOUT_SUCESS, USER_LOADED, USER_LOADING} from "../actions/constants";
-
-1;
+import {
+    AUTH_ERROR,
+    LOGIN_FAIL,
+    LOGIN_SUCESS,
+    LOGOUT_SUCESS,
+    USER_LOADED,
+    USER_LOADING} from "../actions/constants";
 
 const apiConnectionString = 'http://localhost:4000';
 
