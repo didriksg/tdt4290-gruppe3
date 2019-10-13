@@ -24,13 +24,13 @@ caseRouter.get('/list', auth, list);
 // @access  Private
 caseRouter.get('/:id', auth, getCaseById);
 
-// @route   GET api/case/gericaid
-// @desc    Get case with given GericaID
+// @route   GET api/case/idNumber
+// @desc    Get case with given idNumber
 // @access  Private
 caseRouter.get('/idNumber/:id', auth, getCasesByIdNumber);
 
 // @route   GET api/case/updateCaseState/:id
-// @desc    Get case with given GericaID
+// @desc    Get case with given idNumber
 // @access  Private
 caseRouter.put('/updateCaseState/:id', auth, updateCaseState);
 

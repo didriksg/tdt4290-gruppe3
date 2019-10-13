@@ -25,8 +25,8 @@ mongoose.connect(connectionString, {
 
 // Setup routes.
 app.use('/api/auth', authRouter);
-app.use('/api/user', caseRouter);
-app.use('/api/case', userRouter);
+app.use('/api/user', userRouter);
+app.use('/api/case', caseRouter);
 
 // Make app listen a given port
 app.listen(apiPort, () => console.log('Server is running on port: ' + apiPort));
