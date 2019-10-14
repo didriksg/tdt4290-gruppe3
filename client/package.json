@@ -19,16 +19,34 @@
   },
   "homepage": "https://github.com/theatok/tdt4290-gruppe3#readme",
   "dependencies": {
+<<<<<<< HEAD
     "@material-ui/core": "^4.5.0",
     "@material-ui/icons": "^4.4.3",
     "parcel-bundler": "^1.12.3",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
+=======
+    "@date-io/date-fns": "^1.3.11",
+    "@material-ui/core": "^4.5.0",
+    "@material-ui/icons": "^4.4.3",
+    "@material-ui/pickers": "^3.2.6",
+    "axios": "^0.19.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "date-fns": "^2.4.1",
+    "parcel-bundler": "^1.12.4",
+    "react": "^16.10.2",
+    "react-dom": "^16.10.2",
+    "react-redux": "^7.1.1",
+>>>>>>> 1cae0d3ba21618e52b544b2cb4a4a64fb968497e
     "react-router-dom": "^5.1.2",
-    "save-dev": "^2.0.0"
+    "redux": "^4.0.4",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-thunk": "^2.3.0",
+    "save": "^2.0.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1"
   }

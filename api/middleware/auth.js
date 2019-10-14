@@ -1,5 +1,5 @@
-const config = require('config');
-const jwt = require('jsonwebtoken');
+import {jwtSecret} from '../config/default';
+import jwt from 'jsonwebtoken';
 
 /**
  * Authenticates a given token and add the authenticated user to the incoming request.
@@ -11,12 +11,12 @@ const auth = function authenticateToken(req, res, next) {
     const token = req.header('x-auth-token');
 
     if (token === undefined) {
-        res.status(401)
+        return res.status(401)
             .json({msg: 'No valid token was found. Access denied.'});
     }
 
     try {
-        req.user = jwt.verify(token, config.get('jwtSecret'));
+        req.user = jwt.verify(token, jwtSecret);
         next();
     } catch (e) {
         res.status(400)
@@ -24,4 +24,4 @@ const auth = function authenticateToken(req, res, next) {
     }
 };
 
-module.exports = auth;
+export default auth;

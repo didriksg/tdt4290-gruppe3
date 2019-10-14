@@ -1,12 +1,22 @@
-const firstBy = require('thenby/thenBy.module');
-
+import firstBy from 'thenby/thenBy.module'
 
 /**
  * Sort an array of cases based on agreed upon order.
  * @param cases Array containing cases.
+ * @param doFilter Only show unstarted cases.
  */
-const sort = function sortCasesByPriority(cases) {
-    const sortedCases = cases.sort(
+const sort = function sortCasesByPriority(cases, doFilter) {
+    let filteredCases;
+
+    if (doFilter) {
+        filteredCases = cases.filter((c) => {
+            return c.state === 0;
+        });
+    } else {
+        filteredCases = cases;
+    }
+
+    const sortedCases = filteredCases.sort(
         firstBy((c) => {
             return c.startupDate;
         })
@@ -17,7 +27,8 @@ const sort = function sortCasesByPriority(cases) {
                 return !c.important;
             })
     );
+
+    return sortedCases;
 };
 
-
-module.exports = sort;
+export default sort;

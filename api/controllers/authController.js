@@ -1,22 +1,21 @@
-const express = require('express');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const config = require('config');
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 
-const router = express.Router();
+import {jwtSecret, jwtExpireInterval} from '../config/default';
+import {User} from '../models/User';
 
-const User = require('../models/User');
-const auth = require('../middleware/auth');
-
-
-// @route   POST api/auth/login
-// @desc    Authenticate a user.
-// @access  Public
-router.post('/login', (req, res) => {
-    const {email, password} = req.body;
+/**
+ * Logs a user in by checking the DB for a matching user, validating the password, and returning a JWT.
+ */
+export const login = function loginUser(req, res) {
+    const email = req.body.email;
+    const password = req.body.password;
 
     // Simple validation
-    if (!email || !password) {
+    if (email === undefined
+        || email === ''
+        || password === undefined
+        || password === '') {
         return res.status(400)
             .json({msg: 'Please enter all fields'});
     }
@@ -40,8 +39,8 @@ router.post('/login', (req, res) => {
                     // If successful match, sign a token and return it.
                     jwt.sign(
                         {id: user.id},
-                        config.get('jwtSecret'),
-                        {expiresIn: config.get('jwtExpireInterval')},
+                        jwtSecret,
+                        {expiresIn: jwtExpireInterval},
                         (err, token) => {
                             if (err) throw err;
 
@@ -58,26 +57,14 @@ router.post('/login', (req, res) => {
                     );
                 });
         });
-});
+};
 
-// @route   GET api/auth/user
-// @desc    Get user data
-// @access  Private
-router.get('/user', auth, (req, res) => {
+/**
+ * Get the all data about the current user, except the password.
+ */
+export const getUser = function getUserById(req, res) {
     User.findById(req.user.id)
         .select('-password')
         .then((user) => res.status(200).json(user))
-        .catch(() => res.status(500).json({msg: 'User data not found..'}));
-});
-
-// @route   GET api/auth/user
-// @desc    Get user data
-// @access  Private
-router.get('/user/:id', auth, (req, res) => {
-    // Return user data, but don't add password.
-    User.findById(req.user.id)
-        .select('-password')
-        .then(user => res.json(user));
-});
-
-module.exports = router;
+        .catch((err) => res.status(500).json({msg: 'User data not found..'}));
+};

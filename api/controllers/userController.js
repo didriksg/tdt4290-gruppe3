@@ -1,32 +1,40 @@
-const express = require('express');
-const router = express.Router();
+import express from 'express';
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-
-const config = require('config');
+import {bcryptSaltRounds, jwtExpireInterval, jwtSecret} from '../config/default';
 
 // User model
-const User = require('../models/User');
+import User from '../models/User';
 
-// @route   POST api/user/register
-// @desc    Register new user
-// @access  Public
-router.post('/register', (req, res) => {
-    const {name, email, password} = req.body;
+
+/**
+ * Register a new user.
+ */
+export const register = function registerNewUser(req, res) {
+    const name  = req.body.name;
+    const email = req.body.email;
+    const password = req.body.password;
 
     // Check that all required data is provided.
-    if (name === undefined || email === undefined || password === undefined) {
-        return res.status(400)
+    if (name === undefined
+        || name === ''
+        || email === undefined
+        || email === ''
+        || password === undefined
+        || password === '') {
+        res.status(400)
             .json({msg: 'Please enter all fields'});
+        return;
     }
 
     // Check for existing user
     User.findOne({email})
         .then((user) => {
             if (user !== null) {
-                return res.status(400)
+                res.status(400)
                     .json({msg: 'User already exists'});
+                return;
             }
 
             // If no user with this email exist, create new user model with given data.
@@ -37,7 +45,7 @@ router.post('/register', (req, res) => {
             });
 
             // Create salt and hash password
-            bcrypt.genSalt(config.get('bcryptSaltRounds'))
+            bcrypt.genSalt(bcryptSaltRounds)
                 .then((salt) => {
                     bcrypt.hash(newUser.password, salt)
                         .then((hash) => {
@@ -47,8 +55,8 @@ router.post('/register', (req, res) => {
                                 .then((user) => {
                                     jwt.sign(
                                         {id: user.id},
-                                        config.get('jwtSecret'),
-                                        {expiresIn: config.get('jwtExpireInterval')},
+                                        jwtSecret,
+                                        {expiresIn: jwtExpireInterval},
                                         (err, token) => {
                                             if (err)
                                                 throw err;
@@ -73,8 +81,5 @@ router.post('/register', (req, res) => {
                     res.status(500)
                         .json({msg: 'Problems hashing password.'});
                 });
-        });
-});
-
-
-module.exports = router;
+        })
+};
