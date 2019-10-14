@@ -1,41 +1,42 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import clsx from 'clsx';
-import { lighten, makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TablePagination from '@material-ui/core/TablePagination';
-import TableRow from '@material-ui/core/TableRow';
-import TableSortLabel from '@material-ui/core/TableSortLabel';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Paper from '@material-ui/core/Paper';
-import IconButton from '@material-ui/core/IconButton';
-import Tooltip from '@material-ui/core/Tooltip';
-import FilterListIcon from '@material-ui/icons/FilterList';
-import { grey, red } from '@material-ui/core/colors';
+import { makeStyles } from '@material-ui/core/styles';
+import {Table, 
+  TableBody,
+  TableCell,
+  TableHead,
+  TablePagination,
+  TableRow,
+  TableSortLabel,
+  Toolbar,
+  Typography,
+  Paper 
+} from '@material-ui/core';
 
 
-function createData(gericaid, calories, fat, carbs, protein) {
-  return { gericaid, calories, fat, carbs, protein };
+// Sample data method
+function createData(gericaid, diagnose, aldersgruppe, prioritet, terapeut, innmeldt, sakStart) {
+  return { gericaid, diagnose, aldersgruppe, prioritet, terapeut, innmeldt, sakStart };
 }
 
-const rows = [
-  createData('Cupcake', 3, 3.7, 67, 4.3),
-  createData('Donut', 3, 25.0, 51, 4.9),
-  createData('Eclair', 3, 16.0, 24, 6.0),
-  createData('Frozen yoghurt', 3, 6.0, 24, 4.0),
-  createData('Gingerbread', 2, 16.0, 49, 3.9),
-  createData('Honeycomb', 2, 3.2, 87, 6.5),
-  createData('Ice cream sandwich', 3, 9.0, 37, 4.3),
-  createData('Jelly Bean', 1, 0.0, 94, 0.0),
-  createData('KitKat', 1, 26.0, 65, 7.0),
-  createData('Lollipop', 4, 0.2, 98, 0.0),
-  createData('Marshmallow', 2, 0, 81, 2.0),
-  createData('Nougat', 3, 19.0, 9, 37.0),
-  createData('Oreo', 1, 18.0, 63, 4.0),
+// Sample data method
+const rows = [
+    createData('010101', "Tiltak", "Voksen", 4, "Ola Nordmann", 36, 38),
+    createData('111111', "Arbeidsform", "Barn", 2, "Kari Nordmann", 38, 40),
+    createData('222222', "Diagnoser", "Voksen", 1, "Per", 37, 37),
+    createData('333333', "Tiltak", "Voksen", 4, "Ola Nordmann", 36, 38),
+    createData('000191', "Arbeidsform", "Barn", 2, "Kari Nordmann", 38, 40),
+    createData('999999', "Diagnoser", "Voksen", 1, "Per", 37, 37),
+  ];
+
+const headCells = [
+  { id: 'gericaid', numeric: false, disablePadding: false, label: 'ID' },
+  { id: 'diagnose', numeric: true, disablePadding: false, label: 'Diagnosegrupper' },
+  { id: 'aldersgruppe', numeric: true, disablePadding: false, label: 'Aldersgruppe' },
+  { id: 'prioritet', numeric: true, disablePadding: false, label: 'Prioritet' },
+  { id: 'terapeut', numeric: true, disablePadding: false, label: 'Terapeut' },
+  { id: 'innmeldt', numeric: true, disablePadding: false, label: 'Innmeldt uke' },
+  { id: 'sakStart', numeric: true, disablePadding: false, label: 'Forventet start' },
 ];
 
 // Sort function
@@ -53,7 +54,8 @@ function stableSort(array, cmp) {
   const stabilizedThis = array.map((el, index) => [el, index]);
   stabilizedThis.sort((a, b) => {
     const order = cmp(a[0], b[0]);
-    if (order !== 0) return order;
+    if (order !== 0) 
+      return order;
     return a[1] - b[1];
   });
   return stabilizedThis.map(el => el[0]);
@@ -62,14 +64,6 @@ function stableSort(array, cmp) {
 function getSorting(order, orderBy) {
   return order === 'desc' ? (a, b) => desc(a, b, orderBy) : (a, b) => -desc(a, b, orderBy);
 }
-
-const headCells = [
-  { id: 'gericaid', numeric: false, disablePadding: true, label: 'GericaIdent' },
-  { id: 'calories', numeric: true, disablePadding: false, label: 'Prioritet' },
-  { id: 'fat', numeric: true, disablePadding: false, label: 'Kategori' },
-  { id: 'carbs', numeric: true, disablePadding: false, label: 'Uke motatt' },
-  { id: 'protein', numeric: true, disablePadding: false, label: 'Uke tatt' },
-];
 
 function EnhancedTableHead(props) {
   const { classes, order, orderBy, onRequestSort } = props;
@@ -113,38 +107,10 @@ EnhancedTableHead.propTypes = {
   orderBy: PropTypes.string.isRequired,
 };
 
-const useToolbarStyles = makeStyles(theme => ({
-  root: {
-    paddingLeft: theme.spacing(2),
-    paddingRight: theme.spacing(1),
-  },
-  highlight:
-    theme.palette.type === 'light'
-      ? {
-          color: theme.palette.secondary.main,
-          backgroundColor: lighten(theme.palette.secondary.light, 0.85),
-        }
-      : {
-          color: theme.palette.text.primary,
-          backgroundColor: theme.palette.secondary.dark,
-        },
-  spacer: {
-    flex: '1 1 100%',
-  },
-  actions: {
-    color: theme.palette.text.secondary,
-  },
-  title: {
-    flex: '0 0 auto',
-  },
-}));
-
 const EnhancedTableToolbar = props => {
-  const classes = useToolbarStyles();
-
   return (
-    <Toolbar >
-      <div className={classes.title}>
+    <Toolbar>
+      <div>
           <Typography variant="h6" id="tableTitle">
             Alle saker
           </Typography>
@@ -153,6 +119,7 @@ const EnhancedTableToolbar = props => {
   );
 };
 
+// Styling
 const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
@@ -184,11 +151,11 @@ const useStyles = makeStyles(theme => ({
 export default function OverviewBoard() {
   const classes = useStyles();
   const [order, setOrder] = React.useState('asc');
-  const [orderBy, setOrderBy] = React.useState('calories');
+  const [orderBy, setOrderBy] = React.useState('diagnose');
   const [page, setPage] = React.useState(0);
   
   // Chooses how many rows to be shown
-  const [rowsPerPage, setRowsPerPage] = React.useState(9);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   const handleRequestSort = (event, property) => {
     const isDesc = orderBy === property && order === 'desc';
@@ -215,6 +182,7 @@ export default function OverviewBoard() {
           <Table
             className={classes.table}
             aria-labelledby="tableTitle"
+            stickyHeader
           >
             <EnhancedTableHead
               classes={classes}
@@ -233,19 +201,21 @@ export default function OverviewBoard() {
                       tabIndex={-1}
                       key={row.gericaid}
                     >
-                      <TableCell component="th" id={labelId} scope="row" padding="none">
+                      <TableCell component="th" id={labelId} scope="row" >
                         {row.gericaid}
                       </TableCell>
-                      <TableCell align="right">{row.calories}</TableCell>
-                      <TableCell align="right">{row.fat}</TableCell>
-                      <TableCell align="right">{row.carbs}</TableCell>
-                      <TableCell align="right">{row.protein}</TableCell>
+                      <TableCell align="right">{row.diagnose}</TableCell>
+                      <TableCell align="right">{row.aldersgruppe}</TableCell>
+                      <TableCell align="right">{row.prioritet}</TableCell>
+                      <TableCell align="right">{row.terapeut}</TableCell>
+                      <TableCell align="right">{row.innmeldt}</TableCell>
+                      <TableCell align="right">{row.sakStart}</TableCell>
                     </TableRow>
                   );
                 })}
               {emptyRows > 0 && (
                 <TableRow >
-                  <TableCell colSpan={6} />
+                  <TableCell colSpan={7} />
                 </TableRow>
               )}
             </TableBody>
