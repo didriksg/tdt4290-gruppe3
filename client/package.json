@@ -19,13 +19,6 @@
   },
   "homepage": "https://github.com/theatok/tdt4290-gruppe3#readme",
   "dependencies": {
-<<<<<<< HEAD
-    "@material-ui/core": "^4.5.0",
-    "@material-ui/icons": "^4.4.3",
-    "parcel-bundler": "^1.12.3",
-    "react": "^16.9.0",
-    "react-dom": "^16.9.0",
-=======
     "@date-io/date-fns": "^1.3.11",
     "@material-ui/core": "^4.5.0",
     "@material-ui/icons": "^4.4.3",
@@ -37,7 +30,6 @@
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
     "react-redux": "^7.1.1",
->>>>>>> 1cae0d3ba21618e52b544b2cb4a4a64fb968497e
     "react-router-dom": "^5.1.2",
     "redux": "^4.0.4",
     "redux-devtools-extension": "^2.13.8",
