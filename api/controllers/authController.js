@@ -2,7 +2,7 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
 import {jwtSecret, jwtExpireInterval} from '../config/default';
-import {User} from '../models/User';
+import User from '../models/User';
 
 /**
  * Logs a user in by checking the DB for a matching user, validating the password, and returning a JWT.
