@@ -1,7 +1,7 @@
 import React from "react";
 import "./loginscreen.css";
 import {connect} from 'react-redux';
-import {login} from '../../actions/authActions'
+import {login} from '../../redux/actions/authActions'
 import PropTypes from 'prop-types';
 
 

@@ -6,7 +6,7 @@ import {
     LOGIN_SUCESS,
     LOGOUT_SUCESS,
     USER_LOADED,
-    USER_LOADING} from "../actions/constants";
+    USER_LOADING} from "./constants";
 
 const apiConnectionString = 'http://localhost:4000';
 
