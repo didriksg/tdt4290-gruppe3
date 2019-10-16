@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import LoginScreen from "./components/loginscreen/LoginScreen";
 
 import { Provider } from 'react-redux';
-import configureStore from './redux/store'
-import {loadUser} from "./redux/actions/authActions";
+import configureStore from './store'
+import {loadUser} from "./actions/authActions";
 
 const store = configureStore();
 
