@@ -40,8 +40,6 @@ const genDbData = function generateDummyDataToDatabase() {
 };
 
 const genCases = async function generateDummyCases() {
-    const availableCategories = categories['categories'];
-
     for (let i = 0; i < numberOfCasesToGenerate; i++) {
         const idNumber = randomInt(100000, 999999);
         const priority = randomInt(1, 4);
@@ -69,7 +67,7 @@ const genCases = async function generateDummyCases() {
         const description = "En kul beskrivelse.";
         const startupDate = new Date(startYear, startMonth, startDay);
         const registeredDate = new Date(registerYear, registeredMonth, registeredDay);
-        const category = availableCategories[Math.floor(Math.random() * availableCategories.length)];
+        const category = categories[Math.floor(Math.random() * categories.length)];
         const district = availableDistricts[Math.floor(Math.random() * availableDistricts.length)];
         const important = Math.random() >= 0.9;
 
@@ -94,12 +92,11 @@ const genCases = async function generateDummyCases() {
 };
 
 const genUsers = async function generateDummyUsers(users) {
-    const us = users['users'];
     let usersAdded = 0;
-    for (i = 0; i < us.length; i++) {
-        const name = us[i].name;
-        const email = us[i].email;
-        const password = us[i].password;
+    for (let i = 0; i < users.length; i++) {
+        const name = users[i].name;
+        const email = users[i].email;
+        const password = users[i].password;
 
 
         // Check for existing user
