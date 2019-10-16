@@ -5,7 +5,8 @@ import HomeScreen from "./components/homescreen/homescreen";
 import Arkiv from "./components/arkiv/arkiv";
 import MonthlyReport from "./components/monthlyReport/monthlyReport";
 import CaseScreen from "./components/casescreen/CaseScreen";
-import OverviewBoard from "./components/table/OverviewBoard"
+import OverviewBoard from "./components/table/OverviewBoard";
+import LoginScreen from "./components/loginscreen/LoginScreen";
 import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
 
 const routing = (
