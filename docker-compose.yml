@@ -15,16 +15,14 @@ services:
       ports:
         - "1234:1234"
       volumes:
-        - ./client:/client
-        - ./client/node_modules
+        - /client/
+        - /client/node_modules/
 
       links:
         - api
 
       networks:
         - app-network
-
-
 
      # Setup for the API
     api:
@@ -39,8 +37,8 @@ services:
       ports:
         - "4000:4000"
       volumes:
-        - ./api:/api
-        - ./api/node_modules
+        - /api
+        - /api/node_modules
 
       depends_on:
         - mongodb

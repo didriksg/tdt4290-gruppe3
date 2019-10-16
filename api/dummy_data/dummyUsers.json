@@ -1,0 +1,29 @@
+{
+  "users": [
+    {
+      "name": "Test Testersen",
+      "email": "test@testersen.no",
+      "password": "testpassord"
+    },
+    {
+      "name": "Bob Bobbersen",
+      "email": "bob@bobbersen.no",
+      "password": "testpassord"
+    },
+    {
+      "name": "Kåre Willoch",
+      "email": "kare@willoch.no",
+      "password": "testpassord"
+    },
+    {
+      "name": "Didrik E. R. Kulesen",
+      "email": "didrik@kulesen.no",
+      "password": "testpassord"
+    },
+    {
+      "name": "Feorg B. B. Partin",
+      "email": "got@s8notgood.no",
+      "password": "testpassord"
+    }
+  ]
+}
