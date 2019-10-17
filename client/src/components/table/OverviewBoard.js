@@ -15,28 +15,28 @@ import {Table,
 
 
 // Sample data method
-function createData(gericaid, diagnose, aldersgruppe, prioritet, terapeut, innmeldt, sakStart) {
-  return { gericaid, diagnose, aldersgruppe, prioritet, terapeut, innmeldt, sakStart };
+function createData(idNumber, category, priority, referredFrom, district, registeredDate, startupDate) {
+  return { idNumber, category, priority, referredFrom, district, registeredDate, startupDate };
 }
 
 // Sample data method
 const rows = [
-    createData('010101', "Tiltak", "Voksen", 4, "Ola Nordmann", 36, 38),
-    createData('111111', "Arbeidsform", "Barn", 2, "Kari Nordmann", 38, 40),
-    createData('222222', "Diagnoser", "Voksen", 1, "Per", 37, 37),
-    createData('333333', "Tiltak", "Voksen", 4, "Ola Nordmann", 36, 38),
-    createData('000191', "Arbeidsform", "Barn", 2, "Kari Nordmann", 38, 40),
-    createData('999999', "Diagnoser", "Voksen", 1, "Per", 37, 37),
+    createData('010101', "Tiltak", 4, "Ola Nordmann", "Midtbyen", 38, 43),
+    createData('111111', "Arbeidsform", 2, "Kari Nordmann", "Østbyen", 40, 42),
+    createData('222222', "Diagnoser", 1, "Per", "Lerkendal", 37, 38),
+    createData('333333', "Tiltak", 4, "Ola Nordmann", "Heimdal", 38, 37),
+    createData('000191', "Arbeidsform", 2, "Kari Nordmann", "Østbyen", 40, 45),
+    createData('999999', "Diagnoser", 1, "Per", "Østbyen", 37, 48),
   ];
 
 const headCells = [
-  { id: 'gericaid', numeric: false, disablePadding: false, label: 'ID' },
-  { id: 'diagnose', numeric: true, disablePadding: false, label: 'Diagnosegrupper' },
-  { id: 'aldersgruppe', numeric: true, disablePadding: false, label: 'Aldersgruppe' },
-  { id: 'prioritet', numeric: true, disablePadding: false, label: 'Prioritet' },
-  { id: 'terapeut', numeric: true, disablePadding: false, label: 'Terapeut' },
-  { id: 'innmeldt', numeric: true, disablePadding: false, label: 'Innmeldt uke' },
-  { id: 'sakStart', numeric: true, disablePadding: false, label: 'Forventet start' },
+  { id: 'idNumber', numeric: false, disablePadding: false, label: 'IDNummer' },
+  { id: 'category', numeric: true, disablePadding: false, label: 'Kategori' },
+  { id: 'priority', numeric: true, disablePadding: false, label: 'Prioritet' },
+  { id: 'referredFrom', numeric: true, disablePadding: false, label: 'Henvist fra' },
+  { id: 'district', numeric: true, disablePadding: false, label: 'Bydel' },
+  { id: 'registeredDate', numeric: true, disablePadding: false, label: 'Innmeldt' },
+  { id: 'startupDate', numeric: true, disablePadding: false, label: 'Forventet start' },
 ];
 
 // Sort function
@@ -151,7 +151,7 @@ const useStyles = makeStyles(theme => ({
 export default function OverviewBoard() {
   const classes = useStyles();
   const [order, setOrder] = React.useState('asc');
-  const [orderBy, setOrderBy] = React.useState('diagnose');
+  const [orderBy, setOrderBy] = React.useState('category');
   const [page, setPage] = React.useState(0);
   
   // Chooses how many rows to be shown
@@ -170,6 +170,11 @@ export default function OverviewBoard() {
   const handleChangeRowsPerPage = event => {
     setRowsPerPage(+event.target.value);
     setPage(0);
+  };
+
+  // TODO: assigne a therapist to the case
+  const handleClick = (event, name) => {
+    console.log(name);
   };
 
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
@@ -198,23 +203,22 @@ export default function OverviewBoard() {
                   return (
                     <TableRow
                       hover
+                      onClick={event => handleClick(event, row.idNumber)}
                       tabIndex={-1}
-                      key={row.gericaid}
+                      key={row.idNumber}
                     >
-                      <TableCell component="th" id={labelId} scope="row" >
-                        {row.gericaid}
-                      </TableCell>
-                      <TableCell align="right">{row.diagnose}</TableCell>
-                      <TableCell align="right">{row.aldersgruppe}</TableCell>
-                      <TableCell align="right">{row.prioritet}</TableCell>
-                      <TableCell align="right">{row.terapeut}</TableCell>
-                      <TableCell align="right">{row.innmeldt}</TableCell>
-                      <TableCell align="right">{row.sakStart}</TableCell>
+                      <TableCell component="th" id={labelId} scope="row">{row.idNumber}</TableCell>
+                      <TableCell align="right">{row.category}</TableCell>
+                      <TableCell align="right">{row.priority}</TableCell>
+                      <TableCell align="right">{row.referredFrom}</TableCell>
+                      <TableCell align="right">{row.district}</TableCell>
+                      <TableCell align="right">{row.registeredDate}</TableCell>
+                      <TableCell align="right">{row.startupDate}</TableCell>
                     </TableRow>
                   );
                 })}
               {emptyRows > 0 && (
-                <TableRow >
+                <TableRow>
                   <TableCell colSpan={7} />
                 </TableRow>
               )}
