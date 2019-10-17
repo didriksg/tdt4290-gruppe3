@@ -94,7 +94,7 @@ export default function Arkiv(){
                         </Typography>   
                     </Grid>
                     <Grid item sm={2}>
-                        <Button variant="contained" color="primary" component={Link} to={"/hjemmeside"}> Tilbake - min side</Button>
+                        <Button variant="contained" color="primary" component={Link} to={"/"}> Tilbake - min side</Button>
                     </Grid>
                 </Grid>
             </Toolbar>
