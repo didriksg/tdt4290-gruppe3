@@ -14,14 +14,13 @@ class App extends Component {
 
     render() {
         return (
-            <Provider store={store}>
                 <div>
                     <div className="container">
                         <LoginScreen/>
                         <h1>Hello World {this.props.name}</h1>
                     </div>
                 </div>
-            </Provider>
+
         );
     }
 }

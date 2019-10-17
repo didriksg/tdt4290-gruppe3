@@ -3,7 +3,7 @@ import "./loginscreen.css";
 import {connect} from 'react-redux';
 import {login} from '../../actions/authActions';
 import PropTypes from 'prop-types';
-
+import { Redirect as Router } from 'react-router-dom';
 
 class LoginScreen extends React.Component {
     static propTypes = {
@@ -38,6 +38,9 @@ class LoginScreen extends React.Component {
             } else {
                 this.setState({msg: null});
             }
+        }
+        if(this.props.isAuthenticated) {
+            console.log("Halla");
         }
     }
 

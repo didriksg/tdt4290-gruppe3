@@ -6,23 +6,14 @@ import Arkiv from "./components/arkiv/arkiv";
 import MonthlyReport from "./components/monthlyReport/monthlyReport";
 import CaseScreen from "./components/casescreen/CaseScreen";
 import OverviewBoard from "./components/table/OverviewBoard";
-import LoginScreen from "./components/loginscreen/LoginScreen";
 import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
+import Root from "./Root";
+import { createStore } from 'redux';
+import reducers from "./reducers";
 
-const routing = (
-    <Router>
-        <div>
-            <Route exact path="/" component={App} />
-            <Route path="/hjemmeside" component={HomeScreen} />
-            <Route path="/arkiv" component={Arkiv} />
-            <Route path="/rapport" component={MonthlyReport} />
-            <Route path="/ny-sak" component={CaseScreen} />
-            <Route path="/alle-saker" component={OverviewBoard} />
-        </div>
-    </Router>
-)
+const store = createStore(reducers);
 
 ReactDOM.render(
-    routing, 
+    <Root store={store} />, 
     document.getElementById("app"),
 );
