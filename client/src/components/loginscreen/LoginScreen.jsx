@@ -40,9 +40,6 @@ class LoginScreen extends React.Component {
                 this.setState({msg: null});
             }
         }
-        if(this.props.isAuthenticated) {
-            console.log("Halla");
-        }
     }
 
     onChange = e => {
