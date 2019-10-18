@@ -3,7 +3,8 @@ import "./loginscreen.css";
 import {connect} from 'react-redux';
 import {login} from '../../actions/authActions';
 import PropTypes from 'prop-types';
-import { Redirect as Router } from 'react-router-dom';
+import {Redirect} from "react-router-dom";
+
 
 class LoginScreen extends React.Component {
     static propTypes = {
@@ -49,7 +50,11 @@ class LoginScreen extends React.Component {
     };
 
     render() {
+        if (this.props.isAuthenticated) {
+            return <Redirect to="/"/>;
+        }
         return (
+
             <div className="logincontainer">
 
                 <div className="loginelements">
