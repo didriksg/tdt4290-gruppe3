@@ -1,11 +1,14 @@
-import React from 'react';
+import React, {Component} from 'react';
 
 
-export default function MonthlyReport(){
-    return(
-        <div>
-            <p>Hello</p>
-        </div>
-    )
-
+class MonthlyReport extends Component {
+    render() {
+        return (
+            <div>
+                <p>Hello</p>
+            </div>
+        )
+    }
 }
+
+export default MonthlyReport

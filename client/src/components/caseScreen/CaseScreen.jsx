@@ -1,12 +1,12 @@
 import React from "react";
 import "./casescreen.css";
-import RadioButtons from "./RadioButtons.jsx";
-import BarnVoksenSelect from "./BarnVoksenSelect.jsx";
-import RegisterDate from "./RegisterDate.jsx";
-import StartDate from "./StartDate.jsx";
-import BydelSelect from "./BydelSelect.jsx";
-import KategoriSelect from "./KategoriSelect.jsx";
-import HenvendtSelect from "./HenvendtSelect.jsx";
+import RadioButtons from "./RadioButtons";
+import BarnVoksenSelect from "./BarnVoksenSelect";
+import RegisterDate from "./RegisterDate";
+import StartDate from "./StartDate";
+import BydelSelect from "./BydelSelect";
+import KategoriSelect from "./KategoriSelect";
+import HenvendtSelect from "./HenvendtSelect";
 
 
 class CaseScreen extends React.Component{
