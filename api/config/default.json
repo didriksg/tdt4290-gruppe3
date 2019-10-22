@@ -2,7 +2,7 @@
   "jwtSecret": "Denne må endres på serveren.",
   "jwtExpireInterval": 3600,
 
-  "apiPort": 4000,
+  "apiPort": 5000,
 
   "mongodbConnectionString": "mongodb://mongodb:",
   "mongodbPort": 27017,
