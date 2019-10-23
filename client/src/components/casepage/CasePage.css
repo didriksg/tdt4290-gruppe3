@@ -1,0 +1,67 @@
+.gridContainer {
+    margin-right: 3%;
+    margin-left: 3%;
+    display: grid;
+    grid-template-areas: 
+        "back back"
+        "header assign"
+        "leftside rightside"
+        "leftside rightside";
+    
+    grid-gap: 1px;
+    padding: 1px;
+}
+
+.backButton {
+    grid-area: back;
+    justify-content: flex-start;
+    display: flex;
+    border-bottom: solid 0.001rem grey;
+    text-decoration: none;
+    color: black;
+}
+.backButton:hover{
+    color: blue;
+}
+.header {
+    grid-area: header;
+}
+.assign {
+    grid-area: assign;
+    padding-top: 4%;
+    padding-left: 3%;
+}
+.leftSide {
+    grid-area: leftside;
+}
+
+.rightSide {
+    grid-area: rightside;
+}
+
+.idNummer {
+    margin: 3%;
+    padding-top: 1%;
+    border-bottom: solid 0.001rem grey;
+}
+
+.category {
+    padding: 3%;
+}
+.priority {
+    padding: 3%;
+}
+.referredFrom {
+    padding: 3%;
+}
+.district {
+    padding: 3%;
+    margin-top: 2%;
+}
+.registered {
+    padding: 3%;
+}
+.startupDate {
+    padding: 3%;
+}
+

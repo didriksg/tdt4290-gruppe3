@@ -1,4 +1,9 @@
 import React from 'react';
+import {Redirect} from "react-router-dom";
+import CasePage from "../casepage/CasePage";
+import {Link} from "react-router-dom";
+import { FilledInput } from '@material-ui/core';
+
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import {Table, 
@@ -82,6 +87,7 @@ function EnhancedTableHead(props) {
             sortDirection={orderBy === headCell.id ? order : false}
           >
             <TableSortLabel
+              component={Link} to={"/sak"} 
               active={orderBy === headCell.id}
               direction={order}
               onClick={createSortHandler(headCell.id)}
@@ -175,6 +181,7 @@ export default function OverviewBoard() {
   // TODO: assigne a therapist to the case
   const handleClick = (event, name) => {
     console.log(name);
+    <Redirect to="/sak"/>
   };
 
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
@@ -187,6 +194,7 @@ export default function OverviewBoard() {
           <Table
             className={classes.table}
             aria-labelledby="tableTitle"
+            underlineNone
             stickyHeader
           >
             <EnhancedTableHead
@@ -195,7 +203,7 @@ export default function OverviewBoard() {
               orderBy={orderBy}
               onRequestSort={handleRequestSort}
             />
-            <TableBody>
+            <TableBody underlineNone>
               {stableSort(rows, getSorting(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
@@ -203,9 +211,11 @@ export default function OverviewBoard() {
                   return (
                     <TableRow
                       hover
+                      component={Link} to={"/sak"}
                       onClick={event => handleClick(event, row.idNumber)}
                       tabIndex={-1}
                       key={row.idNumber}
+                      underlineNone
                     >
                       <TableCell component="th" id={labelId} scope="row">{row.idNumber}</TableCell>
                       <TableCell align="right">{row.category}</TableCell>
