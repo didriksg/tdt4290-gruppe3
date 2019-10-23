@@ -42,33 +42,34 @@ export default function RoutingButtons(){
                     </Button>
                 </Grid>
                 <Grid item>
-                    <Button 
-                        variant="outlined" 
-                        color="primary" 
+                    <Button
+                        variant="outlined"
+                        color="primary"
                         style={style.buttons}
-                        onClick={handleMunicipalityOpen}
+                        component={Link} to={"/alle-saker"}
                     >
-                        Endre bydel
+                        Se saker
                     </Button>
                 </Grid>
                 <Grid item>
-                    <Button 
-                        variant="outlined" 
-                        color="primary" style={style.buttons}
-                        component={Link} to={"/rapport"}
-                    
-                    >
-                        Måndesrapport
-                    </Button>
-                </Grid>
-                <Grid item>
-                    <Button 
-                        variant="outlined" 
+
+                    <Button
+                        variant="outlined"
                         color="primary" style={style.buttons}
                         component={Link} to={"/ny-sak"}
-                    
+
                     >
                         Opprett ny sak
+                    </Button>
+                </Grid>
+                <Grid item>
+                    <Button
+                        variant="outlined"
+                        color="primary" style={style.buttons}
+                        component={Link} to={"/rapport"}
+
+                    >
+                        Måndesrapport
                     </Button>
                 </Grid>
             </Grid>

@@ -20,7 +20,7 @@ import {AppBar,
     
   } from '@material-ui/core'
   import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-
+import LogoutButton from "../LogoutButton/LogoutButton";
 const style = {
     persona: { marginTop:10, marginBottom:10 },
     personaDescription: { marginBottom: 10 },
@@ -42,7 +42,7 @@ export default function UserInformation(){
                         </Typography>
                     </Grid>
                     <Grid item sm={2}>
-                        <Button variant="contained" color="primary"> Logout</Button>
+                        <LogoutButton/>
                     </Grid>
                     </Grid>
                 </Toolbar>

@@ -3,11 +3,11 @@ import ReactDOM from "react-dom";
 import {Provider} from 'react-redux';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
-import HomeScreen from "./components/homescreen/homescreen";
-import LoginScreen from "./components/loginscreen/LoginScreen";
+import LoginScreen from "./components/loginScreen/LoginScreen";
+import HomeScreen from "./components/homeScreen/homescreen";
 import Arkiv from "./components/arkiv/arkiv";
 import MonthlyReport from "./components/monthlyReport/monthlyReport";
-import CaseScreen from "./components/casescreen/CaseScreen";
+import CaseScreen from "./components/caseScreen/CaseScreen";
 import OverviewBoard from "./components/table/OverviewBoard";
 import CasePage from "./components/casepage/CasePage";
 

@@ -47,7 +47,7 @@ class LoginScreen extends React.Component {
     };
 
     render() {
-        if (this.props.isAuthenticated) {
+        if (this.props.isAuthenticated === true && this.props.token !== null) {
             return <Redirect to="/"/>;
         }
         return (
@@ -111,6 +111,7 @@ class LoginScreen extends React.Component {
 
 const mapStateToProps = state => ({
     isAuthenticated: state.auth.isAuthenticated,
+    token: state.auth.token,
     error: state.error,
 });
 

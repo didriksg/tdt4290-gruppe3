@@ -1,15 +1,15 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import AwesomeComponent from "./loadingScreen/LoadingScreen";
+import LoadingScreen from "./loadingScreen/LoadingScreen";
 
 const PrivateRoute = ({ component: Component, auth, ...rest }) => (
     <Route
         {...rest}
         render={props => {
             if (auth.isLoading) {
-                return <AwesomeComponent/>
-            } else if (auth.isAuthenticated) {
+                return <LoadingScreen/>
+            } else if (auth.isAuthenticated === true && auth.token !== null) {
                 return <Component {...props} />;
             } else {
                 return <Redirect to="/login" />;
