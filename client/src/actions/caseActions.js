@@ -39,10 +39,12 @@ export const getCases = (state) => {
         dispatch({type: CASES_LOADING});
         const body = JSON.stringify(state);
         axios
-            .get(`${connectionString}/api/case/list`, body, tokenConfig(getState))
-            .then(res => dispatch({
+            .get(`${connectionString}/api/case/list/${state}`, tokenConfig(getState))
+            .then(res => {
+                dispatch({
                 type: CASES_LOADED,
-            }))
+                payload: res.data
+            })})
             .catch(err => dispatch(returnErrors(err.response.data, err.response.status)));
     };
 };

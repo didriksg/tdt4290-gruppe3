@@ -138,8 +138,7 @@ export const update = function updateCaseById(req, res) {
  * Get all the cases currently existing in the database.
  **/
 export const list = function listAllCases(req, res) {
-    const state = req.body.state;
-
+    const state = req.params.state;
     Case.find()
         .then((cases) => {
 
