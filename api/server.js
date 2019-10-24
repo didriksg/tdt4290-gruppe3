@@ -7,6 +7,7 @@ import cors from 'cors'
 import authRouter from './routes/authRouter';
 import caseRouter from './routes/caseRouter';
 import userRouter from './routes/userRouter';
+import { ModuleMap } from 'jest-haste-map';
 
 const app = express();
 app.use(express.json());
@@ -30,3 +31,6 @@ app.use('/api/case', caseRouter);
 
 // Make app listen a given port
 app.listen(apiPort, () => console.log('Server is running on port: ' + apiPort));
+
+
+module.exports = app;
