@@ -12,16 +12,15 @@ describe('POST /register', () => {
 
     it('OK, creating a new user works', (done) => {
 
-        request(app).post('/register').send({
+        request(app).post('/api/user/register').send({
             name: "Test Tester",
             email: "test@email.com",
             password: "abc123"
         })
         .then((res) => {
             const body = res.body;
-            expect(body).to.contain.property('name');
-            expect(body).to.contain.property('email');
-            expect(body).to.contain.property('text');
+            expect(body).to.contain.property('token');
+            expect(body).to.contain.property('user');
             done();
         })
         .catch((err) => done(err));

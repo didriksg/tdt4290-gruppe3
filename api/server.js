@@ -13,8 +13,12 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+
+
 // Connect to MongoDB via mongoose.
 const connectionString = mongodbConnectionString + mongodbPort + '/' + mongodbDatabaseName;
+
+console.log(connectionString)
 
 mongoose.connect(connectionString, {
     useNewUrlParser: true,
