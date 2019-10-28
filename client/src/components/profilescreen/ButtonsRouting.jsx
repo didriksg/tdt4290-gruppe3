@@ -7,23 +7,21 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import {Link} from "react-router-dom"
     
 
 
 
       function checkPassword(p1, p2){
           while(p1 != p2){
-
             print("Passordene er ikke like. Prøv på nytt")
         }
-
       }
       
       
       const useStyles = makeStyles({
         root: {
-          width: '100%',
-            
+          width: '100%',          
         },
         container: {
             display: 'flex',
@@ -35,10 +33,8 @@ import DialogTitle from '@material-ui/core/DialogTitle';
       });
 
 
-    const style = {
-        
-        buttons: { marginTop: 10, marginBottom: 10 },
-        
+    const style = {      
+        buttons: { marginTop: 10, marginBottom: 10 },    
       }
       
 
@@ -56,8 +52,6 @@ import DialogTitle from '@material-ui/core/DialogTitle';
         setOpen(false)
     }
         
-      
-
     
       return (
         <div>
@@ -66,7 +60,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
             <Grid container justify="center" spacing={2}>
         
               <Grid item>
-              <Button variant="outlined" color="primary">Returner til Min Side</Button>
+              <Button variant="outlined" color="primary" component={Link} to={"/homescreen"}>Returner til Min Side</Button>
               </Grid>
               
             <Grid item>     
