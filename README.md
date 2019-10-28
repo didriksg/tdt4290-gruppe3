@@ -63,7 +63,6 @@ When deploying the system to a server, it is important to remember a few things:
 
 1. The app is by default using a local version of MongoDB, as it is more convenient and safe to use while developing. Using this on a production build is **NOT RECOMMENDED** as destroying the Docker container also destroys the database. We recommend using *MongoDB Atlas*, a cloud based MongoDB instance. Remember to change the `api/config/default.json` to support the new 
 2. For authentication, we use JsonWebTokens (jwt). JWT requires a *secret phrase* which is used as a seed when it is generating tokens. We **HIGHLY RECOMMEND** changing this to something other than the default phrase.
-3. f
 
 ## Known Issues
 ### Docker
