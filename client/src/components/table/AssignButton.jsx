@@ -20,7 +20,7 @@ export default function AssignButton() {
   return (
     <div>
       <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-        Open alert dialog
+        Tildel sak
       </Button>
       <Dialog
         open={open}
