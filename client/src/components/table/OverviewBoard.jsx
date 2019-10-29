@@ -1,8 +1,9 @@
-import React, {useEffect} from 'react';
-import {Link, Redirect} from "react-router-dom";
-import {
-    Paper,
-    Table,
+import React from 'react';
+import AssignButton from "./AssignButton";
+
+import PropTypes from 'prop-types';
+import { makeStyles } from '@material-ui/core/styles';
+import {Table,
     TableBody,
     TableCell,
     TableHead,
@@ -10,19 +11,14 @@ import {
     TableRow,
     TableSortLabel,
     Toolbar,
-    Typography
+    Typography,
+    Paper
 } from '@material-ui/core';
-
-import PropTypes from 'prop-types';
-import {makeStyles} from '@material-ui/core/styles';
-import {getCases, updateCaseStatus} from '../../actions/caseActions'
-import {connect} from 'react-redux';
-
 
 
 // Sample data method
 function createData(idNumber, category, priority, referredFrom, district, registeredDate, startupDate) {
-    return {idNumber, category, priority, referredFrom, district, registeredDate, startupDate};
+    return { idNumber, category, priority, referredFrom, district, registeredDate, startupDate };
 }
 
 // Sample data method
@@ -36,13 +32,14 @@ const rows = [
 ];
 
 const headCells = [
-    {id: 'idNumber', numeric: false, disablePadding: false, label: 'IDNummer'},
-    {id: 'category', numeric: true, disablePadding: false, label: 'Kategori'},
-    {id: 'priority', numeric: true, disablePadding: false, label: 'Prioritet'},
-    {id: 'referredFrom', numeric: true, disablePadding: false, label: 'Henvist fra'},
-    {id: 'district', numeric: true, disablePadding: false, label: 'Bydel'},
-    {id: 'registeredDate', numeric: true, disablePadding: false, label: 'Innmeldt'},
-    {id: 'startupDate', numeric: true, disablePadding: false, label: 'Forventet start'},
+    { id: 'idNumber', numeric: false, disablePadding: false, label: 'IDNummer' },
+    { id: 'category', numeric: true, disablePadding: false, label: 'Kategori' },
+    { id: 'priority', numeric: true, disablePadding: false, label: 'Prioritet' },
+    { id: 'referredFrom', numeric: true, disablePadding: false, label: 'Henvist fra' },
+    { id: 'district', numeric: true, disablePadding: false, label: 'Bydel' },
+    { id: 'registeredDate', numeric: true, disablePadding: false, label: 'Innmeldt' },
+    { id: 'startupDate', numeric: true, disablePadding: false, label: 'Forventet start' },
+    { id: 'assignCase', disablePadding: false, label: 'Tildel sak' },
 ];
 
 // Sort function
@@ -72,7 +69,7 @@ function getSorting(order, orderBy) {
 }
 
 function EnhancedTableHead(props) {
-    const {classes, order, orderBy, onRequestSort} = props;
+    const { classes, order, orderBy, onRequestSort } = props;
     const createSortHandler = property => event => {
         onRequestSort(event, property);
     };
@@ -88,7 +85,6 @@ function EnhancedTableHead(props) {
                         sortDirection={orderBy === headCell.id ? order : false}
                     >
                         <TableSortLabel
-                            component={Link} to={"/sak"}
                             active={orderBy === headCell.id}
                             direction={order}
                             onClick={createSortHandler(headCell.id)}
@@ -155,7 +151,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const OverviewBoard = (props) => {
+function OverviewBoard() {
     const classes = useStyles();
     const [order, setOrder] = React.useState('asc');
     const [orderBy, setOrderBy] = React.useState('category');
@@ -179,28 +175,16 @@ const OverviewBoard = (props) => {
         setPage(0);
     };
 
-    // TODO: assigne a therapist to the case
-    const handleClick = (event, name) => {
-        console.log(name);
-        <Redirect to="/sak"/>
-    };
-
-    // Similar to componentDidMount and componentDidUpdate:
-    useEffect(() => {
-        props.getCases(0);
-    },[]);
-
-    const emptyRows = rowsPerPage - Math.min(rowsPerPage, props.cases.length - page * rowsPerPage);
+    const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
     return (
         <div className={classes.root}>
             <Paper className={classes.paper}>
-                <EnhancedTableToolbar/>
+                <EnhancedTableToolbar />
                 <div className={classes.tableWrapper}>
                     <Table
                         className={classes.table}
                         aria-labelledby="tableTitle"
-                        underlineNone
                         stickyHeader
                     >
                         <EnhancedTableHead
@@ -209,19 +193,16 @@ const OverviewBoard = (props) => {
                             orderBy={orderBy}
                             onRequestSort={handleRequestSort}
                         />
-                        <TableBody underlineNone>
-                            {stableSort(props.cases, getSorting(order, orderBy))
+                        <TableBody>
+                            {stableSort(rows, getSorting(order, orderBy))
                                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                 .map((row, index) => {
                                     const labelId = `enhanced-table-checkbox-${index}`;
                                     return (
                                         <TableRow
                                             hover
-                                            component={Link} to={"/sak"}
-                                            onClick={event => handleClick(event, row.idNumber)}
                                             tabIndex={-1}
                                             key={row.idNumber}
-                                            underlineNone
                                         >
                                             <TableCell component="th" id={labelId} scope="row">{row.idNumber}</TableCell>
                                             <TableCell align="right">{row.category}</TableCell>
@@ -230,12 +211,19 @@ const OverviewBoard = (props) => {
                                             <TableCell align="right">{row.district}</TableCell>
                                             <TableCell align="right">{row.registeredDate}</TableCell>
                                             <TableCell align="right">{row.startupDate}</TableCell>
+                                            <TableCell align="right">
+                                                <AssignButton
+                                                    idNumber={row.idNumber}
+                                                    category={row.category}
+                                                    priority={row.priority}
+                                                />
+                                            </TableCell>
                                         </TableRow>
                                     );
                                 })}
                             {emptyRows > 0 && (
                                 <TableRow>
-                                    <TableCell colSpan={7}/>
+                                    <TableCell colSpan={7} />
                                 </TableRow>
                             )}
                         </TableBody>
@@ -244,7 +232,7 @@ const OverviewBoard = (props) => {
                 <TablePagination
                     rowsPerPageOptions={[10, 25]}
                     component="div"
-                    count={props.cases.length}
+                    count={rows.length}
                     rowsPerPage={rowsPerPage}
                     page={page}
                     backIconButtonProps={{
@@ -261,17 +249,4 @@ const OverviewBoard = (props) => {
     );
 }
 
-const mapStateToProps = state => ({
-    error: state.error,
-    cases: state.caseState.cases,
-});
-
-const mapDispatchToProps = {
-   getCases,
-   updateCaseStatus
-};
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps,
-)(OverviewBoard)
+export default OverviewBoard;
