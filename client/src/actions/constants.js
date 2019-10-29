@@ -11,8 +11,8 @@ export const GET_ERRORS = 'GET_ERRORS';
 export const CLEAR_ERRORS = 'CLEAR_ERRORS';
 
 // Case states
-export const CASES_LOADING = 'GET_CASES';
-export const CASES_LOADED = 'GETTING_CASES';
+export const CASES_LOADING = 'CASES_LOADING';
+export const CASES_LOADED = 'CASES_LOADED';
 export const ADD_CASE = 'GET_CASE';
 export const CASE_UPDATING = 'CASE_UPDATING';
 export const CASE_UPDATED = 'CASE_UPDATED';
