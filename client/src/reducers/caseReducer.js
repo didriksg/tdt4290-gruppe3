@@ -7,6 +7,7 @@ import {
 
 const initialState = {
     isLoading: false,
+    cases: [],
 };
 
 export default function (state = initialState, action) {
@@ -18,8 +19,13 @@ export default function (state = initialState, action) {
                 isLoading: true,
             };
         case CASES_LOADED:
-        case CASE_UPDATED:
         case ADD_CASE:
+            return {
+                ...state,
+                isLoading: false,
+                cases: action.payload
+            };
+        case CASE_UPDATED:
             return {
                 ...state,
                 isLoading: false,

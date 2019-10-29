@@ -9,6 +9,7 @@ import Arkiv from "./components/arkiv/arkiv";
 import MonthlyReport from "./components/monthlyReport/monthlyReport";
 import CaseScreen from "./components/caseScreen/CaseScreen";
 import OverviewBoard from "./components/table/OverviewBoard";
+import CasePage from "./components/casepage/CasePage";
 
 import {loadUser} from "./actions/authActions";
 import configureStore from './store'
@@ -35,6 +36,7 @@ class App extends Component {
                         <PrivateRoute path="/rapport" component={MonthlyReport}/>
                         <PrivateRoute path="/ny-sak" component={CaseScreen}/>
                         <PrivateRoute path="/alle-saker" component={OverviewBoard}/>
+                        <PrivateRoute path="/sak" component={CasePage}/>
                     </Switch>
                 </Router>
             </Provider>
