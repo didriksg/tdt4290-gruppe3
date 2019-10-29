@@ -11,11 +11,11 @@ import {AppBar,
 
 
 const style = {
-persona: { marginTop:10, marginBottom:10 },
-personaDescription: { marginBottom: 10 },
-buttons: { marginTop: 10, marginBottom: 10 },
-datatable: { marginTop: 10, marginBottom: 10 },
-mainCard: {marginTop: 5, marginBottom:5}
+    persona: { marginTop:10, marginBottom:10 },
+    personaDescription: { marginBottom: 10 },
+    buttons: { marginTop: 10, marginBottom: 10 },
+    datatable: { marginTop: 10, marginBottom: 10 },
+    mainCard: {marginTop: 5, marginBottom:5}
 }
 
 class ActiveCases extends Component {
@@ -33,7 +33,14 @@ class ActiveCases extends Component {
                                         </Typography>   
                                     </Grid>
                                     <Grid item sm={2}>
-                                        <Button variant="contained" color="primary" component={Link} to={""}> Tilbake - min side</Button>
+                                        <Button 
+                                            variant="contained" 
+                                            color="primary" 
+                                            component={Link} 
+                                            to={""}
+                                        >
+                                            Tilbake - min side
+                                        </Button>
                                     </Grid>
                                 </Grid>
                             </Toolbar>
