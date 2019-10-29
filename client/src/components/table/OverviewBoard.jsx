@@ -190,7 +190,7 @@ const OverviewBoard = (props) => {
         props.getCases(0);
     },[]);
 
-    const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
+    const emptyRows = rowsPerPage - Math.min(rowsPerPage, props.cases.length - page * rowsPerPage);
 
     return (
         <div className={classes.root}>
@@ -244,7 +244,7 @@ const OverviewBoard = (props) => {
                 <TablePagination
                     rowsPerPageOptions={[10, 25]}
                     component="div"
-                    count={rows.length}
+                    count={props.cases.length}
                     rowsPerPage={rowsPerPage}
                     page={page}
                     backIconButtonProps={{
