@@ -11,4 +11,4 @@ class MonthlyReport extends Component {
     }
 }
 
-export default MonthlyReport
+export default MonthlyReport;
