@@ -35,9 +35,9 @@ class LogoutButton extends Component {
                     this.onButtonClick();
                 }}
                 style={style.button}
-
+                variant="contained"
+                color="primary"
             >
-
                 Logg ut
             </Button>
         );
