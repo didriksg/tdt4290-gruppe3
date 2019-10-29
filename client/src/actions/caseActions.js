@@ -1,7 +1,7 @@
 import axios from "axios";
 import {ADD_CASE, CASE_UPDATED, CASE_UPDATING, CASES_LOADED, CASES_LOADING} from "./constants";
 import {returnErrors} from "./errorActions";
-import {tokenConfig} from "./authActions";
+import {handleError, tokenConfig} from "./authActions";
 
 
 const connectionString = 'http://localhost:4000';
@@ -15,7 +15,9 @@ export const addCase = c => {
                 type: ADD_CASE,
                 payload: res.data
             }))
-            .catch(err => dispatch(returnErrors(err.response.data, err.response.status)));
+            .catch(err =>
+                handleError(dispatch, err)
+            );
     };
 };
 
@@ -30,7 +32,9 @@ export const updateCase = c => {
                 type: CASE_UPDATED,
                 payload: res.data
             }))
-            .catch(err => dispatch(returnErrors(err.response.data, err.response.status)));
+            .catch(err =>
+                handleError(dispatch, err)
+            );
     };
 };
 
@@ -42,10 +46,13 @@ export const getCases = (state) => {
             .get(`${connectionString}/api/case/list/${state}`, tokenConfig(getState))
             .then(res => {
                 dispatch({
-                type: CASES_LOADED,
-                payload: res.data
-            })})
-            .catch(err => dispatch(returnErrors(err.response.data, err.response.status)));
+                    type: CASES_LOADED,
+                    payload: res.data
+                })
+            })
+            .catch(err =>
+                handleError(dispatch, err)
+            );
     };
 };
 
@@ -56,7 +63,9 @@ export const getCasesById = (id) => {
             .then(() => dispatch({
                 type: CASES_LOADING,
             }))
-            .catch(err => dispatch(returnErrors(err.response.data, err.response.status)));
+            .catch(err =>
+                handleError(dispatch, err)
+            );
     };
 };
 
@@ -76,6 +85,8 @@ export const updateCaseStatus = (case_id, user_id, state) => {
             .then(() => {
                 dispatch(getCases(0));
             })
-            .catch(err => dispatch(returnErrors(err.response.data, err.response.status)));
+            .catch(err =>
+                handleError(dispatch, err)
+            );
     }
 };

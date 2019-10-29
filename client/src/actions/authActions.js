@@ -23,7 +23,6 @@ export const loadUser = () => (dispatch, getState) => {
             })
         })
         .catch(err => {
-            dispatch(returnErrors(err.response.data, err.response.status));
             dispatch({
                 type: AUTH_ERROR
             });
@@ -49,7 +48,7 @@ export const login = ({email, password}) => dispatch => {
             })
         })
         .catch(err => {
-            dispatch(returnErrors(err.response.data, err.response.status, 'LOGIN_FAIL'));
+            handleError(dispatch, err);
             dispatch({
                 type: LOGIN_FAIL
             });
@@ -78,4 +77,9 @@ export const tokenConfig = getState => {
         config.headers['x-auth-token'] = token;
     }
     return config;
+};
+
+export const handleError = (dispatch, err) => {
+    dispatch(returnErrors(err.response.data, err.response.status));
+    dispatch(loadUser());
 };

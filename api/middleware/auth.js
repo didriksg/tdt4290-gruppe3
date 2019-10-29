@@ -19,7 +19,7 @@ const auth = function authenticateToken(req, res, next) {
         req.user = jwt.verify(token, jwtSecret);
         next();
     } catch (e) {
-        res.status(400)
+        res.status(401)
             .json({msg: 'Provided token is not valid. Access denied.'})
     }
 };
