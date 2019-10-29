@@ -139,7 +139,7 @@ export const update = function updateCaseById(req, res) {
  **/
 export const list = function listAllCases(req, res) {
     const state = req.params.state;
-    Case.find()
+    Case.find({state: state})
         .then((cases) => {
 
             if (cases === null || cases.length === 0) {
@@ -225,6 +225,8 @@ export const updateCaseState = function updateCaseState(req, res) {
     const id = req.params.id;
     const newState = req.body.state;
     const userId = req.body.user_id;
+
+    console.log(id, newState,userId);
 
     if (id === undefined) {
         return res.status(400)

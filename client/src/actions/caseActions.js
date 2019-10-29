@@ -69,10 +69,13 @@ export const updateCaseStatus = (case_id, user_id, state) => {
         });
 
         axios
-            .put(`${connectionString}/api/case/updateCaseState/${id}`, body, tokenConfig(getState))
+            .put(`${connectionString}/api/case/updateCaseState/${case_id}`, body, tokenConfig(getState))
             .then(res => dispatch({
                 type: CASE_UPDATED
             }))
+            .then(() => {
+                dispatch(getCases(0));
+            })
             .catch(err => dispatch(returnErrors(err.response.data, err.response.status)));
     }
 };
