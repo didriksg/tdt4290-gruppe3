@@ -2,7 +2,7 @@ import {
     CASE_UPDATING,
     ADD_CASE,
     CASES_LOADING,
-    CASES_LOADED, CASE_UPDATED
+    CASES_LOADED, CASE_UPDATED, NO_CASES_FOUND
 } from "../actions/constants";
 
 const initialState = {
@@ -13,6 +13,12 @@ const initialState = {
 export default function (state = initialState, action) {
     switch (action.type) {
         case CASES_LOADING:
+            return {
+                ...state,
+                isLoading: true,
+                cases: [],
+            };
+
         case CASE_UPDATING:
             return {
                 ...state,
@@ -30,6 +36,13 @@ export default function (state = initialState, action) {
                 ...state,
                 isLoading: false,
             };
+        case NO_CASES_FOUND: {
+            return {
+                ...state,
+                isLoading: false,
+                cases: [],
+            }
+        }
         default:
             return state;
     }

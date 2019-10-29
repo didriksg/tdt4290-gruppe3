@@ -31,10 +31,20 @@ class App extends Component {
                     <Switch>
                         <Route path="/login" component={LoginScreen}/>
                         <PrivateRoute exact path="/" component={HomeScreen}/>
-                        <PrivateRoute path="/arkiv" component={Arkiv}/>
                         <PrivateRoute path="/rapport" component={MonthlyReport}/>
                         <PrivateRoute path="/ny-sak" component={CaseScreen}/>
-                        <PrivateRoute path="/alle-saker" component={ActiveCases}/>
+                        <PrivateRoute path="/alle-saker"
+                                      component={(props) => <ActiveCases {...props}
+                                                                         caseState={0}
+                                                                         headerTitle={'Tilgjengelige saker'}
+                                                                         tableTitle={'Alle tilgjengelige saker'}
+                                      />}/>
+                        <PrivateRoute path="/arkiv"
+                                      component={(props) => <ActiveCases {...props}
+                                                                         caseState={1}
+                                                                         headerTitle={'Arkiv'}
+                                                                         tableTitle={'Arkiverte henvisninger'}
+                                      />}/>
                     </Switch>
                 </Router>
             </Provider>

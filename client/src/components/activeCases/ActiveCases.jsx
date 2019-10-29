@@ -8,6 +8,7 @@ import {AppBar,
     Typography, 
     Card   
   } from '@material-ui/core';
+import LogoutButton from "../LogoutButton/LogoutButton";
 
 
 const style = {
@@ -16,9 +17,13 @@ const style = {
     buttons: { marginTop: 10, marginBottom: 10 },
     datatable: { marginTop: 10, marginBottom: 10 },
     mainCard: {marginTop: 5, marginBottom:5}
-}
+};
 
 class ActiveCases extends Component {
+    constructor(props) {
+        super(props);
+    };
+
     render() {
         return (
             <div>
@@ -29,8 +34,8 @@ class ActiveCases extends Component {
                                 <Grid container sm>
                                     <Grid item sm={10}>
                                         <Typography variant="title" color="inherit">
-                                            Alle aktive saker
-                                        </Typography>   
+                                            {this.props.headerTitle}
+                                        </Typography>
                                     </Grid>
                                     <Grid item sm={2}>
                                         <Button 
@@ -41,6 +46,7 @@ class ActiveCases extends Component {
                                         >
                                             Tilbake - min side
                                         </Button>
+                                        <LogoutButton/>
                                     </Grid>
                                 </Grid>
                             </Toolbar>
@@ -48,7 +54,10 @@ class ActiveCases extends Component {
                     </Card>
                 </div>
                 <div className="activeCasesTable">
-                    <OverviewBoard/>
+                    <OverviewBoard
+                        caseState={this.props.caseState}
+                        tableTitle={this.props.tableTitle}
+                    />
                 </div>
             </div>
         );
