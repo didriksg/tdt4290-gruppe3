@@ -151,7 +151,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function OverviewBoard() {
+function OverviewBoard() {
   const classes = useStyles();
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('category');
@@ -175,15 +175,7 @@ export default function OverviewBoard() {
     setPage(0);
   };
 
-  // TODO: assigne a therapist to the case
-  const handleClick = (event, name) => {
-    //console.log(name);
-    const caseID = name;
-    return caseID;
-  };
-
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
-  const caseInformation = "Hellooo";
 
   return (
     <div className={classes.root}>
@@ -209,7 +201,6 @@ export default function OverviewBoard() {
                   return (
                     <TableRow
                       hover
-                      onClick={event => handleClick(event, row.idNumber)}
                       tabIndex={-1}
                       key={row.idNumber}
                     >
@@ -257,3 +248,5 @@ export default function OverviewBoard() {
     </div>
   );
 }
+
+export default OverviewBoard;

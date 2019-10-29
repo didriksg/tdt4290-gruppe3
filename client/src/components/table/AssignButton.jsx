@@ -67,10 +67,5 @@ function AssignButton(props) {
     </div>
   );
 }
-/*
-const mapStateToProps = state => ({
-    user: state.auth.user,
-    isAuthenticated: state.auth.isAuthenticated
-});*/
 
 export default AssignButton;
