@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import AssignButton from "./AssignButton";
 
 import PropTypes from 'prop-types';
@@ -14,6 +14,8 @@ import {Table,
     Typography,
     Paper
 } from '@material-ui/core';
+import {connect} from "react-redux";
+import {getCases, updateCaseStatus} from "../../actions/caseActions";
 
 
 // Sample data method
@@ -151,7 +153,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-function OverviewBoard() {
+function OverviewBoard(props) {
     const classes = useStyles();
     const [order, setOrder] = React.useState('asc');
     const [orderBy, setOrderBy] = React.useState('category');
@@ -175,7 +177,13 @@ function OverviewBoard() {
         setPage(0);
     };
 
-    const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
+    // Similar to componentDidMount and componentDidUpdate:
+    useEffect(() => {
+        props.getCases(0);
+    },[]);
+
+
+    const emptyRows = rowsPerPage - Math.min(rowsPerPage, props.cases.length - page * rowsPerPage);
 
     return (
         <div className={classes.root}>
@@ -194,7 +202,7 @@ function OverviewBoard() {
                             onRequestSort={handleRequestSort}
                         />
                         <TableBody>
-                            {stableSort(rows, getSorting(order, orderBy))
+                            {stableSort(props.cases, getSorting(order, orderBy))
                                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                 .map((row, index) => {
                                     const labelId = `enhanced-table-checkbox-${index}`;
@@ -213,7 +221,7 @@ function OverviewBoard() {
                                             <TableCell align="right">{row.startupDate}</TableCell>
                                             <TableCell align="right">
                                                 <AssignButton
-                                                    idNumber={row.idNumber}
+                                                    idNumber={row._id}
                                                     category={row.category}
                                                     priority={row.priority}
                                                 />
@@ -232,7 +240,7 @@ function OverviewBoard() {
                 <TablePagination
                     rowsPerPageOptions={[10, 25]}
                     component="div"
-                    count={rows.length}
+                    count={props.cases.length}
                     rowsPerPage={rowsPerPage}
                     page={page}
                     backIconButtonProps={{
@@ -249,4 +257,17 @@ function OverviewBoard() {
     );
 }
 
-export default OverviewBoard;
+const mapStateToProps = state => ({
+    error: state.error,
+    cases: state.caseState.cases,
+});
+
+const mapDispatchToProps = {
+    getCases,
+    updateCaseStatus
+};
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(OverviewBoard)
