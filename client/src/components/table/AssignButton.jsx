@@ -6,7 +6,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-export default function AssignButton() {
+function AssignButton(props) {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -16,6 +16,7 @@ export default function AssignButton() {
   const handleClose = () => {
     setOpen(false);
   };
+
 
   return (
     <div>
@@ -28,15 +29,15 @@ export default function AssignButton() {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">{"Ønsker du å tildele deg denne saken?"}</DialogTitle>
+        <DialogTitle id="alert-dialog-title">{"Ønsker du å tildele deg saken: "}{props.idNumber}{"?"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Let Google help apps determine location. This means sending anonymous location data to
-            Google, even when no apps are running.
+            Saken har prioritet: {props.priority} <br/>
+            Kategori er: {props.category} 
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
+          <Button onClick={handleClose} color="secondary">
             Avbryt
           </Button>
           <Button onClick={handleClose} color="primary" autoFocus>
@@ -47,3 +48,4 @@ export default function AssignButton() {
     </div>
   );
 }
+export default AssignButton;

@@ -177,10 +177,13 @@ export default function OverviewBoard() {
 
   // TODO: assigne a therapist to the case
   const handleClick = (event, name) => {
-    console.log(name);
+    //console.log(name);
+    const caseID = name;
+    return caseID;
   };
 
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
+  const caseInformation = "Hellooo";
 
   return (
     <div className={classes.root}>
@@ -190,7 +193,6 @@ export default function OverviewBoard() {
           <Table
             className={classes.table}
             aria-labelledby="tableTitle"
-            underlineNone
             stickyHeader
           >
             <EnhancedTableHead
@@ -219,7 +221,11 @@ export default function OverviewBoard() {
                       <TableCell align="right">{row.registeredDate}</TableCell>
                       <TableCell align="right">{row.startupDate}</TableCell>
                       <TableCell align="right">
-                        <AssignButton/>
+                        <AssignButton 
+                          idNumber={row.idNumber} 
+                          category={row.category} 
+                          priority={row.priority}
+                        />
                       </TableCell>
                     </TableRow>
                   );
