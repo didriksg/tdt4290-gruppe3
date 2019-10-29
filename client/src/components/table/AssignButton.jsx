@@ -32,7 +32,7 @@ function AssignButton(props) {
     const handleAssignCase = () => {
         setOpen(false);
         console.log(userid);
-        dispatch(updateCaseStatus(props.idNumber, userid, 1));
+        dispatch(updateCaseStatus(props._id, userid, 1));
     };
 
 
@@ -49,7 +49,7 @@ function AssignButton(props) {
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"
             >
-                <DialogTitle id="alert-dialog-title">{"Ønsker du å tildele deg saken: "}{props.idNumber}{"?"}</DialogTitle>
+                <DialogTitle id="alert-dialog-title">{"Ønsker du å tildele deg saken med ID nummer: "}{props.idNumber}{"?"}</DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
                         Saken har prioritet: {props.priority} <br/>

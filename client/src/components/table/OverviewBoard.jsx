@@ -221,7 +221,8 @@ function OverviewBoard(props) {
                                             <TableCell align="right">{row.startupDate}</TableCell>
                                             <TableCell align="right">
                                                 <AssignButton
-                                                    idNumber={row._id}
+                                                    _id={row._id}
+                                                    idNumber={row.idNumber}
                                                     category={row.category}
                                                     priority={row.priority}
                                                 />
