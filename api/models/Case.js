@@ -63,7 +63,7 @@ const CaseSchema = new Schema({
 
     createdBy: {
         type: mongoose.ObjectId,
-        required: true,
+        required: false, //TODO: Make this required field
     },
 
     lastChanged: {
