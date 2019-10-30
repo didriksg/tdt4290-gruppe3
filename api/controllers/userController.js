@@ -15,6 +15,7 @@ export const register = function registerNewUser(req, res) {
     const name  = req.body.name;
     const email = req.body.email;
     const password = req.body.password;
+    const district = req.body.district;
 
     // Check that all required data is provided.
     if (name === undefined
@@ -22,7 +23,10 @@ export const register = function registerNewUser(req, res) {
         || email === undefined
         || email === ''
         || password === undefined
-        || password === '') {
+        || password === ''
+        || district === undefined
+        || password === ''
+    ) {
         res.status(400)
             .json({msg: 'Please enter all fields'});
         return;
@@ -41,7 +45,8 @@ export const register = function registerNewUser(req, res) {
             const newUser = new User({
                 name,
                 email,
-                password
+                password,
+                district,
             });
 
             // Create salt and hash password
@@ -68,6 +73,7 @@ export const register = function registerNewUser(req, res) {
                                                         id: user.id,
                                                         name: user.name,
                                                         email: user.email,
+                                                        district: user.district,
                                                     }
                                                 })
                                         });

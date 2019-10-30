@@ -36,16 +36,17 @@ class App extends Component {
                         <PrivateRoute path="/voksen"
                                       component={(props) => <ActiveCases {...props}
                                                                          caseState={0}
-                                                                         headerTitle={'Tilgjengelige saker'}
-                                                                         tableTitle={'Alle tilgjengelige saker'}
+                                                                         headerTitle={'Tilgjengelige voksenhenvisnger'}
+                                                                         tableTitle={'Alle tilgjengelige' +
+                                                                         ' voksenhenvisnger'}
                                                                          isChildrenCase={false}
                                       />}/>
 
                         <PrivateRoute path="/barn"
                                       component={(props) => <ActiveCases {...props}
                                                                          caseState={0}
-                                                                         headerTitle={'Tilgjengelige saker'}
-                                                                         tableTitle={'Alle tilgjengelige saker'}
+                                                                         headerTitle={'Tilgjengelige barnehenvisninger'}
+                                                                         tableTitle={'Alle tilgjengelige barnehenvisninger'}
                                                                          isChildrenCase={true}
                                       />}/>
                         <PrivateRoute path="/arkiv"

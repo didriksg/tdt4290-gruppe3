@@ -19,6 +19,11 @@ const UserSchema = new Schema({
         required: true,
     },
 
+    district: {
+        type: Number,
+        required: true,
+    },
+
     registeredDate: {
         type: Date,
         default: Date.now,
