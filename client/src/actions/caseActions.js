@@ -37,11 +37,12 @@ export const updateCase = c => {
     };
 };
 
-export const getCases = (state) => {
+export const getCases = (state, isChildrenCase) => {
+    console.log(state, isChildrenCase);
     return (dispatch, getState) => {
         dispatch({type: CASES_LOADING});
         axios
-            .get(`${connectionString}/api/case/list/${state}`, tokenConfig(getState))
+            .get(`${connectionString}/api/case/list/${state}/${isChildrenCase}`, tokenConfig(getState))
             .then(res => {
                 dispatch({
                     type: CASES_LOADED,

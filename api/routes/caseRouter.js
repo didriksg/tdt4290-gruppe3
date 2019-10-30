@@ -17,7 +17,7 @@ caseRouter.put('/update/:id', auth, update);
 // @route   GET api/case/list
 // @desc    Get all cases from the database.
 // @access  Private
-caseRouter.get('/list/:state', auth, list);
+caseRouter.get('/list/:state/:isChildrenCase', auth, list);
 
 // @route   GET api/case/:id
 // @desc    Get case with given ID
