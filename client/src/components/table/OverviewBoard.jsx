@@ -16,22 +16,8 @@ import {Table,
 } from '@material-ui/core';
 import {connect} from "react-redux";
 import {getCases, updateCaseStatus} from "../../actions/caseActions";
+import LoadingScreen from "../loadingScreen/LoadingScreen";
 
-
-// Sample data method
-function createData(idNumber, category, priority, referredFrom, district, registeredDate, startupDate) {
-    return { idNumber, category, priority, referredFrom, district, registeredDate, startupDate };
-}
-
-// Sample data method
-const rows = [
-    createData('010101', "Tiltak", 4, "Ola Nordmann", "Midtbyen", 38, 43),
-    createData('111111', "Arbeidsform", 2, "Kari Nordmann", "Østbyen", 40, 42),
-    createData('222222', "Diagnoser", 1, "Per", "Lerkendal", 37, 38),
-    createData('333333', "Tiltak", 4, "Ola Nordmann", "Heimdal", 38, 37),
-    createData('000191', "Arbeidsform", 2, "Kari Nordmann", "Østbyen", 40, 45),
-    createData('999999', "Diagnoser", 1, "Per", "Østbyen", 37, 48),
-];
 
 const headCells = [
     { id: 'idNumber', numeric: false, disablePadding: false, label: 'IDNummer' },
@@ -41,7 +27,7 @@ const headCells = [
     { id: 'district', numeric: true, disablePadding: false, label: 'Bydel' },
     { id: 'registeredDate', numeric: true, disablePadding: false, label: 'Innmeldt' },
     { id: 'startupDate', numeric: true, disablePadding: false, label: 'Forventet start' },
-    { id: 'assignCase', disablePadding: false, label: 'Tildel sak' },
+    { id: 'assignCase', numeric: true, disablePadding: false, label: '' },
 ];
 
 // Sort function
@@ -76,10 +62,19 @@ function EnhancedTableHead(props) {
         onRequestSort(event, property);
     };
 
+    let headCellToUse;
+
+    if (props.caseState === 1) {
+        headCellToUse = headCells.filter((obj) => {
+            return obj.id !== 'assignCase'
+        });
+    } else {
+        headCellToUse = headCells;
+    }
     return (
         <TableHead>
             <TableRow>
-                {headCells.map(headCell => (
+                {headCellToUse.map(headCell => (
                     <TableCell
                         key={headCell.id}
                         align={headCell.numeric ? 'right' : 'left'}
@@ -117,7 +112,7 @@ const EnhancedTableToolbar = props => {
         <Toolbar>
             <div>
                 <Typography variant="h6" id="tableTitle">
-                    Alle saker
+                    {props.tableTitle}
                 </Typography>
             </div>
         </Toolbar>
@@ -179,16 +174,19 @@ function OverviewBoard(props) {
 
     // Similar to componentDidMount and componentDidUpdate:
     useEffect(() => {
-        props.getCases(0);
+        console.log('beb');
+        props.getCases(props.caseState, props.isChildrenCase);
     },[]);
 
 
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, props.cases.length - page * rowsPerPage);
 
     return (
+
         <div className={classes.root}>
+            {props.isLoading ? <LoadingScreen/> :
             <Paper className={classes.paper}>
-                <EnhancedTableToolbar />
+                <EnhancedTableToolbar tableTitle={props.tableTitle}/>
                 <div className={classes.tableWrapper}>
                     <Table
                         className={classes.table}
@@ -200,6 +198,7 @@ function OverviewBoard(props) {
                             order={order}
                             orderBy={orderBy}
                             onRequestSort={handleRequestSort}
+                            caseState={props.caseState}
                         />
                         <TableBody>
                             {stableSort(props.cases, getSorting(order, orderBy))
@@ -219,14 +218,16 @@ function OverviewBoard(props) {
                                             <TableCell align="right">{row.district}</TableCell>
                                             <TableCell align="right">{row.registeredDate}</TableCell>
                                             <TableCell align="right">{row.startupDate}</TableCell>
-                                            <TableCell align="right">
+
+                                            {props.caseState == 0 ? <TableCell align="right">
                                                 <AssignButton
                                                     _id={row._id}
                                                     idNumber={row.idNumber}
                                                     category={row.category}
                                                     priority={row.priority}
+                                                    isChildrenCase={row.isChildrenCase}
                                                 />
-                                            </TableCell>
+                                            </TableCell> : null}
                                         </TableRow>
                                     );
                                 })}
@@ -253,7 +254,7 @@ function OverviewBoard(props) {
                     onChangePage={handleChangePage}
                     onChangeRowsPerPage={handleChangeRowsPerPage}
                 />
-            </Paper>
+            </Paper>}
         </div>
     );
 }
@@ -261,6 +262,7 @@ function OverviewBoard(props) {
 const mapStateToProps = state => ({
     error: state.error,
     cases: state.caseState.cases,
+    isLoading: state.caseState.isLoading,
 });
 
 const mapDispatchToProps = {

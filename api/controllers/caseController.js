@@ -16,7 +16,7 @@ export const add = function addNewCase(req, res) {
     const category = req.body.category;
     const district = req.body.district;
     const description = req.body.description;
-    const referredFrom = req.body.referredFrom;
+    const referredFrom = req.body.referredFrom;q
     const important = req.body.important;
 
     // Check if all required fields are provided.
@@ -139,7 +139,18 @@ export const update = function updateCaseById(req, res) {
  **/
 export const list = function listAllCases(req, res) {
     const state = req.params.state;
-    Case.find({state: state})
+    const isChildrenCase = req.params.isChildrenCase;
+
+    let query;
+    if (state === '0' && isChildrenCase !== undefined) {
+        query = {state: state, isChildrenCase: isChildrenCase}
+    } else {
+        query = {state:state}
+    }
+
+    console.log(query);
+
+    Case.find(query)
         .then((cases) => {
 
             if (cases === null || cases.length === 0) {
@@ -152,7 +163,6 @@ export const list = function listAllCases(req, res) {
             if (state !== undefined && state !== '' && [0, 1, 2].includes(state)) {
                 cases = cases.filter(c => c.state === state);
             }
-
 
             // Sort cases by startup date, priority, then importance.
             const sortedCases = sort(cases);
@@ -299,3 +309,5 @@ export const updateCaseState = function updateCaseState(req, res) {
                 });
         });
 };
+
+

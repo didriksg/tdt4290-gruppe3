@@ -97,6 +97,7 @@ const genUsers = async function generateDummyUsers(users) {
         const name = users[i].name;
         const email = users[i].email;
         const password = users[i].password;
+        const district = users[i].district;
 
 
         // Check for existing user
@@ -109,7 +110,8 @@ const genUsers = async function generateDummyUsers(users) {
         const newUser = new User({
             name,
             email,
-            password
+            password,
+            district
         });
 
         // Create salt and hash password

@@ -66,5 +66,5 @@ export const getUser = function getUserById(req, res) {
     User.findById(req.user.id)
         .select('-password')
         .then((user) => res.status(200).json(user))
-        .catch((err) => res.status(500).json({msg: 'User data not found..'}));
+        .catch(() => res.status(500).json({msg: 'User data not found..'}));
 };

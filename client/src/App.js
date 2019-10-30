@@ -31,10 +31,30 @@ class App extends Component {
                     <Switch>
                         <Route path="/login" component={LoginScreen}/>
                         <PrivateRoute exact path="/" component={HomeScreen}/>
-                        <PrivateRoute path="/arkiv" component={Arkiv}/>
                         <PrivateRoute path="/rapport" component={MonthlyReport}/>
                         <PrivateRoute path="/ny-sak" component={CaseScreen}/>
-                        <PrivateRoute path="/alle-saker" component={ActiveCases}/>
+                        <PrivateRoute path="/voksen"
+                                      component={(props) => <ActiveCases {...props}
+                                                                         caseState={0}
+                                                                         headerTitle={'Tilgjengelige voksenhenvisnger'}
+                                                                         tableTitle={'Alle tilgjengelige' +
+                                                                         ' voksenhenvisnger'}
+                                                                         isChildrenCase={false}
+                                      />}/>
+
+                        <PrivateRoute path="/barn"
+                                      component={(props) => <ActiveCases {...props}
+                                                                         caseState={0}
+                                                                         headerTitle={'Tilgjengelige barnehenvisninger'}
+                                                                         tableTitle={'Alle tilgjengelige barnehenvisninger'}
+                                                                         isChildrenCase={true}
+                                      />}/>
+                        <PrivateRoute path="/arkiv"
+                                      component={(props) => <ActiveCases {...props}
+                                                                         caseState={1}
+                                                                         headerTitle={'Arkiv'}
+                                                                         tableTitle={'Arkiverte henvisninger'}
+                                      />}/>
                     </Switch>
                 </Router>
             </Provider>

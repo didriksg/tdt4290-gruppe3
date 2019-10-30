@@ -56,14 +56,14 @@ const CaseSchema = new Schema({
         default: false,
     },
 
-    description: {
-        type: String,
-        required: false,
-    },
-
     userResponsible: {
         type: mongoose.ObjectId,
         required: false,
+    },
+
+    createdBy: {
+        type: mongoose.ObjectId,
+        required: false, //TODO: Make this required field
     },
 
     lastChanged: {

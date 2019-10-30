@@ -1,6 +1,5 @@
 import axios from "axios";
-import {ADD_CASE, CASE_UPDATED, CASE_UPDATING, CASES_LOADED, CASES_LOADING} from "./constants";
-import {returnErrors} from "./errorActions";
+import {ADD_CASE, CASE_UPDATED, CASE_UPDATING, CASES_LOADED, CASES_LOADING, NO_CASES_FOUND} from "./constants";
 import {handleError, tokenConfig} from "./authActions";
 
 
@@ -38,21 +37,27 @@ export const updateCase = c => {
     };
 };
 
-export const getCases = (state) => {
+export const getCases = (state, isChildrenCase) => {
+    console.log(state, isChildrenCase);
     return (dispatch, getState) => {
         dispatch({type: CASES_LOADING});
-        const body = JSON.stringify(state);
         axios
-            .get(`${connectionString}/api/case/list/${state}`, tokenConfig(getState))
+            .get(`${connectionString}/api/case/list/${state}/${isChildrenCase}`, tokenConfig(getState))
             .then(res => {
                 dispatch({
                     type: CASES_LOADED,
                     payload: res.data
                 })
             })
-            .catch(err =>
-                handleError(dispatch, err)
-            );
+            .catch(err => {
+                if (err.response.status === 404) {
+                    dispatch({
+                        type: NO_CASES_FOUND
+                    });
+                } else {
+                    handleError(dispatch, err)
+                }
+            });
     };
 };
 
@@ -63,8 +68,15 @@ export const getCasesById = (id) => {
             .then(() => dispatch({
                 type: CASES_LOADING,
             }))
-            .catch(err =>
-                handleError(dispatch, err)
+            .catch(err => {
+                    if (err.response.status === 404) {
+                        dispatch({
+                            type: NO_CASES_FOUND
+                        });
+                    } else {
+                        handleError(dispatch, err)
+                    }
+                }
             );
     };
 };
@@ -85,8 +97,15 @@ export const updateCaseStatus = (case_id, user_id, state) => {
             .then(() => {
                 dispatch(getCases(0));
             })
-            .catch(err =>
-                handleError(dispatch, err)
+            .catch(err => {
+                    if (err.response.status === 404) {
+                        dispatch({
+                            type: NO_CASES_FOUND
+                        });
+                    } else {
+                        handleError(dispatch, err)
+                    }
+                }
             );
     }
 };

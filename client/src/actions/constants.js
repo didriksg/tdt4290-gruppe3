@@ -16,3 +16,4 @@ export const CASES_LOADED = 'CASES_LOADED';
 export const ADD_CASE = 'GET_CASE';
 export const CASE_UPDATING = 'CASE_UPDATING';
 export const CASE_UPDATED = 'CASE_UPDATED';
+export const NO_CASES_FOUND = 'NO_CASES_FOUND';

@@ -3,27 +3,32 @@
     {
       "name": "Test Testersen",
       "email": "test@testersen.no",
-      "password": "testpassord"
+      "password": "testpassord",
+      "district": 0
     },
     {
       "name": "Bob Bobbersen",
       "email": "bob@bobbersen.no",
-      "password": "testpassord"
+      "password": "testpassord",
+      "district": 1
     },
     {
       "name": "Kåre Willoch",
       "email": "kare@willoch.no",
-      "password": "testpassord"
+      "password": "testpassord",
+      "district": 2
     },
     {
       "name": "Didrik E. R. Kulesen",
       "email": "didrik@kulesen.no",
-      "password": "testpassord"
+      "password": "testpassord",
+      "district": 3
     },
     {
       "name": "Feorg B. B. Partin",
       "email": "got@s8notgood.no",
-      "password": "testpassord"
+      "password": "testpassord",
+      "district": 0
     }
   ]
 }
