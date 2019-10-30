@@ -33,11 +33,20 @@ class App extends Component {
                         <PrivateRoute exact path="/" component={HomeScreen}/>
                         <PrivateRoute path="/rapport" component={MonthlyReport}/>
                         <PrivateRoute path="/ny-sak" component={CaseScreen}/>
-                        <PrivateRoute path="/alle-saker"
+                        <PrivateRoute path="/voksen"
                                       component={(props) => <ActiveCases {...props}
                                                                          caseState={0}
                                                                          headerTitle={'Tilgjengelige saker'}
                                                                          tableTitle={'Alle tilgjengelige saker'}
+                                                                         isChildrenCase={false}
+                                      />}/>
+
+                        <PrivateRoute path="/barn"
+                                      component={(props) => <ActiveCases {...props}
+                                                                         caseState={0}
+                                                                         headerTitle={'Tilgjengelige saker'}
+                                                                         tableTitle={'Alle tilgjengelige saker'}
+                                                                         isChildrenCase={true}
                                       />}/>
                         <PrivateRoute path="/arkiv"
                                       component={(props) => <ActiveCases {...props}

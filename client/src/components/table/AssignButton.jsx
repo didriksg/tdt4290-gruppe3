@@ -52,9 +52,9 @@ function AssignButton(props) {
                 <DialogTitle id="alert-dialog-title">{"Ønsker du å tildele deg saken med ID nummer: "}{props.idNumber}{"?"}</DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
-                        Saken har prioritet: {props.priority} <br/>
-                        Kategori er: {props.category}
-
+                        Prioritet: {props.priority} <br/>
+                        Kategori: {props.category} <br/>
+                        Aldersgruppe: {props.isChildrenCase ? 'Barn' : 'Voksen'}
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>

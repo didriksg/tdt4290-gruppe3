@@ -174,7 +174,8 @@ function OverviewBoard(props) {
 
     // Similar to componentDidMount and componentDidUpdate:
     useEffect(() => {
-        props.getCases(props.caseState);
+        console.log('beb');
+        props.getCases(props.caseState, props.isChildrenCase);
     },[]);
 
 
@@ -224,6 +225,7 @@ function OverviewBoard(props) {
                                                     idNumber={row.idNumber}
                                                     category={row.category}
                                                     priority={row.priority}
+                                                    isChildrenCase={row.isChildrenCase}
                                                 />
                                             </TableCell> : null}
                                         </TableRow>

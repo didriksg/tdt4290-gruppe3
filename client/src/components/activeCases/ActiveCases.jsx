@@ -57,6 +57,7 @@ class ActiveCases extends Component {
                     <OverviewBoard
                         caseState={this.props.caseState}
                         tableTitle={this.props.tableTitle}
+                        isChildrenCase={this.props.isChildrenCase}
                     />
                 </div>
             </div>
