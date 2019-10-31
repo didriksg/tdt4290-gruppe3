@@ -23,7 +23,6 @@ export const addCase = c => {
 export const updateCase = c => {
     return (dispatch, getState) => {
         dispatch({type: CASE_UPDATING});
-
         const body = JSON.stringify(c);
         axios
             .put(`${connectionString}/api/case/update/${id}`, body, tokenConfig(getState))
@@ -38,7 +37,6 @@ export const updateCase = c => {
 };
 
 export const getCases = (state, isChildrenCase) => {
-    console.log(state, isChildrenCase);
     return (dispatch, getState) => {
         dispatch({type: CASES_LOADING});
         axios
@@ -81,7 +79,7 @@ export const getCasesById = (id) => {
     };
 };
 
-export const updateCaseStatus = (case_id, user_id, state) => {
+export const updateCaseStatus = (case_id, user_id, state, isChildrenCase) => {
     return (dispatch, getState) => {
         dispatch({type: CASE_UPDATING});
         const body = JSON.stringify({
@@ -95,7 +93,7 @@ export const updateCaseStatus = (case_id, user_id, state) => {
                 type: CASE_UPDATED
             }))
             .then(() => {
-                dispatch(getCases(0));
+                dispatch(getCases(0, isChildrenCase));
             })
             .catch(err => {
                     if (err.response.status === 404) {

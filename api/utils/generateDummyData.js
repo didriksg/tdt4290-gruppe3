@@ -13,7 +13,7 @@ import User from '../models/User';
 import Case from '../models/Case';
 
 const availableDistricts = ['Midtbyen', 'Lerkendal', 'Østbyen', 'Heimdal'];
-const numberOfCasesToGenerate = 5;
+const numberOfCasesToGenerate = 50;
 
 const genDbData = function generateDummyDataToDatabase() {
     const connectionString = mongodbConnectionString + mongodbPort + '/' + mongodbDatabaseName;

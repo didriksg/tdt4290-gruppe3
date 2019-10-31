@@ -16,7 +16,6 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 isLoading: true,
-                cases: [],
             };
 
         case CASE_UPDATING:
