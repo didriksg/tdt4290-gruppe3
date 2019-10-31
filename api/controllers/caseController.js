@@ -1,5 +1,5 @@
 import sort from '../utils/sortCasesByPriority';
-
+import {getWeek} from '../utils/dateUtils';
 // Case model
 import Case from '../models/Case';
 
@@ -16,7 +16,7 @@ export const add = function addNewCase(req, res) {
     const category = req.body.category;
     const district = req.body.district;
     const description = req.body.description;
-    const referredFrom = req.body.referredFrom;q
+    const referredFrom = req.body.referredFrom;
     const important = req.body.important;
 
     // Check if all required fields are provided.
@@ -145,12 +145,10 @@ export const list = function listAllCases(req, res) {
     if (state === '0' && isChildrenCase !== undefined) {
         query = {state: state, isChildrenCase: isChildrenCase}
     } else {
-        query = {state:state}
+        query = {state: state}
     }
 
-    console.log(query);
-
-    Case.find(query)
+    Case.find(query).lean()
         .then((cases) => {
 
             if (cases === null || cases.length === 0) {
@@ -165,7 +163,25 @@ export const list = function listAllCases(req, res) {
             }
 
             // Sort cases by startup date, priority, then importance.
+
+            // Replace date with week or month.
+            if (isChildrenCase === 'true') {
+                cases.forEach((c) => {
+                    const startup = new Date(c.startupDate);
+                    const registered = new Date(c.registeredDate);
+
+                    c.modifiedStartupDate = {date: startup.getMonth(), year: startup.getFullYear()};
+                    c.modifiedRegisteredDate = {date: registered.getMonth(), year: registered.getFullYear()};
+                });
+            } else {
+                cases.forEach((c) => {
+                    c.modifiedStartupDate = {date: getWeek(c.startupDate), year: c.startupDate.getFullYear()};
+                    c.modifiedRegisteredDate = {date: getWeek(c.registeredDate), year: c.registeredDate.getFullYear()};
+                })
+            }
+
             const sortedCases = sort(cases);
+
             res.status(200)
                 .json(sortedCases);
         })
@@ -235,8 +251,6 @@ export const updateCaseState = function updateCaseState(req, res) {
     const id = req.params.id;
     const newState = req.body.state;
     const userId = req.body.user_id;
-
-    console.log(id, newState,userId);
 
     if (id === undefined) {
         return res.status(400)
@@ -309,5 +323,3 @@ export const updateCaseState = function updateCaseState(req, res) {
                 });
         });
 };
-
-

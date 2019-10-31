@@ -1,7 +1,7 @@
 import {CLEAR_ERRORS, GET_ERRORS} from "../actions/constants";
 
 const initalState = {
-    msg: {},
+    msg: '',
     status: null,
     id: null
 };

@@ -2,8 +2,10 @@ import React, {useEffect} from 'react';
 import AssignButton from "./AssignButton";
 
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
-import {Table,
+import {makeStyles} from '@material-ui/core/styles';
+import {
+    Paper,
+    Table,
     TableBody,
     TableCell,
     TableHead,
@@ -11,8 +13,7 @@ import {Table,
     TableRow,
     TableSortLabel,
     Toolbar,
-    Typography,
-    Paper
+    Typography
 } from '@material-ui/core';
 import {connect} from "react-redux";
 import {getCases, updateCaseStatus} from "../../actions/caseActions";
@@ -20,14 +21,14 @@ import LoadingScreen from "../loadingScreen/LoadingScreen";
 
 
 const headCells = [
-    { id: 'idNumber', numeric: false, disablePadding: false, label: 'IDNummer' },
-    { id: 'category', numeric: true, disablePadding: false, label: 'Kategori' },
-    { id: 'priority', numeric: true, disablePadding: false, label: 'Prioritet' },
-    { id: 'referredFrom', numeric: true, disablePadding: false, label: 'Henvist fra' },
-    { id: 'district', numeric: true, disablePadding: false, label: 'Bydel' },
-    { id: 'registeredDate', numeric: true, disablePadding: false, label: 'Innmeldt' },
-    { id: 'startupDate', numeric: true, disablePadding: false, label: 'Forventet start' },
-    { id: 'assignCase', numeric: true, disablePadding: false, label: '' },
+    {id: 'idNumber', numeric: false, disablePadding: false, label: 'IDNummer'},
+    {id: 'category', numeric: true, disablePadding: false, label: 'Kategori'},
+    {id: 'priority', numeric: true, disablePadding: false, label: 'Prioritet'},
+    {id: 'referredFrom', numeric: true, disablePadding: false, label: 'Henvist fra'},
+    {id: 'district', numeric: true, disablePadding: false, label: 'Bydel'},
+    {id: 'registeredDate', numeric: true, disablePadding: false, label: 'Innmeldt'},
+    {id: 'startupDate', numeric: true, disablePadding: false, label: 'Forventet start'},
+    {id: 'assignCase', numeric: true, disablePadding: false, label: ''},
 ];
 
 // Sort function
@@ -57,7 +58,7 @@ function getSorting(order, orderBy) {
 }
 
 function EnhancedTableHead(props) {
-    const { classes, order, orderBy, onRequestSort } = props;
+    const {classes, order, orderBy, onRequestSort} = props;
     const createSortHandler = property => event => {
         onRequestSort(event, property);
     };
@@ -151,7 +152,7 @@ const useStyles = makeStyles(theme => ({
 function OverviewBoard(props) {
     const classes = useStyles();
     const [order, setOrder] = React.useState('asc');
-    const [orderBy, setOrderBy] = React.useState('category');
+    const [orderBy, setOrderBy] = React.useState();
     const [page, setPage] = React.useState(0);
 
     // Chooses how many rows to be shown
@@ -174,9 +175,8 @@ function OverviewBoard(props) {
 
     // Similar to componentDidMount and componentDidUpdate:
     useEffect(() => {
-        console.log('beb');
         props.getCases(props.caseState, props.isChildrenCase);
-    },[]);
+    }, []);
 
 
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, props.cases.length - page * rowsPerPage);
@@ -185,76 +185,78 @@ function OverviewBoard(props) {
 
         <div className={classes.root}>
             {props.isLoading ? <LoadingScreen/> :
-            <Paper className={classes.paper}>
-                <EnhancedTableToolbar tableTitle={props.tableTitle}/>
-                <div className={classes.tableWrapper}>
-                    <Table
-                        className={classes.table}
-                        aria-labelledby="tableTitle"
-                        stickyHeader
-                    >
-                        <EnhancedTableHead
-                            classes={classes}
-                            order={order}
-                            orderBy={orderBy}
-                            onRequestSort={handleRequestSort}
-                            caseState={props.caseState}
-                        />
-                        <TableBody>
-                            {stableSort(props.cases, getSorting(order, orderBy))
-                                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                .map((row, index) => {
-                                    const labelId = `enhanced-table-checkbox-${index}`;
-                                    return (
-                                        <TableRow
-                                            hover
-                                            tabIndex={-1}
-                                            key={row.idNumber}
-                                        >
-                                            <TableCell component="th" id={labelId} scope="row">{row.idNumber}</TableCell>
-                                            <TableCell align="right">{row.category}</TableCell>
-                                            <TableCell align="right">{row.priority}</TableCell>
-                                            <TableCell align="right">{row.referredFrom}</TableCell>
-                                            <TableCell align="right">{row.district}</TableCell>
-                                            <TableCell align="right">{row.registeredDate}</TableCell>
-                                            <TableCell align="right">{row.startupDate}</TableCell>
+                <Paper className={classes.paper}>
+                    <EnhancedTableToolbar tableTitle={props.tableTitle}/>
+                    <div className={classes.tableWrapper}>
+                        <Table
+                            className={classes.table}
+                            aria-labelledby="tableTitle"
+                            stickyHeader
+                        >
+                            <EnhancedTableHead
+                                classes={classes}
+                                order={order}
+                                orderBy={orderBy}
+                                onRequestSort={handleRequestSort}
+                                caseState={props.caseState}
+                            />
+                            <TableBody>
+                                {stableSort(props.cases, getSorting(order, orderBy))
+                                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                    .map((row, index) => {
+                                        const labelId = `enhanced-table-checkbox-${index}`;
+                                        return (
+                                            <TableRow
+                                                hover
+                                                tabIndex={-1}
+                                                key={row.idNumber}
+                                            >
+                                                <TableCell component="th" id={labelId} scope="row">{row.idNumber}</TableCell>
+                                                <TableCell align="right">{row.category}</TableCell>
+                                                <TableCell align="right">{row.priority}</TableCell>
+                                                <TableCell align="right">{row.referredFrom}</TableCell>
+                                                <TableCell align="right">{row.district}</TableCell>
+                                                <TableCell
+                                                    align="right">{props.isChildrenCase ? '' : 'Uke '} {props.isChildrenCase ? numberToMonth(row.modifiedRegisteredDate.date) : row.modifiedRegisteredDate.date}, {row.modifiedRegisteredDate.year}</TableCell>
+                                                <TableCell
+                                                    align="right">{props.isChildrenCase ? '' : 'Uke '} {props.isChildrenCase ? numberToMonth(row.modifiedStartupDate.date) : row.modifiedStartupDate.date}, {row.modifiedStartupDate.year}</TableCell>
 
-                                            {props.caseState == 0 ? <TableCell align="right">
-                                                <AssignButton
-                                                    _id={row._id}
-                                                    idNumber={row.idNumber}
-                                                    category={row.category}
-                                                    priority={row.priority}
-                                                    isChildrenCase={row.isChildrenCase}
-                                                />
-                                            </TableCell> : null}
-                                        </TableRow>
-                                    );
-                                })}
-                            {emptyRows > 0 && (
-                                <TableRow>
-                                    <TableCell colSpan={7} />
-                                </TableRow>
-                            )}
-                        </TableBody>
-                    </Table>
-                </div>
-                <TablePagination
-                    rowsPerPageOptions={[10, 25]}
-                    component="div"
-                    count={props.cases.length}
-                    rowsPerPage={rowsPerPage}
-                    page={page}
-                    backIconButtonProps={{
-                        'aria-label': 'previous page',
-                    }}
-                    nextIconButtonProps={{
-                        'aria-label': 'next page',
-                    }}
-                    onChangePage={handleChangePage}
-                    onChangeRowsPerPage={handleChangeRowsPerPage}
-                />
-            </Paper>}
+                                                {props.caseState == 0 ? <TableCell align="right">
+                                                    <AssignButton
+                                                        _id={row._id}
+                                                        idNumber={row.idNumber}
+                                                        category={row.category}
+                                                        priority={row.priority}
+                                                        isChildrenCase={row.isChildrenCase}
+                                                    />
+                                                </TableCell> : null}
+                                            </TableRow>
+                                        );
+                                    })}
+                                {emptyRows > 0 && (
+                                    <TableRow>
+                                        <TableCell colSpan={7}/>
+                                    </TableRow>
+                                )}
+                            </TableBody>
+                        </Table>
+                    </div>
+                    <TablePagination
+                        rowsPerPageOptions={[10, 25]}
+                        component="div"
+                        count={props.cases.length}
+                        rowsPerPage={rowsPerPage}
+                        page={page}
+                        backIconButtonProps={{
+                            'aria-label': 'previous page',
+                        }}
+                        nextIconButtonProps={{
+                            'aria-label': 'next page',
+                        }}
+                        onChangePage={handleChangePage}
+                        onChangeRowsPerPage={handleChangeRowsPerPage}
+                    />
+                </Paper>}
         </div>
     );
 }
@@ -268,6 +270,11 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
     getCases,
     updateCaseStatus
+};
+
+const numberToMonth = (month) => {
+    const monthArray = ["Januar", "Februar", "Mars", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Desember"];
+    return monthArray[month];
 };
 
 export default connect(

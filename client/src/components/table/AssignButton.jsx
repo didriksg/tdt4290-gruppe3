@@ -31,8 +31,7 @@ function AssignButton(props) {
 
     const handleAssignCase = () => {
         setOpen(false);
-        console.log(userid);
-        dispatch(updateCaseStatus(props._id, userid, 1));
+        dispatch(updateCaseStatus(props._id, userid, 1, props.isChildrenCase));
     };
 
 
