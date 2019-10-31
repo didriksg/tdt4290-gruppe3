@@ -2,111 +2,106 @@ import React from "react";
 import "./casescreen.css";
 import RadioButtons from "./RadioButtons";
 import BarnVoksenSelect from "./BarnVoksenSelect";
-import RegisterDate from "./RegisterDate";
-import StartDate from "./StartDate";
+import DatePicker from "./DatePicker";
 import BydelSelect from "./BydelSelect";
 import KategoriSelect from "./KategoriSelect";
 import HenvendtSelect from "./HenvendtSelect";
 
 
-class CaseScreen extends React.Component{
+class CaseScreen extends React.Component {
+    constructor(props) {
+        super(props);
 
-    render(){
-        return(
+        this.state = {
+            id: null,
+            priority: null,
+            isChildrenCase: null,
+            referal: null,
+            registeredDate: new Date(),
+            startDate: null,
+            category: null,
+            district: null,
+        }
+    }
+
+    handleEventChange = (e) => {
+        this.setState({[e.target.name] : e.target.value});
+    };
+
+    handleDateChange = (name, date) => {
+        this.setState({[name]: date});
+    };
+
+
+    render() {
+        return (
             <div className="casecontainer">
 
                 <div className="caseelements">
 
-                    <h1>Ny sak</h1>    
+                    <h1>Ny sak</h1>
 
                     <div className="elementsingrid">
-                        
-                        
-                        <div className="gericanr">IDnr:</div> 
-                        <div className="gericainput"> 
-                            <input 
-                                className="inputboxer" 
+
+
+                        <div className="gericanr">IDnr:</div>
+                        <div className="gericainput">
+                            <input
+                                className="inputboxer"
                                 type="number"
+                                name='id'
+                                onChange={this.handleEventChange}
                             >
                             </input>
                         </div>
 
 
-                        <div className="prio"> Prioritet:</div> 
+                        <div className="prio"> Prioritet:</div>
                         <div className="priograd">
-                            <RadioButtons />
+                            <RadioButtons handleFunction={this.handleEventChange} value={this.state.priority} name={'priority'}/>
                         </div>
 
 
-                        <div className="henvendtfra"> Henvendelse fra: </div> 
-                        <div className="sted"> 
-                             <HenvendtSelect />
-                        </div>              
+                        <div className="henvendtfra"> Henvendelse fra:</div>
+                        <div className="sted">
+                            <HenvendtSelect handleFunction={this.handleEventChange} value={this.state.referal} name={'referal'}/>
+                        </div>
 
 
                         <div className="aldersgruppe"> Aldersgruppe:</div>
                         <div className="barnvoksen">
-                            <BarnVoksenSelect />
+                            <BarnVoksenSelect handleFunction={this.handleEventChange} value={this.state.isChildrenCase} name={'isChildrenCase'}/>
                         </div>
 
 
                         <div className="registreringsdato">Registreringsdato:</div>
                         <div className="RegDate">
-                            <RegisterDate />
+                            <DatePicker handleFunction={this.handleDateChange} value={this.state.registeredDate} name={'registeredDate'}/>
                         </div>
 
                         <div className="oppstartsdato">Oppstartsdato:</div>
                         <div className="StartDate">
-                            <StartDate />
+                            <DatePicker handleFunction={this.handleDateChange} value={this.state.startupDate} name={'startupDate'}/>
                         </div>
 
 
                         <div className="bydel">Bydel:</div>
-                        <div className="bydelbox"> 
-                            <BydelSelect />
+                        <div className="bydelbox">
+                            <BydelSelect handleFunction={this.handleEventChange} value={this.state.district} name={'district'}/>
                         </div>
 
 
                         <div className="kategori"> Kategori</div>
                         <div className="kategorifelt">
-                            <KategoriSelect />
+                            <KategoriSelect handleFunction={this.handleEventChange} value={this.state.category} name={'category'}/>
                         </div>
 
-
-                        <div className="beskrivelse"> Beskrivelse</div>
-                        <div className="beskrivelseboks"> 
-                            <textarea 
-                                className="inputboxer" 
-                                rows="6" 
-                                cols="43"
-                            >                                
-                            </textarea> 
-                        </div>
-
-
-                        <div className="avbrytknapp">
-                            <form className="forma">
-                                <button className="abutton" type="submit">Avbryt</button>
-                            </form>
-                        </div>
-
-                        <div className="viktigknapp">
-                            <form className="formb">
-                                <button className="mbutton" type="submit">Marker viktig</button>
-                            </form>
-                        </div>
-
-                        <div className="lagnysakknapp">
-                            <form className="formc">
-                                <button className="lbutton" type="submit">Lag ny sak</button>
-                            </form>
-                        </div>
-
+                        <button className="abutton" onClick={''}>Avbryt</button>
+                        <button className="mbutton" onClick={''}>Legg til henvendelse</button>
                     </div>
-        
+
                 </div>
 
-                
 
             </div>
         )
