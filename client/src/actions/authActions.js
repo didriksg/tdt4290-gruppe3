@@ -81,5 +81,9 @@ export const tokenConfig = getState => {
 
 export const handleError = (dispatch, err) => {
     dispatch(returnErrors(err.response.data, err.response.status));
-    // dispatch(loadUser());
+
+    console.log(err.response.status);
+    if (err.response.status === 401)  {
+        dispatch(loadUser());
+    }
 };

@@ -1,4 +1,3 @@
-
 // Source: https://weeknumber.net/how-to/javascript
 // Returns the ISO week of the date.
 export const getWeek = (dateString) => {
