@@ -182,7 +182,6 @@ function OverviewBoard(props) {
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, props.cases.length - page * rowsPerPage);
 
     return (
-
         <div className={classes.root}>
             {props.isLoading ? <LoadingScreen/> :
                 <Paper className={classes.paper}>

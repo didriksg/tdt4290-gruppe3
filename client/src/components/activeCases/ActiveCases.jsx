@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import OverviewBoard from "../table/OverviewBoard";
+import DistrictFilterButton from "./DistrictFilterButton";
 import {Link} from 'react-router-dom';
+
 import {AppBar, 
     Toolbar,
     Grid,
@@ -22,7 +24,12 @@ const style = {
 class ActiveCases extends Component {
     constructor(props) {
         super(props);
+        this.state = {district: ""}
     };
+
+    callbackFunction = (district) => {
+        this.setState({district: district})
+    }
 
     render() {
         return (
@@ -53,11 +60,16 @@ class ActiveCases extends Component {
                         </AppBar>
                     </Card>
                 </div>
+                <div className="filterButton">
+                    <DistrictFilterButton parentCallback={this.callbackFunction}/>
+                    {console.log("parent", this.state.district)}
+                </div>
                 <div className="activeCasesTable">
                     <OverviewBoard
                         caseState={this.props.caseState}
                         tableTitle={this.props.tableTitle}
                         isChildrenCase={this.props.isChildrenCase}
+                        districtState={this.state.district}
                     />
                 </div>
             </div>
