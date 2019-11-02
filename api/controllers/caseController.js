@@ -8,16 +8,15 @@ import Case from '../models/Case';
  **/
 export const add = function addNewCase(req, res) {
     // Extract data from request's body.
-    const idNumber = req.body.idNumber;
+    const idNumber = req.body.id;
     const priority = req.body.priority;
     const isChildrenCase = req.body.isChildrenCase;
-    const startupDate = req.body.startupDate;
+    const startupDate = req.body.startDate;
     const registeredDate = req.body.registeredDate;
     const category = req.body.category;
     const district = req.body.district;
-    const description = req.body.description;
-    const referredFrom = req.body.referredFrom;
-    const important = req.body.important;
+    const referredFrom = req.body.referral;
+    const important = false;
 
     // Check if all required fields are provided.
     if (idNumber === undefined
@@ -33,7 +32,7 @@ export const add = function addNewCase(req, res) {
     }
 
     const newCase = new Case({
-        gericaNumber: idNumber,
+        idNumber: idNumber,
         priority,
         isChildrenCase,
         startupDate,
@@ -41,7 +40,6 @@ export const add = function addNewCase(req, res) {
         category,
         district,
         'important': important,
-        'description': description,
         'referredFrom': referredFrom,
     });
 

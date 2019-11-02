@@ -4,15 +4,16 @@ import {Provider} from 'react-redux';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 import LoginScreen from "./components/loginScreen/LoginScreen";
-import HomeScreen from "./components/homeScreen/homescreen";
+import HomeScreen from "./components/homeScreen/HomeScreen";
 import Arkiv from "./components/arkiv/arkiv";
 import MonthlyReport from "./components/monthlyReport/monthlyReport";
-import CaseScreen from "./components/caseScreen/CaseScreen";
+import CaseSelector from "./components/caseScreen/CaseSelector";
 import ActiveCases from "./components/activeCases/ActiveCases";
 
 import {loadUser} from "./actions/authActions";
 import configureStore from './store'
 import PrivateRoute from "./components/PrivateRoute";
+import CaseScreen from "./components/caseScreen/CaseScreen";
 
 
 const store = configureStore();
@@ -32,7 +33,7 @@ class App extends Component {
                         <Route path="/login" component={LoginScreen}/>
                         <PrivateRoute exact path="/" component={HomeScreen}/>
                         <PrivateRoute path="/rapport" component={MonthlyReport}/>
-                        <PrivateRoute path="/ny-sak" component={CaseScreen}/>
+                        <PrivateRoute path="/ny" component={CaseScreen}/>
                         <PrivateRoute path="/voksen"
                                       component={(props) => <ActiveCases {...props}
                                                                          caseState={0}

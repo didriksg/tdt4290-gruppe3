@@ -3,7 +3,6 @@ import "./CasePage.css";
 import {Link} from 'react-router-dom';
 
 class CasePage extends Component {
-
     render() {
         return (
             <div className="gridContainer">

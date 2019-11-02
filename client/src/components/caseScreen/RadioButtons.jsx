@@ -6,42 +6,39 @@ import FormControl from "@material-ui/core/FormControl";
 
 
 export default function FormControlLabelPosition(props) {
-  const [value, setValue] = React.useState("female");
-
-  return (
-    <FormControl component="fieldset">
-      
-      <RadioGroup
-        name={props.name}
-        value={props.value}
-        onChange={props.handleFunction}
-        row
-      >
-        <FormControlLabel
-          value="1"
-          control={<Radio color="default" />}
-          label="1"
-          labelPlacement="top"
-        />
-        <FormControlLabel
-          value="2"
-          control={<Radio color="default" />}
-          label="2"
-          labelPlacement="top"
-        />
-        <FormControlLabel
-          value="3"
-          control={<Radio color="default" />}
-          label="3"
-          labelPlacement="top"
-        />
-        <FormControlLabel
-          value="4"
-          control={<Radio color="default" />}
-          label="4"
-          labelPlacement="top"
-        />
-      </RadioGroup>
-    </FormControl>
-  );
+    return (
+        <FormControl component="fieldset">
+            <RadioGroup
+                name={props.name}
+                value={props.value ? props.value : 0}
+                onChange={props.handleFunction}
+                row={true}
+            >
+                <FormControlLabel
+                    value="1"
+                    control={<Radio color="default"/>}
+                    label="1"
+                    labelPlacement="top"
+                />
+                <FormControlLabel
+                    value="2"
+                    control={<Radio color="default"/>}
+                    label="2"
+                    labelPlacement="top"
+                />
+                <FormControlLabel
+                    value="3"
+                    control={<Radio color="default"/>}
+                    label="3"
+                    labelPlacement="top"
+                />
+                <FormControlLabel
+                    value="4"
+                    control={<Radio color="default"/>}
+                    label="4"
+                    labelPlacement="top"
+                />
+            </RadioGroup>
+        </FormControl>
+    );
 }

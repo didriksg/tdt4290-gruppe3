@@ -7,9 +7,19 @@
   },
 
   "priorityToWaitingTime": {
-    "0": 1,
-    "1": 2,
-    "2": 3,
-    "3": 4
-  }
+    "1": 1,
+    "2": 2,
+    "3": 3,
+    "4": 4
+  },
+
+  "categories": [
+    "Varsling/Sikkerhet",
+    "Bekymringsmelding",
+    "ADL",
+    "Arbeidsform",
+    "Diagnoser",
+    "BHG/Skole",
+    "Tiltak"
+  ]
 }
