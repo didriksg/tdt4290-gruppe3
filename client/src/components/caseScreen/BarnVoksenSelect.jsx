@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function SimpleSelect() {
+export default function SimpleSelect(props) {
   const classes = useStyles();
   const [values, setValues] = React.useState(false);
 
@@ -39,13 +39,10 @@ export default function SimpleSelect() {
           Barn/Voksen
         </InputLabel >
         <Select
-          value={values.age}
-          onChange={handleChange}
+            name={props.name}
+          value={props.value}
+          onChange={props.handleFunction}
           labelWidth={labelWidth}
-          inputProps={{
-            name: 'age',
-            id: 'outlined-age-simple',
-          }}
         >
           <MenuItem value={true}>Barn</MenuItem>
           <MenuItem value={false}>Voksen</MenuItem>

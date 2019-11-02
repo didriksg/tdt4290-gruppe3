@@ -6,7 +6,7 @@ import {users} from '../dummy_data/dummyUsers';
 
 // Categories and config files
 import {bcryptSaltRounds, mongodbConnectionString, mongodbDatabaseName, mongodbPort} from '../config/default';
-import {categories} from '../config/acceptedCategories';
+import {categories} from '../config/definitions';
 
 // Models
 import User from '../models/User';

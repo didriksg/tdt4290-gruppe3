@@ -34,9 +34,6 @@ function AssignButton(props) {
         dispatch(updateCaseStatus(props._id, userid, 1, props.isChildrenCase));
     };
 
-
-
-
     return (
         <div>
             <Button variant="outlined" color="primary" onClick={handleClickOpen}>

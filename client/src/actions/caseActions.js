@@ -1,5 +1,13 @@
 import axios from "axios";
-import {ADD_CASE, CASE_UPDATED, CASE_UPDATING, CASES_LOADED, CASES_LOADING, NO_CASES_FOUND} from "./constants";
+import {
+    ADD_CASE,
+    ADDING_CASE,
+    CASE_UPDATED,
+    CASE_UPDATING,
+    CASES_LOADED,
+    CASES_LOADING,
+    NO_CASES_FOUND
+} from "./constants";
 import {handleError, tokenConfig} from "./authActions";
 
 
@@ -7,6 +15,7 @@ const connectionString = 'http://localhost:4000';
 
 export const addCase = c => {
     return (dispatch, getState) => {
+        dispatch({type: ADDING_CASE});
         const body = JSON.stringify(c);
         axios
             .post(`${connectionString}/api/case/add`, body, tokenConfig(getState))

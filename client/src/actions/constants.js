@@ -13,7 +13,8 @@ export const CLEAR_ERRORS = 'CLEAR_ERRORS';
 // Case states
 export const CASES_LOADING = 'CASES_LOADING';
 export const CASES_LOADED = 'CASES_LOADED';
-export const ADD_CASE = 'GET_CASE';
+export const ADD_CASE = 'ADD_CASE';
+export const ADDING_CASE = 'ADDING_CASE';
 export const CASE_UPDATING = 'CASE_UPDATING';
 export const CASE_UPDATED = 'CASE_UPDATED';
 export const NO_CASES_FOUND = 'NO_CASES_FOUND';

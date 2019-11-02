@@ -55,32 +55,14 @@ export default function RoutingButtons() {
                             <Button
                                 variant="outlined"
                                 color="primary" style={style.buttons}
-                                component={Link} to={"/ny-sak"}
+                                component={Link} to={"/ny"}
                             >
-                                Opprett ny sak
+                                Registrer ny henvisning
                             </Button>
                         </Grid>
                     </Grid>
                 </Grid>
             </Grid>
-
-            <Dialog onClose={handleMunicipalityClose} open={open}>
-                <DialogTitle>
-                    Endre bydel
-                </DialogTitle>
-                <DialogContent dividers>
-                    <Typography gutterBottom>
-                        Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis
-                        in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-                    </Typography>
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleMunicipalityClose} color="primary">
-                        Close
-                    </Button>
-                </DialogActions>
-            </Dialog>
-
         </form>
     )
 }
