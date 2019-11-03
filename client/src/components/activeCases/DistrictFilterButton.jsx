@@ -42,10 +42,10 @@ function DistrictFilterButton(props) {
                     <MenuItem value="">
                         <em>Alle</em>
                     </MenuItem>
-                    <MenuItem value={0}>Heimdal</MenuItem>
-                    <MenuItem value={1}>Lerkendal</MenuItem>
-                    <MenuItem value={2}>Midtbyen</MenuItem>
-                    <MenuItem value={3}>Østbyen</MenuItem>
+                    <MenuItem value={"Heimdal"}>Heimdal</MenuItem>
+                    <MenuItem value={"Lerkendal"}>Lerkendal</MenuItem>
+                    <MenuItem value={"Midtbyen"}>Midtbyen</MenuItem>
+                    <MenuItem value={"Østbyen"}>Østbyen</MenuItem>
                 </Select>
                 <FormHelperText>Velg bydel</FormHelperText>
             </FormControl>

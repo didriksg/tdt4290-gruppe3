@@ -178,9 +178,13 @@ function OverviewBoard(props) {
         props.getCases(props.caseState, props.isChildrenCase);
     }, []);
 
+    const filterDistrictList = () => {
+        const result = props.cases.filter(x => x.district === props.districtState);
+        return result;
+    }
 
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, props.cases.length - page * rowsPerPage);
-
+    
     return (
         <div className={classes.root}>
             {props.isLoading ? <LoadingScreen/> :
@@ -238,7 +242,7 @@ function OverviewBoard(props) {
                                     </TableRow>
                                 )}
                             </TableBody>
-                        </Table>
+                        </Table>{filterDistrictList}
                     </div>
                     <TablePagination
                         rowsPerPageOptions={[10, 25]}
