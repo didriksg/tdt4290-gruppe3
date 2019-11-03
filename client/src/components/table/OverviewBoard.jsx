@@ -154,6 +154,7 @@ function OverviewBoard(props) {
     const [order, setOrder] = React.useState('asc');
     const [orderBy, setOrderBy] = React.useState();
     const [page, setPage] = React.useState(0);
+    const [caseList, setCaseList] = React.useState(props.cases);
 
     // Chooses how many rows to be shown
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -177,13 +178,24 @@ function OverviewBoard(props) {
     useEffect(() => {
         props.getCases(props.caseState, props.isChildrenCase);
     }, []);
-
+/*
+    useEffect(() => {
+        console.log("updatet")
+        setCaseList(filterDistrictList);
+    }, [props.districtState]);
+*/
     const filterDistrictList = () => {
-        const result = props.cases.filter(x => x.district === props.districtState);
-        return result;
+        if(props.districtState !== "") {
+            const result = props.cases.filter(x => x.district === props.districtState);
+            console.log(result);
+            return result;
+        }
+        else {
+            return props.cases;
+        }
     }
 
-    const emptyRows = rowsPerPage - Math.min(rowsPerPage, props.cases.length - page * rowsPerPage);
+    const emptyRows = rowsPerPage - Math.min(rowsPerPage, filterDistrictList().length - page * rowsPerPage);
     
     return (
         <div className={classes.root}>
@@ -195,7 +207,7 @@ function OverviewBoard(props) {
                             className={classes.table}
                             aria-labelledby="tableTitle"
                             stickyHeader
-                        >
+                        >{console.log("case", filterDistrictList().length)}
                             <EnhancedTableHead
                                 classes={classes}
                                 order={order}
@@ -204,7 +216,7 @@ function OverviewBoard(props) {
                                 caseState={props.caseState}
                             />
                             <TableBody>
-                                {stableSort(props.cases, getSorting(order, orderBy))
+                                {stableSort(filterDistrictList(), getSorting(order, orderBy))
                                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                     .map((row, index) => {
                                         const labelId = `enhanced-table-checkbox-${index}`;
@@ -247,7 +259,7 @@ function OverviewBoard(props) {
                     <TablePagination
                         rowsPerPageOptions={[10, 25]}
                         component="div"
-                        count={props.cases.length}
+                        count={filterDistrictList().length}
                         rowsPerPage={rowsPerPage}
                         page={page}
                         backIconButtonProps={{
