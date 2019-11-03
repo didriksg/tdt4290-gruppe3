@@ -7,7 +7,6 @@ import LoginScreen from "./components/loginScreen/LoginScreen";
 import HomeScreen from "./components/homeScreen/HomeScreen";
 import Arkiv from "./components/arkiv/arkiv";
 import MonthlyReport from "./components/monthlyReport/monthlyReport";
-import CaseSelector from "./components/caseScreen/CaseSelector";
 import ActiveCases from "./components/activeCases/ActiveCases";
 
 import {loadUser} from "./actions/authActions";

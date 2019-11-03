@@ -21,7 +21,7 @@ import {AppBar,
   } from '@material-ui/core'
   import {makeStyles} from '@material-ui/core/styles'
   import {Link} from 'react-router-dom';
-//Data-OverviewBoard methods
+//Data-overviewBoard methods
 
 // Sample data method
 const columns = [

@@ -20,7 +20,7 @@ import {AppBar,
     
   } from '@material-ui/core'
   import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import LogoutButton from "../LogoutButton/LogoutButton";
+import LogoutButton from "../logoutButton/LogoutButton";
 const style = {
     persona: { marginTop:10, marginBottom:10 },
     personaDescription: { marginBottom: 10 },

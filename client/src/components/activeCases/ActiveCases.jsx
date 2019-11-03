@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import OverviewBoard from "../OverviewBoard/OverviewBoard";
+import OverviewBoard from "../overviewBoard/OverviewBoard";
 import Header from "../header/Header";
 
 

@@ -1,4 +1,4 @@
-import LogoutButton from "../LogoutButton/LogoutButton";
+import LogoutButton from "../logoutButton/LogoutButton";
 import React, {Component} from 'react';
 import {AppBar,
     Toolbar,
