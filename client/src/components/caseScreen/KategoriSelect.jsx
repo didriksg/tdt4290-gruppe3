@@ -5,6 +5,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
+import {categories} from '../../../definitions'
+
 const useStyles = makeStyles(theme => ({
     root: {
         /*display: 'flex',
@@ -17,7 +19,6 @@ const useStyles = makeStyles(theme => ({
 
 export default function SimpleSelect(props) {
     const classes = useStyles();
-    const [values, setValues] = React.useState(false);
 
     const inputLabel = React.useRef(null);
     const [labelWidth, setLabelWidth] = React.useState(0);
@@ -25,6 +26,11 @@ export default function SimpleSelect(props) {
         setLabelWidth(inputLabel.current.offsetWidth);
     }, []);
 
+    let elements = [];
+
+    for (let i = 0; i < categories.length; i++) {
+        elements.push(<MenuItem value={categories[i]}>{categories[i]}</MenuItem>);
+    }
 
     /*outlined-age-simple is a type property for material-ui*/
     return (
@@ -38,16 +44,8 @@ export default function SimpleSelect(props) {
                     value={props.value}
                     onChange={props.handleFunction}
                     labelWidth={labelWidth}
-                    // inputProps={{
-                    //     name: props.name,
-                    //     id: 'outlined-age-simple',
-                    // }}
                 >
-                    <MenuItem value={1}>Kategori1</MenuItem>
-                    <MenuItem value={2}>Kategori2</MenuItem>
-                    <MenuItem value={3}>Kategori3</MenuItem>
-                    <MenuItem value={4}>Kategori4</MenuItem>
-
+                    {elements}
                 </Select>
             </FormControl>
 

@@ -4,6 +4,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import {districts} from "../../../definitions";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -24,6 +25,12 @@ export default function SimpleSelect(props) {
         setLabelWidth(inputLabel.current.offsetWidth);
     }, []);
 
+    let elements = [];
+
+    for (let i = 0; i < districts.length; i++) {
+        elements.push(<MenuItem value={districts[i]}>{districts[i]}</MenuItem>);
+    }
+
 
     /*outlined-age-simple is a type property for material-ui*/
     return (
@@ -38,10 +45,7 @@ export default function SimpleSelect(props) {
                     onChange={props.handleFunction}
                     labelWidth={labelWidth}
                 >
-                    <MenuItem value={1}>Midtbyen</MenuItem>
-                    <MenuItem value={2}>Østbyen</MenuItem>
-                    <MenuItem value={3}>Tiller</MenuItem>
-                    <MenuItem value={4}>Heimdal</MenuItem>
+                    {elements}
 
 
                 </Select>

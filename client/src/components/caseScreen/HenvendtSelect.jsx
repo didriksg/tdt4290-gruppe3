@@ -4,6 +4,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import {referralCodes} from "../../../definitions";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -24,6 +25,11 @@ export default function SimpleSelect(props) {
         setLabelWidth(inputLabel.current.offsetWidth);
     }, []);
 
+    let elements = [];
+
+    for (let i = 0; i < referralCodes.length; i++) {
+        elements.push(<MenuItem value={referralCodes[i]}>{referralCodes[i]}</MenuItem>);
+    }
 
     /*outlined-age-simple is a type property for material-ui*/
     return (
@@ -38,10 +44,7 @@ export default function SimpleSelect(props) {
                     onChange={props.handleFunction}
                     labelWidth={labelWidth}
                 >
-                    <MenuItem value={1}>100001</MenuItem>
-                    <MenuItem value={2}>100022</MenuItem>
-                    <MenuItem value={3}>100333</MenuItem>
-                    <MenuItem value={4}>104444</MenuItem>
+                    {elements}
 
 
                 </Select>
