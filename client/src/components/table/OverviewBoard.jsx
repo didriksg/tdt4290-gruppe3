@@ -154,7 +154,6 @@ function OverviewBoard(props) {
     const [order, setOrder] = React.useState('asc');
     const [orderBy, setOrderBy] = React.useState();
     const [page, setPage] = React.useState(0);
-    const [caseList, setCaseList] = React.useState(props.cases);
 
     // Chooses how many rows to be shown
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -178,21 +177,13 @@ function OverviewBoard(props) {
     useEffect(() => {
         props.getCases(props.caseState, props.isChildrenCase);
     }, []);
-/*
-    useEffect(() => {
-        console.log("updatet")
-        setCaseList(filterDistrictList);
-    }, [props.districtState]);
-*/
+
     const filterDistrictList = () => {
-        if(props.districtState !== "") {
-            const result = props.cases.filter(x => x.district === props.districtState);
-            console.log(result);
-            return result;
-        }
-        else {
-            return props.cases;
-        }
+        return props.districtState !== "" ?
+             (props.cases.filter(x => x.district === props.districtState))
+            :
+             props.cases
+
     }
 
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, filterDistrictList().length - page * rowsPerPage);
@@ -207,7 +198,7 @@ function OverviewBoard(props) {
                             className={classes.table}
                             aria-labelledby="tableTitle"
                             stickyHeader
-                        >{console.log("case", filterDistrictList().length)}
+                        >
                             <EnhancedTableHead
                                 classes={classes}
                                 order={order}

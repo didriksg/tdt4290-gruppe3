@@ -62,7 +62,6 @@ class ActiveCases extends Component {
                 </div>
                 <div className="filterButton">
                     <DistrictFilterButton parentCallback={this.callbackFunction}/>
-                    {console.log("parent", this.state.district)}
                 </div>
                 <div className="activeCasesTable">
                     <OverviewBoard
