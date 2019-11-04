@@ -1,10 +1,10 @@
 /* eslint-disable no-param-reassign */
-import React, { PureComponent } from "react";
+import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 
-import { DatePicker } from "material-ui-pickers";
-import { IconButton, withStyles } from "@material-ui/core/index";
+import {DatePicker} from "material-ui-pickers";
+import {IconButton, withStyles} from "@material-ui/core/index";
 
 class WeekPicker extends PureComponent {
     static propTypes = {
@@ -16,7 +16,7 @@ class WeekPicker extends PureComponent {
     };
 
     handleWeekChange = date => {
-        this.setState({ selectedDate: date.startOf("isoWeek") });
+        this.setState({selectedDate: date.startOf("isoWeek")});
     };
 
     formatWeekSelectLabel = (date, invalidLabel) => {
@@ -28,7 +28,7 @@ class WeekPicker extends PureComponent {
     };
 
     renderWrappedWeekDay = (date, selectedDate, dayInCurrentMonth) => {
-        const { classes } = this.props;
+        const {classes} = this.props;
 
         const start = selectedDate.clone().startOf("isoWeek");
         const end = selectedDate.clone().endOf("isoWeek");
@@ -58,7 +58,7 @@ class WeekPicker extends PureComponent {
     };
 
     render() {
-        const { selectedDate } = this.state;
+        const {selectedDate} = this.state;
 
         return (
             <div className="picker">

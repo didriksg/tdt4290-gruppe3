@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from '@emotion/core';
+import {css} from '@emotion/core';
 // Another way to import. This is recommended to reduce bundle size
 import ClipLoader from 'react-spinners/ClipLoader';
 import "./LoadingScreen.css";
@@ -12,6 +12,7 @@ class LoadingScreen extends React.Component {
             loading: true
         }
     }
+
     render() {
         return (
             <div className='sweet-loading'>

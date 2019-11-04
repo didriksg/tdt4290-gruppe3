@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+
 const Schema = mongoose.Schema;
 
 // Create user model
@@ -20,7 +21,7 @@ const UserSchema = new Schema({
     },
 
     district: {
-        type: Number,
+        type: String,
         required: true,
     },
 

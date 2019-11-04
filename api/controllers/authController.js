@@ -1,7 +1,7 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
-import {jwtSecret, jwtExpireInterval} from '../config/default';
+import {jwtExpireInterval, jwtSecret} from '../config/default';
 import User from '../models/User';
 
 /**
@@ -51,6 +51,7 @@ export const login = function loginUser(req, res) {
                                     id: user.id,
                                     name: user.name,
                                     email: user.email,
+                                    district: user.district
                                 }
                             });
                         }

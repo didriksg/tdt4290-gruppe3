@@ -1,14 +1,14 @@
-import { useDispatch, useSelector } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import React from 'react';
 import Snackbar from "@material-ui/core/Snackbar";
 import IconButton from "@material-ui/core/IconButton";
-import { Icon } from "@material-ui/core";
-import { clearSnackbar } from "../actions/snackbarActions";
+import {Icon} from "@material-ui/core";
+import {clearSnackbar} from "../actions/snackbarActions";
 
 export default function SuccessSnackbar() {
     const dispatch = useDispatch();
 
-    const { successSnackbarMessage, successSnackbarOpen } = useSelector(
+    const {successSnackbarMessage, successSnackbarOpen} = useSelector(
         state => state.ui
     );
 

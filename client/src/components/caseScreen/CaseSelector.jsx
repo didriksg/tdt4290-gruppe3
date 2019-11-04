@@ -15,6 +15,7 @@ import {addCase} from "../../actions/caseActions";
 import moment from "moment";
 import "moment/locale/nb";
 import {connect} from "react-redux";
+
 moment.locale("nb");
 
 class CaseSelector extends React.Component {
@@ -162,7 +163,7 @@ class CaseSelector extends React.Component {
                         </div>
 
 
-                    <Button variant="contained" onClick={this.resetFields} color="secondary">Tøm felter</Button>
+                        <Button variant="contained" onClick={this.resetFields} color="secondary">Tøm felter</Button>
                         <div/>
                         <Button variant="contained"
                                 color="primary"

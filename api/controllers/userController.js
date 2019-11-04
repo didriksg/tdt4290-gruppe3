@@ -1,9 +1,7 @@
-import express from 'express';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
 import {bcryptSaltRounds, jwtExpireInterval, jwtSecret} from '../config/default';
-
 // User model
 import User from '../models/User';
 
@@ -12,7 +10,7 @@ import User from '../models/User';
  * Register a new user.
  */
 export const register = function registerNewUser(req, res) {
-    const name  = req.body.name;
+    const name = req.body.name;
     const email = req.body.email;
     const password = req.body.password;
     const district = req.body.district;

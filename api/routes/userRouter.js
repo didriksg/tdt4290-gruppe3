@@ -1,7 +1,7 @@
 import express from 'express';
-const userRouter = express.Router();
-
 import {register} from '../controllers/userController';
+
+const userRouter = express.Router();
 
 // @route   POST api/user/register
 // @desc    Register new user

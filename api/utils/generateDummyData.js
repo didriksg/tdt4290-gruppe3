@@ -1,18 +1,14 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
-
 // Dummy data users.
 import {users} from '../dummy_data/dummyUsers';
-
 // Categories and config files
 import {bcryptSaltRounds, mongodbConnectionString, mongodbDatabaseName, mongodbPort} from '../config/default';
-import {categories} from '../config/definitions';
-
+import {categories, districts} from '../config/definitions';
 // Models
 import User from '../models/User';
 import Case from '../models/Case';
 
-const availableDistricts = ['Midtbyen', 'Lerkendal', 'Østbyen', 'Heimdal'];
 const numberOfCasesToGenerate = 50;
 
 const genDbData = function generateDummyDataToDatabase() {
@@ -68,8 +64,10 @@ const genCases = async function generateDummyCases() {
         const startupDate = new Date(startYear, startMonth, startDay);
         const registeredDate = new Date(registerYear, registeredMonth, registeredDay);
         const category = categories[Math.floor(Math.random() * categories.length)];
-        const district = availableDistricts[Math.floor(Math.random() * availableDistricts.length)];
+        const district = districts[Math.floor(Math.random() * districts.length)];
         const important = Math.random() >= 0.9;
+
+        console.log(district);
 
         const newCase = new Case({
             idNumber: idNumber,
