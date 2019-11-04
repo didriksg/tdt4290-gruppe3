@@ -20,4 +20,4 @@ COPY . .
 EXPOSE 4000
 
 # Run the app when you start the container
-CMD ["npm", "start"]
+CMD ["nodemon", "server.js"]
