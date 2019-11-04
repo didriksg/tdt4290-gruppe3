@@ -182,11 +182,17 @@ function OverviewBoard(props) {
         props.getCases(props.caseState, props.isChildrenCase);
     }, []);
 
+    const filterDistrictList = () => {
+        return props.districtState !== "" ?
+             (props.cases.filter(x => x.district === props.districtState))
+            :
+             props.cases
 
-    const emptyRows = rowsPerPage - Math.min(rowsPerPage, props.cases.length - page * rowsPerPage);
+    }
 
+    const emptyRows = rowsPerPage - Math.min(rowsPerPage, filterDistrictList().length - page * rowsPerPage);
+    
     return (
-
         <div className={classes.root}>
             {props.isLoading ? <LoadingScreen/> :
                 <Paper className={classes.paper}>
@@ -205,7 +211,7 @@ function OverviewBoard(props) {
                                 caseState={props.caseState}
                             />
                             <TableBody>
-                                {stableSort(props.cases, getSorting(order, orderBy))
+                                {stableSort(filterDistrictList(), getSorting(order, orderBy))
                                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                     .map((row, index) => {
                                         const labelId = `enhanced-table-checkbox-${index}`;
@@ -243,12 +249,12 @@ function OverviewBoard(props) {
                                     </TableRow>
                                 )}
                             </TableBody>
-                        </Table>
+                        </Table>{filterDistrictList}
                     </div>
                     <TablePagination
                         rowsPerPageOptions={[10, 25]}
                         component="div"
-                        count={props.cases.length}
+                        count={filterDistrictList().length}
                         rowsPerPage={rowsPerPage}
                         page={page}
                         backIconButtonProps={{
