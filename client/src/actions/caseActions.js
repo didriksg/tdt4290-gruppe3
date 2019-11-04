@@ -9,7 +9,7 @@ import {
     NO_CASES_FOUND
 } from "./constants";
 import {handleError, tokenConfig} from "./authActions";
-
+import {showSnackbar} from "./snackbarActions";
 
 const connectionString = 'http://localhost:4000';
 
@@ -23,6 +23,9 @@ export const addCase = c => {
                 type: ADD_CASE,
                 payload: res.data
             }))
+            .then(() => dispatch(
+                showSnackbar("Henvendelsen er lagt til","success")
+            ))
             .catch(err =>
                 handleError(dispatch, err)
             );
@@ -39,6 +42,9 @@ export const updateCase = c => {
                 type: CASE_UPDATED,
                 payload: res.data
             }))
+            .then(() => dispatch(
+                showSnackbar("Flott! Du har tatt henvendelsen!","success")
+            ))
             .catch(err =>
                 handleError(dispatch, err)
             );
@@ -61,30 +67,12 @@ export const getCases = (state, isChildrenCase) => {
                     dispatch({
                         type: NO_CASES_FOUND
                     });
+                    dispatch(showSnackbar(`Ingen ${state === 1 ? 'arkiverte ' : isChildrenCase ? 'barne' : 'voksen'}henvendelser funnet`,"warning"));
+
                 } else {
                     handleError(dispatch, err)
                 }
             });
-    };
-};
-
-export const getCasesById = (id) => {
-    return (dispatch, getState) => {
-        axios
-            .get(`${connectionString}/api/case/${id}`, body, tokenConfig(getState))
-            .then(() => dispatch({
-                type: CASES_LOADING,
-            }))
-            .catch(err => {
-                    if (err.response.status === 404) {
-                        dispatch({
-                            type: NO_CASES_FOUND
-                        });
-                    } else {
-                        handleError(dispatch, err)
-                    }
-                }
-            );
     };
 };
 
@@ -104,11 +92,17 @@ export const updateCaseStatus = (case_id, user_id, state, isChildrenCase) => {
             .then(() => {
                 dispatch(getCases(0, isChildrenCase));
             })
+            .then(() => dispatch(
+                showSnackbar("Flott! Du har tatt henvendelsen!","success")
+            ))
             .catch(err => {
                     if (err.response.status === 404) {
                         dispatch({
-                            type: NO_CASES_FOUND
-                        });
+                            type: NO_CASES_FOUD
+                        })
+                            .then(() => {
+                                dispatch(showSnackbar("Ingen saker funnet","warning"));
+                            });
                     } else {
                         handleError(dispatch, err)
                     }

@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 
 import { DatePicker } from "material-ui-pickers";
-import { IconButton, withStyles } from "@material-ui/core";
+import { IconButton, withStyles } from "@material-ui/core/index";
 
 class WeekPicker extends PureComponent {
     static propTypes = {

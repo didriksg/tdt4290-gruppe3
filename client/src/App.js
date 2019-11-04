@@ -13,6 +13,8 @@ import {loadUser} from "./actions/authActions";
 import configureStore from './store'
 import PrivateRoute from "./components/PrivateRoute";
 import CaseScreen from "./components/caseScreen/CaseScreen";
+import SuccessSnackbar from "./components/SuccessSnackbar";
+import CustomizedSnackbars from "./components/Snackbar";
 
 
 const store = configureStore();
@@ -27,6 +29,7 @@ class App extends Component {
     render() {
         return (
             <Provider store={store}>
+                <CustomizedSnackbars/>
                 <Router>
                     <Switch>
                         <Route path="/login" component={LoginScreen}/>

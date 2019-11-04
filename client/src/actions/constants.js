@@ -18,3 +18,7 @@ export const ADDING_CASE = 'ADDING_CASE';
 export const CASE_UPDATING = 'CASE_UPDATING';
 export const CASE_UPDATED = 'CASE_UPDATED';
 export const NO_CASES_FOUND = 'NO_CASES_FOUND';
+
+// UI Constants
+export const SNACKBAR_SUCCESS = 'SNACKBAR_SUCCESS';
+export const SNACKBAR_CLEAR = 'SNACKBAR_CLEAR';

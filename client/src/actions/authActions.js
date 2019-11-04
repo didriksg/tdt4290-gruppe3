@@ -6,7 +6,9 @@ import {
     LOGIN_SUCESS,
     LOGOUT_SUCESS,
     USER_LOADED,
-    USER_LOADING} from "./constants";
+    USER_LOADING
+} from "./constants";
+import {showSnackbar} from "./snackbarActions";
 
 const apiConnectionString = 'http://localhost:4000';
 
@@ -48,14 +50,16 @@ export const login = ({email, password}) => dispatch => {
             })
         })
         .catch(err => {
-            handleError(dispatch, err);
+            handleError(dispatch, err, LOGIN_FAIL);
             dispatch({
                 type: LOGIN_FAIL
             });
         })
 };
 
-export const logout = () => {
+export const logout = () => dispatch => {
+    dispatch({type: LOGOUT_SUCESS});
+    dispatch(showSnackbar('Du har logget ut', 'success'));
     return {
         type: LOGOUT_SUCESS
     };
@@ -79,11 +83,12 @@ export const tokenConfig = getState => {
     return config;
 };
 
-export const handleError = (dispatch, err) => {
-    dispatch(returnErrors(err.response.data, err.response.status));
+export const handleError = (dispatch, err, id) => {
+    dispatch(returnErrors(err.response.data, err.response.status, id, dispatch));
 
     console.log(err.response.status);
-    if (err.response.status === 401)  {
+    if (err.response.status === 401) {
         dispatch(loadUser());
+        dispatch(showSnackbar('Du har blitt logget ut', 'error'));
     }
 };

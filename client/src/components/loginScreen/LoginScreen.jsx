@@ -63,9 +63,7 @@ class LoginScreen extends React.Component {
                             alt="Trondheim kommune logo"
                         />
                     </div>
-                    {/*TODO: Lag denne finere.*/}
                     <h1>Enhet for Ergoterapitjeneste</h1>
-                    {this.state.msg ? <h2>{this.state.msg}</h2> : null}
                     <div className="inputfelter">
                         <form>
                             <input

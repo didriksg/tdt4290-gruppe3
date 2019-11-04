@@ -7,7 +7,7 @@ import BydelSelect from "./BydelSelect";
 import KategoriSelect from "./KategoriSelect";
 import HenvendtSelect from "./HenvendtSelect";
 import {Button} from '@material-ui/core';
-import WeekPicker from "../../WeekPicker";
+import WeekPicker from "../WeekPicker";
 import MuiPickersUtilsProvider from "material-ui-pickers/MuiPickersUtilsProvider";
 import MomentUtils from "@date-io/moment"
 
