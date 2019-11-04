@@ -2,59 +2,59 @@ version: "3"
 
 services:
 
-    # Setup for the client
-    client:
-      build:
-        context: ./client
-        dockerfile: Dockerfile
+  # Setup for the client
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
 
-      image: client
-      container_name: client
-      restart: always
+    image: client
+    container_name: client
+    restart: always
 
-      ports:
-        - "1234:1234"
-      volumes:
-        - ./client:/client/
-        - /client/node_modules/
+    ports:
+      - "1234:1234"
+    volumes:
+      - ./client:/client/
+      - /client/node_modules/
 
-      links:
-        - api
+    links:
+      - api
 
-      networks:
-        - app-network
+    networks:
+      - app-network
 
-     # Setup for the API
-    api:
-      build:
-        context: ./api
-        dockerfile: Dockerfile
+    # Setup for the API
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
 
-      image: api
-      container_name: api
-      restart: always
+    image: api
+    container_name: api
+    restart: always
 
-      ports:
-        - "4000:4000"
-      volumes:
-        - ./api:/api
-        - /api/node_modules
+    ports:
+      - "4000:4000"
+    volumes:
+      - ./api:/api
+      - /api/node_modules
 
-      depends_on:
-        - mongodb
+    depends_on:
+      - mongodb
 
-      networks:
-        - app-network
+    networks:
+      - app-network
 
 
-    # Setup for MongoDB
-    mongodb:
-        container_name: mongodb
-        image: mongo
-        ports:
-          - "27017:27017"
-        networks:
-          - app-network
+  # Setup for MongoDB
+  mongodb:
+    container_name: mongodb
+    image: mongo
+    ports:
+      - "27017:27017"
+    networks:
+      - app-network
 
 
 volumes:

@@ -1,49 +1,24 @@
 import React from "react";
-import {AppBar, 
-    Toolbar,
-    Grid,
-    Button,
-    Paper,
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TablePagination,
-    TableRow,
-    Divider,
-    Typography,
-    Dialog,
-    DialogTitle,
-    DialogContent,
-    DialogActions, 
-    Card,  
-    
-  } from '@material-ui/core'
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import { mergeClasses } from "@material-ui/styles";
+import {Divider,} from '@material-ui/core'
+import {useSelector} from "react-redux";
+
 
 const style = {
-    persona: { marginTop:10, marginBottom:10 },
-    personaDescription: { marginBottom: 10 },
-    buttons: { marginTop: 10, marginBottom: 10 },
-}
+    persona: {marginTop: 10, marginBottom: 10},
+    personaDescription: {marginBottom: 10},
+    buttons: {marginTop: 10, marginBottom: 10},
+    center: {textAlign: 'center', fontFamily: 'sans-serif'}
+};
 
-export default function UserInformation(){
+export default function UserInformation() {
+    const userInfo = useSelector(state => state.auth.user);
 
-    return(
-        <form >
-            <Grid container direction="column" justify="center" >
-                <Grid container justify="center">
-                    <AccountCircleIcon style={style.persona}/>
-                </Grid>
-                
-                <Grid container justify="center" style={style.personaDescription}>
-                    Ola Nordmann, tilhører bydel ...
-                </Grid>
-            </Grid>
-
-            <Divider />
-        </form>
+    return (
+        <div style={style.center}>
+            <h2>{userInfo.name}</h2>
+            <h4>Tilhører bydel: {userInfo.district}</h4>
+            <Divider/>
+        </div>
     )
 }
 

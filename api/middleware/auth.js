@@ -12,7 +12,7 @@ const auth = function authenticateToken(req, res, next) {
 
     if (token === undefined) {
         return res.status(401)
-            .json({msg: 'No valid token was found. Access denied.'});
+            .json({msg: 'Du har ikke tilgang til å se denne siden...'});
     }
 
     try {
@@ -20,7 +20,7 @@ const auth = function authenticateToken(req, res, next) {
         next();
     } catch (e) {
         res.status(401)
-            .json({msg: 'Provided token is not valid. Access denied.'})
+            .json({msg: 'Du har blitt logget ut på grunn av inaktivitet.'})
     }
 };
 

@@ -4,31 +4,31 @@
       "name": "Test Testersen",
       "email": "test@testersen.no",
       "password": "testpassord",
-      "district": 0
+      "district": "Heimdal"
     },
     {
       "name": "Bob Bobbersen",
       "email": "bob@bobbersen.no",
       "password": "testpassord",
-      "district": 1
+      "district": "Midtbyen"
     },
     {
       "name": "Kåre Willoch",
       "email": "kare@willoch.no",
       "password": "testpassord",
-      "district": 2
+      "district": "Lerkendal"
     },
     {
       "name": "Didrik E. R. Kulesen",
       "email": "didrik@kulesen.no",
       "password": "testpassord",
-      "district": 3
+      "district": "Heimdal"
     },
     {
       "name": "Feorg B. B. Partin",
       "email": "got@s8notgood.no",
       "password": "testpassord",
-      "district": 0
+      "district": "Midtbyen"
     }
   ]
 }

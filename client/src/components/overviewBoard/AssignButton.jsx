@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch, useSelector } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {updateCaseStatus} from '../../actions/caseActions';
 import PropTypes from 'prop-types';
 
@@ -13,7 +13,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 
 function AssignButton(props) {
     const [open, setOpen] = React.useState(false);
-    const userid = useSelector( state => state.auth.user._id);
+    const userid = useSelector(state => state.auth.user._id);
     const dispatch = useDispatch();
 
     /*

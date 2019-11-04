@@ -1,61 +1,54 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
+import {categories} from '../../../definitions'
+
 const useStyles = makeStyles(theme => ({
-  root: {
-    /*display: 'flex',
-    flexWrap: 'wrap',*/
-  },
-  formControl: {
-    minWidth: 295,  /* length of selectorfield */
-  }
+    root: {
+        /*display: 'flex',
+        flexWrap: 'wrap',*/
+    },
+    formControl: {
+        minWidth: 295,  /* length of selectorfield */
+    }
 }));
 
-export default function SimpleSelect() {
-  const classes = useStyles();
-  const [values, setValues] = React.useState(false);
+export default function SimpleSelect(props) {
+    const classes = useStyles();
 
-  const inputLabel = React.useRef(null);
-  const [labelWidth, setLabelWidth] = React.useState(0);
-  React.useEffect(() => {
-    setLabelWidth(inputLabel.current.offsetWidth);
-  }, []);
+    const inputLabel = React.useRef(null);
+    const [labelWidth, setLabelWidth] = React.useState(0);
+    React.useEffect(() => {
+        setLabelWidth(inputLabel.current.offsetWidth);
+    }, []);
 
-  const handleChange = event => {
-    setValues(oldValues => ({
-      oldValues,
-      [event.target.name]: event.target.value,
-    }));
-  };
+    let elements = [];
 
-  /*outlined-age-simple is a type property for material-ui*/
-  return (
-    <form className={classes.root} autoComplete="off">
-      <FormControl variant="outlined" className={classes.formControl}>
-        <InputLabel ref={inputLabel} htmlFor="outlined-age-simple">
-          Kategori
-        </InputLabel >
-        <Select
-          value={values.age}
-          onChange={handleChange}
-          labelWidth={labelWidth}
-          inputProps={{
-            name: 'age',
-            id: 'outlined-age-simple',
-          }}
-        >
-          <MenuItem value={1}>Kategori1</MenuItem>
-          <MenuItem value={2}>Kategori2</MenuItem>
-          <MenuItem value={3}>Kategori3</MenuItem>
-          <MenuItem value={4}>Kategori4</MenuItem>
+    for (let i = 0; i < categories.length; i++) {
+        elements.push(<MenuItem value={categories[i]}>{categories[i]}</MenuItem>);
+    }
 
-        </Select>
-      </FormControl>
-      
-    </form>
-  );
+    /*outlined-age-simple is a type property for material-ui*/
+    return (
+        <form className={classes.root} autoComplete="off">
+            <FormControl variant="outlined" className={classes.formControl}>
+                <InputLabel ref={inputLabel} htmlFor="outlined-age-simple">
+                    Kategori
+                </InputLabel>
+                <Select
+                    name={props.name}
+                    value={props.value}
+                    onChange={props.handleFunction}
+                    labelWidth={labelWidth}
+                >
+                    {elements}
+                </Select>
+            </FormControl>
+
+        </form>
+    );
 }

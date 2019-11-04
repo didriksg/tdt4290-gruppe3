@@ -1,8 +1,8 @@
 import express from 'express';
-const caseRouter = express.Router();
-
 import auth from '../middleware/auth';
 import {add, getCaseById, getCasesByIdNumber, list, update, updateCaseState} from '../controllers/caseController';
+
+const caseRouter = express.Router();
 
 // @route   POST api/case/add
 // @desc    Add a new case to database. Request should contain all required elements defined in the `Case` model.

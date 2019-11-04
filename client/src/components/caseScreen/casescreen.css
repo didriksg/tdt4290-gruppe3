@@ -3,7 +3,6 @@
     justify-content: center;
     font-family: sans-serif;
     align-content: center;
-    background-color: lightblue;
 }
 
 .caseelements{
@@ -13,7 +12,7 @@
     border: 2px solid lightgray;
     background-color: white;
     /*background-color: lightgrey;*/
-    height: 54.5    rem;
+    height: auto;
     width: 30rem;
     font-family: sans-serif;
 }
@@ -31,14 +30,16 @@
         'kategori kategorifelt kategorifelt'
         'henvendtfra sted sted'
         'bydel bydelbox bydelbox'
-        'beskrivelse beskrivelseboks beskrivelseboks'
-        'beskrivelse beskrivelseboks beskrivelseboks' 
-        'beskrivelse beskrivelseboks beskrivelseboks'
-        'avbrytknapp viktigknapp lagnysakknapp'
-        'footer footer footer';
+        'viktig viktigknapp viktigknapp'
+        'avbrytknapp tom lagnysakknapp';
     grid-gap: 1rem;
     padding: 1rem;
     justify-content: center;
+}
+
+.buttonPanel {
+    display: grid;
+    margin-top: 5rem;
 }
 
 .elementsingrid > div {
@@ -47,9 +48,6 @@
     padding: 2px 0;
   }
 
-.avbrytknapp{
-    grid-area: avbrytknapp;
-}
 .abutton{
     background-color:rgb(255, 50, 50);
 }

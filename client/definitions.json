@@ -1,10 +1,10 @@
 {
-  "districts": {
-    "0": "Heimdal",
-    "1": "Lerkendal",
-    "2": "Midtbyen",
-    "3": "Østbyen"
-  },
+  "districts": [
+    "Heimdal",
+    "Lerkendal",
+    "Midtbyen",
+    "Østbyen"
+  ],
   "priorityToWaitingTime": {
     "1": 1,
     "2": 2,

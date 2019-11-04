@@ -1,8 +1,8 @@
 import express from 'express';
-const authRouter = express.Router();
-
 import auth from '../middleware/auth';
-import {login, getUser} from '../controllers/authController';
+import {getUser, login} from '../controllers/authController';
+
+const authRouter = express.Router();
 
 // @route   POST api/auth/login
 // @desc    Authenticate a user.
