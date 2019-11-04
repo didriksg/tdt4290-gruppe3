@@ -17,7 +17,7 @@ export const login = function loginUser(req, res) {
         || password === undefined
         || password === '') {
         return res.status(400)
-            .json({msg: 'Please enter all fields'});
+            .json({msg: 'Vennligst fyll ut alle feltene.'});
     }
 
     // Check for existing user
@@ -25,7 +25,7 @@ export const login = function loginUser(req, res) {
         .then(user => {
             if (!user) {
                 return res.status(400)
-                    .json({msg: 'User does not exist.'});
+                    .json({msg: 'Brukeren finnes ikke.'});
             }
 
             // Validate password against hashed password in database.
@@ -33,7 +33,7 @@ export const login = function loginUser(req, res) {
                 .then(isMatch => {
                     if (!isMatch) {
                         return res.status(400)
-                            .json({msg: 'Invalid user name or password.'})
+                            .json({msg: 'Feil brukernavn og/eller passord.'})
                     }
 
                     // If successful match, sign a token and return it.

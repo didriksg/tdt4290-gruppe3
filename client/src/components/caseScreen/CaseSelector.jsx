@@ -93,7 +93,7 @@ class CaseSelector extends React.Component {
 
                 <div className="caseelements">
 
-                    <h1>Ny sak</h1>
+                    <h1>Ny henvendelse</h1>
 
                     <div className="elementsingrid">
 
@@ -165,8 +165,8 @@ class CaseSelector extends React.Component {
                     <Button variant="contained" onClick={this.resetFields} color="secondary">Tøm felter</Button>
                         <div/>
                         <Button variant="contained"
-                                onClick={this.handleSendCase}
                                 color="primary"
+                                onClick={this.handleSendCase}
                                 disabled={!this.isReadyToSend()}
                         >
                             Legg til henvendelse

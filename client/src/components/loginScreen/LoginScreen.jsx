@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {login} from '../../actions/authActions';
 import PropTypes from 'prop-types';
 import {Redirect} from "react-router-dom";
+import {Button} from '@material-ui/core';
 
 
 class LoginScreen extends React.Component {
@@ -95,9 +96,10 @@ class LoginScreen extends React.Component {
                     </div>
 
                     <div className="loginbutton">
-                        <form>
-                            <button type="submit" onClick={this.onLoginButtonClick}>Login</button>
-                        </form>
+                        <Button variant="contained"
+                                color="primary"
+                                onClick={(e) => this.onLoginButtonClick(e)}>Login
+                        </Button>
                     </div>
 
                 </div>

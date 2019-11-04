@@ -89,6 +89,5 @@ export const handleError = (dispatch, err, id) => {
     console.log(err.response.status);
     if (err.response.status === 401) {
         dispatch(loadUser());
-        dispatch(showSnackbar('Du har blitt logget ut', 'error'));
     }
 };
