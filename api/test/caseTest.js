@@ -4,37 +4,80 @@ const request = require('supertest');
 
 const app = require('../server');
 
+
+
+
 /*
 
+const CaseSchema = new Schema({
+    idNumber: {
+        type: String,
+        required: true,
+    },
 
-describe('POST case/add', () => {
-   
+    priority: {
+        type: Number,
+        required: true
+    },
 
-    it('OK, creating a new case works', (done) => {
+    isChildrenCase: {
+        type: Boolean,
+        required: true,
+    },
 
-        request(app).post('/api/case/add').send({
-            idNumber = req.body.idNumber,
-            priority = req.body.priority,
-            isChildrenCase = req.body.isChildrenCase,
-            startupDate = req.body.startupDate,
-            registeredDate = req.body.registeredDate,
-            category = req.body.category,
-            district = req.body.district,
-            description = req.body.description,
-            referredFrom = req.body.referredFrom,
-            important = req.body.important
-        })
-        .then((res) => {
-            const body = res.body;
-            expect(body).to.contain.property('token');
-            expect(body).to.contain.property('user');
-            done();
-        })
-        .catch((err) => done(err));
+    startupDate: {
+        type: Date,
+        required: true,
+    },
 
-    })
+    registeredDate: {
+        type: Date,
+        default: Date.now,
+        required: true,
+    },
 
+    category: {
+        type: String,
+        required: true,
+    },
 
-})
+    referredFrom: {
+        type: String,
+        required: false
+    },
+
+    district: {
+        type: String,
+        required: true,
+    },
+
+    state: {
+        type: Number,
+        required: true,
+        default: 0,
+    },
+
+    important: {
+        type: Boolean,
+        required: false,
+        default: false,
+    },
+
+    description: {
+        type: String,
+        required: false,
+    },
+
+    userResponsible: {
+        type: mongoose.ObjectId,
+        required: false,
+    },
+
+    lastChanged: {
+        type: Date,
+        default: Date.now(),
+    },
+});
+
 
 */

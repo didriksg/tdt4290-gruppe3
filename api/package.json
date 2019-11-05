@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon server.js --exec babel-node --presets babel-preset-env",
-    "test": "mocha --recursive --exit --require babel-core/register"
+    "test": "NODE_ENV=test mocha --recursive --exit --require babel-core/register"
   },
   "keywords": [],
   "author": "",

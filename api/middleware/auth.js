@@ -9,6 +9,7 @@ import jwt from 'jsonwebtoken';
  */
 const auth = function authenticateToken(req, res, next) {
     const token = req.header('x-auth-token');
+    
 
     if (token === undefined) {
         return res.status(401)
