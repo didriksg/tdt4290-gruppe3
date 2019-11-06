@@ -112,6 +112,6 @@ describe('POST case/add', () => {
         })
         .catch((err) => done(err));
 
-    })
+    });
 
-})
+});

@@ -1,6 +1,5 @@
 import express from 'express';
 import mongoose from 'mongoose';
-
 import {apiPort, mongodbConnectionString, mongodbDatabaseName, mongodbPort} from './config/default';
 import cors from 'cors'
 
@@ -9,8 +8,18 @@ import caseRouter from './routes/caseRouter';
 import userRouter from './routes/userRouter';
 import { ModuleMap } from 'jest-haste-map';
 
+const rateLimit = require("express-rate-limit");
+ 
+const limiter = rateLimit({
+  windowMs: 10 * 60 * 1000,
+  max: 100
+});
+ 
+
+
 const app = express();
 app.use(express.json());
+app.use(limiter);
 app.use(cors());
 
 
