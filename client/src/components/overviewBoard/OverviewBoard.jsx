@@ -187,7 +187,6 @@ function OverviewBoard(props) {
              (props.cases.filter(x => x.district === props.districtState))
             :
              props.cases
-
     }
 
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, filterDistrictList().length - page * rowsPerPage);
@@ -252,7 +251,6 @@ function OverviewBoard(props) {
                         </Table>{filterDistrictList}
                     </div>
                     <TablePagination
-                        rowsPerPageOptions={[10, 25]}
                         component="div"
                         count={filterDistrictList().length}
                         rowsPerPage={rowsPerPage}
@@ -265,6 +263,7 @@ function OverviewBoard(props) {
                         }}
                         onChangePage={handleChangePage}
                         onChangeRowsPerPage={handleChangeRowsPerPage}
+                        labelRowsPerPage="Hei"
                     />
                 </Paper>}
         </div>

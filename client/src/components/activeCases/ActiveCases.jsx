@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import DistrictFilterButton from "./DistrictFilterButton";
 import OverviewBoard from "../overviewBoard/OverviewBoard";
 import Header from "../header/Header";
-
+import WeekNavigator from "../weekNavigator/WeekNavigator";
 
 class ActiveCases extends Component {
     constructor(props) {
@@ -21,6 +21,7 @@ class ActiveCases extends Component {
                 <div className="filterButton">
                     <DistrictFilterButton parentCallback={this.callbackFunction}/>
                 </div>
+                <WeekNavigator isChildrenCase={this.props.isChildrenCase}/>
                 <OverviewBoard
                     caseState={this.props.caseState}
                     tableTitle={this.props.tableTitle}

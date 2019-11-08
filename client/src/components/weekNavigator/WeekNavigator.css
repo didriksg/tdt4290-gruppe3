@@ -1,0 +1,9 @@
+.navigator {
+    display: flex;
+    justify-content: center;
+}
+
+.nav {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}

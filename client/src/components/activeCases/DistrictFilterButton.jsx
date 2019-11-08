@@ -29,7 +29,7 @@ function DistrictFilterButton(props) {
         <div>
             <FormControl className={classes.formControl}>
                 <InputLabel shrink id="demo-simple-select-placeholder-label-label">
-                    Bydel
+                    Saker for bydel:
                 </InputLabel>
                 <Select
                     labelid="demo-simple-select-placeholder-label-label"
@@ -46,8 +46,7 @@ function DistrictFilterButton(props) {
                     <MenuItem value={"Lerkendal"}>Lerkendal</MenuItem>
                     <MenuItem value={"Midtbyen"}>Midtbyen</MenuItem>
                     <MenuItem value={"Østbyen"}>Østbyen</MenuItem>
-                </Select>
-                <FormHelperText>Velg bydel</FormHelperText>
+                </Select>  
             </FormControl>
         </div>
     );
