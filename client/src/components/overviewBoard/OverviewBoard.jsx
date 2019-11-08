@@ -159,22 +159,11 @@ function OverviewBoard(props) {
     const [orderBy, setOrderBy] = React.useState();
     const [page, setPage] = React.useState(0);
 
-    // Chooses how many rows to be shown
-    const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
     const handleRequestSort = (event, property) => {
         const isDesc = orderBy === property && order === 'desc';
         setOrder(isDesc ? 'asc' : 'desc');
         setOrderBy(property);
-    };
-
-    const handleChangePage = (event, newPage) => {
-        setPage(newPage);
-    };
-
-    const handleChangeRowsPerPage = event => {
-        setRowsPerPage(+event.target.value);
-        setPage(0);
     };
 
     // Similar to componentDidMount and componentDidUpdate:
@@ -189,7 +178,7 @@ function OverviewBoard(props) {
              props.cases
     }
 
-    const emptyRows = rowsPerPage - Math.min(rowsPerPage, filterDistrictList().length - page * rowsPerPage);
+    //const emptyRows = rowsPerPage - Math.min(rowsPerPage, filterDistrictList().length - page * rowsPerPage);
     
     return (
         <div className={classes.root}>
@@ -211,7 +200,6 @@ function OverviewBoard(props) {
                             />
                             <TableBody>
                                 {stableSort(filterDistrictList(), getSorting(order, orderBy))
-                                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                     .map((row, index) => {
                                         const labelId = `enhanced-table-checkbox-${index}`;
                                         return (
@@ -242,29 +230,10 @@ function OverviewBoard(props) {
                                             </TableRow>
                                         );
                                     })}
-                                {emptyRows > 0 && (
-                                    <TableRow>
-                                        <TableCell colSpan={7}/>
-                                    </TableRow>
-                                )}
+                                
                             </TableBody>
                         </Table>{filterDistrictList}
                     </div>
-                    <TablePagination
-                        component="div"
-                        count={filterDistrictList().length}
-                        rowsPerPage={rowsPerPage}
-                        page={page}
-                        backIconButtonProps={{
-                            'aria-label': 'previous page',
-                        }}
-                        nextIconButtonProps={{
-                            'aria-label': 'next page',
-                        }}
-                        onChangePage={handleChangePage}
-                        onChangeRowsPerPage={handleChangeRowsPerPage}
-                        labelRowsPerPage="Hei"
-                    />
                 </Paper>}
         </div>
     );
