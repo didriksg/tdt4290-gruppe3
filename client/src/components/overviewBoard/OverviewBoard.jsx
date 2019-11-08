@@ -38,6 +38,7 @@ function desc(a, b, orderBy) {
     if (b[orderBy] > a[orderBy]) {
         return 1;
     }
+    
     return 0;
 }
 
@@ -45,7 +46,6 @@ function stableSort(array, cmp) {
     if (array === undefined || array === null) {
         return [];
     }
-    console.log(array)
     const stabilizedThis = array.map((el, index) => [el, index]);
     stabilizedThis.sort((a, b) => {
         const order = cmp(a[0], b[0]);
@@ -53,6 +53,7 @@ function stableSort(array, cmp) {
             return order;
         return a[1] - b[1];
     });
+    
     return stabilizedThis.map(el => el[0]);
 }
 
@@ -93,8 +94,8 @@ function EnhancedTableHead(props) {
                             {headCell.label}
                             {orderBy === headCell.id ? (
                                 <span className={classes.visuallyHidden}>
-                  {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
-                </span>
+                                    {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
+                                </span>
                             ) : null}
                         </TableSortLabel>
                     </TableCell>
@@ -169,6 +170,7 @@ function OverviewBoard(props) {
         props.getCases(props.caseState, props.isChildrenCase);
     }, []);
 
+    // Filter props.cases based on district
     const filterDistrictList = () => {
         return props.districtState !== "" ?
             (props.cases.filter(x => x.district === props.districtState))
