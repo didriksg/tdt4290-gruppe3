@@ -9,7 +9,6 @@ import {
     TableBody,
     TableCell,
     TableHead,
-    TablePagination,
     TableRow,
     TableSortLabel,
     Toolbar,
@@ -157,7 +156,6 @@ function OverviewBoard(props) {
     const classes = useStyles();
     const [order, setOrder] = React.useState('asc');
     const [orderBy, setOrderBy] = React.useState();
-    const [page, setPage] = React.useState(0);
 
 
     const handleRequestSort = (event, property) => {
@@ -173,12 +171,10 @@ function OverviewBoard(props) {
 
     const filterDistrictList = () => {
         return props.districtState !== "" ?
-             (props.cases.filter(x => x.district === props.districtState))
+            (props.cases.filter(x => x.district === props.districtState))
             :
-             props.cases
+            props.cases
     }
-
-    //const emptyRows = rowsPerPage - Math.min(rowsPerPage, filterDistrictList().length - page * rowsPerPage);
     
     return (
         <div className={classes.root}>
@@ -230,7 +226,6 @@ function OverviewBoard(props) {
                                             </TableRow>
                                         );
                                     })}
-                                
                             </TableBody>
                         </Table>{filterDistrictList}
                     </div>
