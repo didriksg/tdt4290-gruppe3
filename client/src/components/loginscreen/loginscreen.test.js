@@ -1,10 +1,9 @@
 import React from 'react';
-import Enzyme, { shallow } from 'enzyme';
+import Enzyme, { shallow, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { Provider } from "react-redux";
 import configureMockStore from "redux-mock-store";
-import loginscreen from './LoginScreen';
-import LoginScreen from './LoginScreen';
+import { LoginScreen } from './LoginScreen';
 
 const mockStore = configureMockStore();
 const store = mockStore({});
@@ -15,12 +14,11 @@ describe('Loginscreen component', () => {
 
     it('Should show text', () => {
 
-        const wrapper = shallow(
-        <Provider store={store}>
-        <LoginScreen />
-        </Provider>);
-        const text = wrapper.find('div');
-        console.log("RIGHT HERE ", text.debug())
+        const component = shallow(
+        <LoginScreen />);
+
+        const wrapper = component.find('.logincontainer');
+        console.log("RIGHT HERE", wrapper.debug());
 
     })
 

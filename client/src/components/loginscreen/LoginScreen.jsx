@@ -6,7 +6,7 @@ import {login} from '../../actions/authActions'
 import PropTypes from 'prop-types';
 
 
-class LoginScreen extends React.Component {
+export class LoginScreen extends React.Component {
     static propTypes = {
         isAuthenticated: PropTypes.bool,
         error: PropTypes.object.isRequired,
