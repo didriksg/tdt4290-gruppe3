@@ -1,6 +1,6 @@
 import express from 'express';
 import auth from '../middleware/auth';
-import {add, getCaseById, getCasesByIdNumber, list, update, updateCaseState} from '../controllers/caseController';
+import {add, getCaseById, getCasesByIdNumber, getWaitingTime, list, update, updateCaseState} from '../controllers/caseController';
 
 const caseRouter = express.Router();
 
@@ -33,5 +33,10 @@ caseRouter.get('/idNumber/:id', auth, getCasesByIdNumber);
 // @desc    Get case with given idNumber
 // @access  Private
 caseRouter.put('/updateCaseState/:id', auth, updateCaseState);
+
+// @route   GET api/case/waitingTime/:state/:district/:isChildrenCase
+// @desc    Get case with given idNumber
+// @access  Private
+caseRouter.get('/waitingTime/:state/:district/:isChildrenCase', auth, getWaitingTime);
 
 export default caseRouter;

@@ -1,5 +1,6 @@
 import sort from '../utils/sortCasesByPriority';
 import {getWeek} from '../utils/dateUtils';
+import {priorityToWaitingTimeInDays} from '../config/definitions'
 // Case model
 import Case from '../models/Case';
 
@@ -319,5 +320,31 @@ export const updateCaseState = function updateCaseState(req, res) {
                     res.status(500)
                         .json({msg: 'Error updating case.'})
                 });
+        });
+};
+
+
+export const getWaitingTime = function getWaitingTime(req, res) {
+    const priority = req.params.priority;
+    const district = req.params.district;
+    const isChildrenCase = req.params.isChildrenCase;
+
+    if (priority === null
+        || priority === undefined
+        || district === undefined
+        || district === null
+        || isChildrenCase === undefined
+        || isChildrenCase === null
+    ) {
+        return res.status(400)
+            .json({
+                msg: 'Vennligst oppgi all påkrevd informasjon.'
+            })
+    }
+
+    const waitingTime = priorityToWaitingTimeInDays[priority];
+    return res.status(200)
+        .json({
+            waitingTimeInDays: {waitingTime}
         });
 };

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import {clearErrors, returnErrors} from "./errorActions";
 import {
+    API_CONNECTION_STR,
     AUTH_ERROR,
     LOGIN_FAIL,
     LOGIN_SUCESS,
@@ -10,7 +11,7 @@ import {
 } from "./constants";
 import {showSnackbar} from "./snackbarActions";
 
-const apiConnectionString = 'http://localhost:4000';
+const apiConnectionString = API_CONNECTION_STR;
 
 // Check token and load user
 export const loadUser = () => (dispatch, getState) => {

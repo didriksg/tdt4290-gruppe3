@@ -1,19 +1,21 @@
 import axios from "axios";
 import {
     ADD_CASE,
-    ADDING_CASE,
+    ADDING_CASE, CALCULATED_WAITING_TIME,
+    CALCULATING_WAITING_TIME,
     CASE_UPDATED,
     CASE_UPDATING,
     CASES_LOADED,
     CASES_LOADING,
-    NO_CASES_FOUND
+    NO_CASES_FOUND,
+    API_CONNECTION_STR
 } from "./constants";
 import {handleError, tokenConfig} from "./authActions";
 import {showSnackbar} from "./snackbarActions";
 
-const connectionString = 'http://localhost:4000';
+const connectionString = API_CONNECTION_STR;
 
-export const addCase = c => {
+export const addCase = (c) => {
     return (dispatch, getState) => {
         dispatch({type: ADDING_CASE});
         const body = JSON.stringify(c);
@@ -24,7 +26,7 @@ export const addCase = c => {
                 payload: res.data
             }))
             .then(() => dispatch(
-                showSnackbar("Henvendelsen er lagt til","success")
+                showSnackbar("Henvendelsen er lagt til", "success")
             ))
             .catch(err =>
                 handleError(dispatch, err)
@@ -43,7 +45,7 @@ export const updateCase = c => {
                 payload: res.data
             }))
             .then(() => dispatch(
-                showSnackbar("Flott! Du har tatt henvendelsen!","success")
+                showSnackbar("Flott! Du har tatt henvendelsen!", "success")
             ))
             .catch(err =>
                 handleError(dispatch, err)
@@ -67,7 +69,7 @@ export const getCases = (state, isChildrenCase) => {
                     dispatch({
                         type: NO_CASES_FOUND
                     });
-                    dispatch(showSnackbar(`Ingen ${state === 1 ? 'arkiverte ' : isChildrenCase ? 'barne' : 'voksen'}henvendelser funnet`,"warning"));
+                    dispatch(showSnackbar(`Ingen ${state === 1 ? 'arkiverte ' : isChildrenCase ? 'barne' : 'voksen'}henvendelser funnet`, "warning"));
 
                 } else {
                     handleError(dispatch, err)
@@ -93,7 +95,7 @@ export const updateCaseStatus = (case_id, user_id, state, isChildrenCase) => {
                 dispatch(getCases(0, isChildrenCase));
             })
             .then(() => dispatch(
-                showSnackbar("Flott! Du har tatt henvendelsen!","success")
+                showSnackbar("Flott! Du har tatt henvendelsen!", "success")
             ))
             .catch(err => {
                     if (err.response.status === 404) {
@@ -101,12 +103,29 @@ export const updateCaseStatus = (case_id, user_id, state, isChildrenCase) => {
                             type: NO_CASES_FOUD
                         })
                             .then(() => {
-                                dispatch(showSnackbar("Ingen saker funnet","warning"));
+                                dispatch(showSnackbar("Ingen saker funnet", "warning"));
                             });
                     } else {
                         handleError(dispatch, err)
                     }
                 }
             );
+    }
+};
+
+export const getWaitingTime = (priority, district, isChildrenCase) => {
+    return (dispatch, getState) => {
+        dispatch({type: CALCULATING_WAITING_TIME});
+        axios
+            .get(`${connectionString}/api/case/waitingTime/${priority}/${district}/${isChildrenCase}`, tokenConfig(getState))
+            .then((res) => {
+                dispatch({
+                    type: CALCULATED_WAITING_TIME,
+                    payload: res.data
+                })
+            })
+            .then(()=>{
+                dispatch(showSnackbar('En startdato har blitt foreslått. Vennligst sjekk at denne stemmer.', 'info'));
+            });
     }
 };
