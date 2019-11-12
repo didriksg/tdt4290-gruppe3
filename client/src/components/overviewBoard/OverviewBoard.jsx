@@ -170,13 +170,39 @@ function OverviewBoard(props) {
         props.getCases(props.caseState, props.isChildrenCase);
     }, []);
 
+
+
+
     // Filter props.cases based on district
     const filterDistrictList = () => {
         return props.districtState !== "" ?
             (props.cases.filter(x => x.district === props.districtState))
             :
             props.cases
-    }
+    };
+
+    // Filter props.cases based on district
+    const filterDateList = (cases) => {
+        let prevYearCases = cases.filter(x => x.modifiedStartupDate.year < props.year);
+        let currentCases = cases.filter(x => x.modifiedStartupDate.year === props.year);
+        let sortedCases;
+        console.log(currentCases);
+        if  (props.isChildrenCase) {
+            sortedCases= currentCases
+                .filter(x => x.modifiedStartupDate.date <= props.monthCounter)
+        } else {
+            sortedCases=currentCases
+                .filter(x => x.modifiedStartupDate.date <= props.weekCounter)
+        }
+
+        console.log(sortedCases);
+        return prevYearCases.concat(sortedCases);
+    };
+
+    const filterCases = () => {
+        const cases = filterDistrictList();
+        return filterDateList(cases);
+    };
     
     return (
         <div className={classes.root}>
@@ -197,7 +223,7 @@ function OverviewBoard(props) {
                                 caseState={props.caseState}
                             />
                             <TableBody>
-                                {stableSort(filterDistrictList(), getSorting(order, orderBy))
+                                {stableSort(filterCases(), getSorting(order, orderBy))
                                     .map((row, index) => {
                                         const labelId = `enhanced-table-checkbox-${index}`;
                                         return (
@@ -247,7 +273,7 @@ const mapDispatchToProps = {
     updateCaseStatus
 };
 
-const numberToMonth = (month) => {
+export const numberToMonth = (month) => {
     const monthArray = ["Januar", "Februar", "Mars", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Desember"];
     return monthArray[month];
 };
