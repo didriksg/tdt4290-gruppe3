@@ -1,8 +1,13 @@
 import {
-    CASE_UPDATING,
     ADD_CASE,
+    ADDING_CASE,
+    CALCULATED_WAITING_TIME,
+    CALCULATING_WAITING_TIME,
+    CASE_UPDATED,
+    CASE_UPDATING,
+    CASES_LOADED,
     CASES_LOADING,
-    CASES_LOADED, CASE_UPDATED, NO_CASES_FOUND, ADDING_CASE
+    NO_CASES_FOUND
 } from "../actions/constants";
 
 const initialState = {
@@ -17,9 +22,9 @@ export default function (state = initialState, action) {
                 ...state,
                 isLoading: true,
             };
-
         case CASE_UPDATING:
         case ADDING_CASE:
+        case CALCULATING_WAITING_TIME:
             return {
                 ...state,
                 isLoading: true,
@@ -41,6 +46,13 @@ export default function (state = initialState, action) {
                 ...state,
                 isLoading: false,
                 cases: [],
+            }
+        }
+        case CALCULATED_WAITING_TIME: {
+            return {
+                ...state,
+                isLoading: false,
+                waitingTime: action.payload
             }
         }
         default:

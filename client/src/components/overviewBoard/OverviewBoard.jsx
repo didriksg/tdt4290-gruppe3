@@ -24,7 +24,7 @@ const headCells = [
     {id: 'idNumber', numeric: false, disablePadding: false, label: 'IDNummer'},
     {id: 'category', numeric: true, disablePadding: false, label: 'Kategori'},
     {id: 'priority', numeric: true, disablePadding: false, label: 'Prioritet'},
-    {id: 'referredFrom', numeric: true, disablePadding: false, label: 'Henvist fra'},
+    {id: 'referral', numeric: true, disablePadding: false, label: 'Henvist fra'},
     {id: 'district', numeric: true, disablePadding: false, label: 'Bydel'},
     {id: 'registeredDate', numeric: true, disablePadding: false, label: 'Innmeldt'},
     {id: 'startupDate', numeric: true, disablePadding: false, label: 'Forventet start'},
@@ -224,7 +224,7 @@ function OverviewBoard(props) {
                                                 <TableCell component="th" id={labelId} scope="row">{row.idNumber}</TableCell>
                                                 <TableCell align="right">{row.category}</TableCell>
                                                 <TableCell align="right">{row.priority}</TableCell>
-                                                <TableCell align="right">{row.referredFrom}</TableCell>
+                                                <TableCell align="right">{row.referral}</TableCell>
                                                 <TableCell align="right">{row.district}</TableCell>
                                                 <TableCell
                                                     align="right">{props.isChildrenCase ? '' : 'Uke '} {props.isChildrenCase ? numberToMonth(row.modifiedRegisteredDate.date) : row.modifiedRegisteredDate.date}, {row.modifiedRegisteredDate.year}</TableCell>

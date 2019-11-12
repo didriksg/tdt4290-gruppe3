@@ -35,7 +35,7 @@ const CaseSchema = new Schema({
         required: true,
     },
 
-    referredFrom: {
+    referral: {
         type: String,
         required: false
     },
