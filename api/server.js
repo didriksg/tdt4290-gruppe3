@@ -8,6 +8,8 @@ import authRouter from './routes/authRouter';
 import caseRouter from './routes/caseRouter';
 import userRouter from './routes/userRouter';
 
+
+
 const app = express();
 app.use(express.json());
 app.use(cors());

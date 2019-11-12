@@ -9,7 +9,7 @@ import {categories, districts, referralCodes} from '../config/definitions';
 import User from '../models/User';
 import Case from '../models/Case';
 
-const numberOfCasesToGenerate = 5000000;
+const numberOfCasesToGenerate = 50;
 
 const genDbData = function generateDummyDataToDatabase() {
     const connectionString = mongodbConnectionString + mongodbPort + '/' + mongodbDatabaseName;
