@@ -22,13 +22,5 @@ class WeekNavigator extends Component {
     }
 }
 
-const mapStateToProps = state => ({
-    error: state.error,
-    cases: state.caseState.cases,
-    isLoading: state.caseState.isLoading,
-});
 
-
-export default connect(
-    mapStateToProps
-)(WeekNavigator);
+export default WeekNavigator;

@@ -20,15 +20,23 @@ class ActiveCases extends Component {
     };
 
     handleCounterIncrement = () => {
+        let maxDate = new Date();
+        maxDate.setDate(28);
+        maxDate.setMonth(11);
+        maxDate.setFullYear(this.state.year);
+
+        const maxWeek = this.getWeek(maxDate);
+        console.log(maxWeek);
+        console.log(maxDate);
         if (this.props.isChildrenCase) {
-            if (this.state.monthCounter === 11) {
+            if (this.state.monthCounter === maxWeek) {
                 this.setState({monthCounter: 0});
                 this.setState({year: ++this.state.year});
             } else {
                 this.setState({monthCounter: this.state.monthCounter + 1});
             }
         } else {
-            if (this.state.weekCounter === 52) {
+            if (this.state.weekCounter === maxWeek) {
                 this.setState({weekCounter: 1});
                 this.setState({year: ++this.state.year});
             } else {
@@ -38,6 +46,13 @@ class ActiveCases extends Component {
     };
 
     handleCounterDecrement = () => {
+        let maxDate = new Date();
+        maxDate.setDate(28);
+        maxDate.setMonth(11);
+        maxDate.setFullYear(this.state.year - 1);
+
+        const maxWeek = this.getWeek(maxDate);
+
         if (this.props.isChildrenCase) {
             if (this.state.monthCounter === 0) {
                 this.setState({monthCounter: 11});
@@ -47,7 +62,7 @@ class ActiveCases extends Component {
             }
         } else {
             if (this.state.weekCounter === 1) {
-                this.setState({weekCounter: 52});
+                this.setState({weekCounter: maxWeek});
                 this.setState({year: --this.state.year});
             } else {
                 this.setState({weekCounter: this.state.weekCounter - 1})
