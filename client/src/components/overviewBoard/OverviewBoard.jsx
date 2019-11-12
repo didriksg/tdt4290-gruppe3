@@ -9,7 +9,6 @@ import {
     TableBody,
     TableCell,
     TableHead,
-    TablePagination,
     TableRow,
     TableSortLabel,
     Toolbar,
@@ -39,6 +38,7 @@ function desc(a, b, orderBy) {
     if (b[orderBy] > a[orderBy]) {
         return 1;
     }
+    
     return 0;
 }
 
@@ -46,7 +46,6 @@ function stableSort(array, cmp) {
     if (array === undefined || array === null) {
         return [];
     }
-    console.log(array)
     const stabilizedThis = array.map((el, index) => [el, index]);
     stabilizedThis.sort((a, b) => {
         const order = cmp(a[0], b[0]);
@@ -54,6 +53,7 @@ function stableSort(array, cmp) {
             return order;
         return a[1] - b[1];
     });
+    
     return stabilizedThis.map(el => el[0]);
 }
 
@@ -94,8 +94,8 @@ function EnhancedTableHead(props) {
                             {headCell.label}
                             {orderBy === headCell.id ? (
                                 <span className={classes.visuallyHidden}>
-                  {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
-                </span>
+                                    {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
+                                </span>
                             ) : null}
                         </TableSortLabel>
                     </TableCell>
@@ -157,10 +157,7 @@ function OverviewBoard(props) {
     const classes = useStyles();
     const [order, setOrder] = React.useState('asc');
     const [orderBy, setOrderBy] = React.useState();
-    const [page, setPage] = React.useState(0);
 
-    // Chooses how many rows to be shown
-    const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
     const handleRequestSort = (event, property) => {
         const isDesc = orderBy === property && order === 'desc';
@@ -168,29 +165,44 @@ function OverviewBoard(props) {
         setOrderBy(property);
     };
 
-    const handleChangePage = (event, newPage) => {
-        setPage(newPage);
-    };
-
-    const handleChangeRowsPerPage = event => {
-        setRowsPerPage(+event.target.value);
-        setPage(0);
-    };
-
     // Similar to componentDidMount and componentDidUpdate:
     useEffect(() => {
         props.getCases(props.caseState, props.isChildrenCase);
     }, []);
 
+
+
+
+    // Filter props.cases based on district
     const filterDistrictList = () => {
         return props.districtState !== "" ?
-             (props.cases.filter(x => x.district === props.districtState))
+            (props.cases.filter(x => x.district === props.districtState))
             :
-             props.cases
+            props.cases
+    };
 
-    }
+    // Filter props.cases based on district
+    const filterDateList = (cases) => {
+        let prevYearCases = cases.filter(x => x.modifiedStartupDate.year < props.year);
+        let currentCases = cases.filter(x => x.modifiedStartupDate.year === props.year);
+        let sortedCases;
+        console.log(currentCases);
+        if  (props.isChildrenCase) {
+            sortedCases= currentCases
+                .filter(x => x.modifiedStartupDate.date <= props.monthCounter)
+        } else {
+            sortedCases=currentCases
+                .filter(x => x.modifiedStartupDate.date <= props.weekCounter)
+        }
 
-    const emptyRows = rowsPerPage - Math.min(rowsPerPage, filterDistrictList().length - page * rowsPerPage);
+        console.log(sortedCases);
+        return prevYearCases.concat(sortedCases);
+    };
+
+    const filterCases = () => {
+        const cases = filterDistrictList();
+        return filterDateList(cases);
+    };
     
     return (
         <div className={classes.root}>
@@ -211,8 +223,7 @@ function OverviewBoard(props) {
                                 caseState={props.caseState}
                             />
                             <TableBody>
-                                {stableSort(filterDistrictList(), getSorting(order, orderBy))
-                                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                {stableSort(filterCases(), getSorting(order, orderBy))
                                     .map((row, index) => {
                                         const labelId = `enhanced-table-checkbox-${index}`;
                                         return (
@@ -243,29 +254,9 @@ function OverviewBoard(props) {
                                             </TableRow>
                                         );
                                     })}
-                                {emptyRows > 0 && (
-                                    <TableRow>
-                                        <TableCell colSpan={7}/>
-                                    </TableRow>
-                                )}
                             </TableBody>
                         </Table>{filterDistrictList}
                     </div>
-                    <TablePagination
-                        rowsPerPageOptions={[10, 25]}
-                        component="div"
-                        count={filterDistrictList().length}
-                        rowsPerPage={rowsPerPage}
-                        page={page}
-                        backIconButtonProps={{
-                            'aria-label': 'previous page',
-                        }}
-                        nextIconButtonProps={{
-                            'aria-label': 'next page',
-                        }}
-                        onChangePage={handleChangePage}
-                        onChangeRowsPerPage={handleChangeRowsPerPage}
-                    />
                 </Paper>}
         </div>
     );
@@ -282,7 +273,7 @@ const mapDispatchToProps = {
     updateCaseStatus
 };
 
-const numberToMonth = (month) => {
+export const numberToMonth = (month) => {
     const monthArray = ["Januar", "Februar", "Mars", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Desember"];
     return monthArray[month];
 };
