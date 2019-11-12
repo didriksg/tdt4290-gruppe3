@@ -1,0 +1,179 @@
+.casecontainer{
+    display: flex;    
+    justify-content: center;
+    font-family: sans-serif;
+    align-content: center;
+}
+
+.caseelements{
+    border-radius: 10px;
+    margin-top: 2rem;
+    text-align: center; 
+    border: 2px solid lightgray;
+    background-color: white;
+    /*background-color: lightgrey;*/
+    height: auto;
+    width: 30rem;
+    font-family: sans-serif;
+}
+
+
+
+.elementsingrid{
+    display: grid;
+    grid-template-areas: 
+        'gericanr gericainput gericainput '
+        'prio priograd priograd'
+        'aldersgruppe barnvoksen barnvoksen'
+        'registreringsdato RegDate RegDate'
+        'oppstartsdato StartDate StartDate'
+        'kategori kategorifelt kategorifelt'
+        'henvendtfra sted sted'
+        'bydel bydelbox bydelbox'
+        'viktig viktigknapp viktigknapp'
+        'avbrytknapp tom lagnysakknapp';
+    grid-gap: 1rem;
+    padding: 1rem;
+    justify-content: center;
+}
+
+.buttonPanel {
+    display: grid;
+    margin-top: 5rem;
+}
+
+.elementsingrid > div {
+    /*background-color: lightgray;*/
+    text-align: left;
+    padding: 2px 0;
+  }
+
+.abutton{
+    background-color:rgb(255, 50, 50);
+}
+.forma{
+    display: grid;
+}
+
+.viktigknapp{
+    grid-area: viktigknapp;
+}
+.formb{
+    display: grid;
+}
+
+
+.lagnysakknapp{
+    grid-area: lagnysakknapp;   
+}
+.lbutton{
+    background-color:rgb(0, 128, 0);
+}
+.formc{
+    display: grid;
+}
+
+.bydel{
+    grid-area: bydel;
+    display: inline-grid;
+    align-items: center;
+}
+
+.bydelbox{
+    grid-area: bydelbox;
+}
+
+.oppstartsdato{
+    grid-area: oppstartsdato;
+    display: inline-grid;
+    align-items: center;
+}
+
+.registreringsdato{
+    grid-area: registreringsdato;
+    display: inline-grid;
+    align-items: center;
+}
+.RegDate{
+    grid-area: RegDate;
+}
+
+.StartDate{
+    grid-area: StartDate;
+}  
+
+.gericanr { 
+    grid-area: gericanr; 
+}
+.gericainput { 
+    grid-area: gericainput; 
+}
+
+.prio{
+    grid-area: prio;
+    display: inline-grid;
+    align-items: center;
+}
+.priograd { 
+    grid-area: priograd; 
+}
+
+.henvendtfra{
+    grid-area: henvendtfra;
+    display: inline-grid;
+    align-items: center;
+}
+.sted { 
+    grid-area: sted; 
+}
+
+.aldersgruppe{
+    grid-area: aldersgruppe;
+    display: inline-grid;
+    align-items: center;
+}
+.barnvoksen{
+    grid-area: barnvoksen;
+}
+
+.beskrivelse{
+    grid-area: beskrivelse;
+}
+.beskrivelseboks{
+    grid-area: beskrivelseboks;
+}
+
+.kategori{
+    grid-area: kategori;
+    display: inline-grid;
+    align-items: center;
+}
+
+.kategorifelt{
+    grid-area: kategorifelt;
+}
+
+.footer{
+    grid-area: footer;
+}
+
+.inputboxer{
+    border-radius: 5px;
+    border: 1px solid grey;
+    padding: 0.2rem;
+    font-family: sans-serif;
+    
+}
+
+/*this part of the code removes the up and downcounter from the numberfield. weird that it is there by default*/
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type=number] {
+    -moz-appearance:textfield; /* Firefox */
+    width: 18rem;    /*fikser størrelse på inputfeltet number*/
+}
