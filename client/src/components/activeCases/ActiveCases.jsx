@@ -29,7 +29,7 @@ class ActiveCases extends Component {
         console.log(maxWeek);
         console.log(maxDate);
         if (this.props.isChildrenCase) {
-            if (this.state.monthCounter === maxWeek) {
+            if (this.state.monthCounter === 11) {
                 this.setState({monthCounter: 0});
                 this.setState({year: ++this.state.year});
             } else {
