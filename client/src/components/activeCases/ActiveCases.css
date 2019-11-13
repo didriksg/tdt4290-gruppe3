@@ -1,0 +1,8 @@
+.activeCases {
+    display: flex;
+    flex-direction: column;
+}
+
+.navigators {
+    align-content: center;
+}

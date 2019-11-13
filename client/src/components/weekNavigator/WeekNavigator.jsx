@@ -18,11 +18,8 @@ class WeekNavigator extends Component {
                 </div>
                 <button className="navButton" onClick={() => this.props.incrementCallback()}>{">"}</button>
             </div>
-
         );
     }
-
 }
-
 
 export default WeekNavigator;

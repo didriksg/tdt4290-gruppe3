@@ -3,6 +3,7 @@ import DistrictFilterButton from "./DistrictFilterButton";
 import OverviewBoard from "../overviewBoard/OverviewBoard";
 import Header from "../header/Header";
 import WeekNavigator from "../weekNavigator/WeekNavigator";
+import "./ActiveCases.css";
 
 class ActiveCases extends Component {
     constructor(props) {
@@ -84,17 +85,19 @@ class ActiveCases extends Component {
 
     render() {
         return (
-            <div>
+            <div className="activeCases">
                 <Header/>
-                <div className="filterButton">
-                    <DistrictFilterButton parentCallback={this.callbackFunction}/>
+                <div className="navigators">
+                    <div className="filterButton">
+                        <DistrictFilterButton parentCallback={this.callbackFunction}/>
+                    </div>
+                    <WeekNavigator isChildrenCase={this.props.isChildrenCase}
+                                weekCounter={this.state.weekCounter}
+                                monthCounter={this.state.monthCounter}
+                                year={this.state.year}
+                                incrementCallback={this.handleCounterIncrement}
+                                decrementCallback={this.handleCounterDecrement}/>
                 </div>
-                <WeekNavigator isChildrenCase={this.props.isChildrenCase}
-                               weekCounter={this.state.weekCounter}
-                               monthCounter={this.state.monthCounter}
-                               year={this.state.year}
-                               incrementCallback={this.handleCounterIncrement}
-                               decrementCallback={this.handleCounterDecrement}/>
                 <OverviewBoard
                     weekCounter={this.state.weekCounter}
                     monthCounter={this.state.monthCounter}
