@@ -76,3 +76,6 @@ When deploying the system to a server, it is important to remember a few things:
 ### MongoDB
 1. When developing locally, we have had some problems changing the connection port for MongoDB. This hasn't really been a big problem for us, as the local database only is used when developing, and we have just continued to use the default `27017` port.
 2. If you already have something running on the port MongoDB is supposed to use, MongoDB will not initialize sucsessfully. Normally this is caused by you having installed MongoDB locally on your computer, and already utilizing port `27017`. This problem is best solved by stopping your local MongoDB instance. This can be done by following the instructions in [this link](https://stackoverflow.com/questions/11774887/how-to-stop-mongo-db-in-one-command/11777141).
+
+### .babelrc
+1. When running `npm test` in the `/api` folder, you may have to edit the `.babelrc` file in that folder for the tests to run without errors. Simply open the `.babelrc` file in your code editor and remove `presets: ["es2015"]`. This will make the tests run, but the application will not work properly when running `docker-compose up`. To make it run again, when done with testing, simply change back the `.babelrc` file by adding back `presets: ["es2015"]` and the application should work. 
