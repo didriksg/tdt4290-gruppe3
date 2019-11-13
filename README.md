@@ -39,7 +39,7 @@ will install and setup the frontend, backend and database.
 
 
 ## Running tests
-Smart things about running the tests goes here.
+The application has two separate parts, the api and the client, and these are tested separately. To test the api, navigate to the `/api` folder from the root directory and run `npm test`. Similarly, to test the client side, navigate to the `/client` folder from the root directory and run `npm test`. 
 
 ## Developing
 While developing this application, we have made up some recommendations and tips for developing.
