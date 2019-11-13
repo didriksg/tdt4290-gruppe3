@@ -22,5 +22,4 @@ class WeekNavigator extends Component {
     }
 }
 
-
 export default WeekNavigator;
