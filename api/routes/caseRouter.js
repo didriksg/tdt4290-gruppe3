@@ -37,6 +37,6 @@ caseRouter.put('/updateCaseState/:id', auth, updateCaseState);
 // @route   GET api/case/waitingTime/:state/:district/:isChildrenCase
 // @desc    Get case with given idNumber
 // @access  Private
-caseRouter.get('/waitingTime/:state/:district/:isChildrenCase', auth, getWaitingTime);
+caseRouter.post('/waitingTime', auth, getWaitingTime);
 
 export default caseRouter;

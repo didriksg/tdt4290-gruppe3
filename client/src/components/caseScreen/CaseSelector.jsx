@@ -11,7 +11,7 @@ import WeekPicker from "../WeekPicker";
 import MuiPickersUtilsProvider from "material-ui-pickers/MuiPickersUtilsProvider";
 import MomentUtils from "@date-io/moment"
 
-import {addCase} from "../../actions/caseActions";
+import {addCase, getWaitingTime} from "../../actions/caseActions";
 import moment from "moment";
 import "moment/locale/nb";
 import {connect} from "react-redux";
@@ -31,17 +31,45 @@ class CaseSelector extends React.Component {
             startDate: new Date(),
             category: '',
             district: '',
-
+            suggestedWaitTime: null,
             disabled: false,
         }
     }
 
     handleEventChange = (e) => {
-        this.setState({[e.target.name]: e.target.value});
+        const {target} = e;
+
+        this.setState({[target.name]: target.value}, () => {
+            if (target.name === 'priority'
+            || target.name === 'district'
+            || target.name === 'isChildrenCase') {
+                this.suggestStartupDate();
+            }
+        })
     };
 
     handleDateChange = (name, date) => {
-        this.setState({[name]: date});
+        this.setState({[name]: date}, () => {
+            if (name === 'registeredDate') {
+                this.suggestStartupDate();
+            }
+        });
+    };
+
+    suggestStartupDate = () => {
+        if (this.state.priority !== ''
+            && this.state.isChildrenCase !== ''
+            && this.state.registeredDate !== null
+            && this.state.district !== ''
+        ) {
+
+            this.props.getWaitingTime(this.state.priority, this.state.district, this.state.isChildrenCase, this.state.registeredDate)
+                .then(() => {
+                    let starting = new Date(this.state.registeredDate);
+                    starting.setDate(starting.getDate() + this.props.waitingTime.waitingTime);
+                    this.setState({startDate: starting})
+                });
+        }
     };
 
     isReadyToSend = () => {
@@ -84,6 +112,7 @@ class CaseSelector extends React.Component {
             startDate: new Date(),
             category: '',
             district: '',
+            suggestedWaitTime: null
         });
     };
 
@@ -132,6 +161,11 @@ class CaseSelector extends React.Component {
                                               name={'isChildrenCase'}/>
                         </div>
 
+                        <div className="bydel">Bydel:</div>
+                        <div className="bydelbox">
+                            <BydelSelect handleFunction={this.handleEventChange} value={this.state.district}
+                                         name={'district'}/>
+                        </div>
 
                         <div className="registreringsdato">Registreringsdato:</div>
                         <div className="RegDate">
@@ -146,13 +180,6 @@ class CaseSelector extends React.Component {
                         <div className="StartDate">
                             <DatePicker handleFunction={this.handleDateChange} value={this.state.startDate}
                                         name={'startDate'}/>
-                        </div>
-
-
-                        <div className="bydel">Bydel:</div>
-                        <div className="bydelbox">
-                            <BydelSelect handleFunction={this.handleEventChange} value={this.state.district}
-                                         name={'district'}/>
                         </div>
 
 
@@ -184,7 +211,11 @@ class CaseSelector extends React.Component {
 
 }
 
+const mapStateToProps = state => ({
+    waitingTime: state.caseState.waitingTime,
+});
+
 export default connect(
-    null,
-    {addCase},
+    mapStateToProps,
+    {addCase, getWaitingTime},
 )(CaseSelector);

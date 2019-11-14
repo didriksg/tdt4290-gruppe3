@@ -5,7 +5,7 @@ import {
     AUTH_ERROR,
     LOGIN_FAIL,
     LOGIN_SUCESS,
-    LOGOUT_SUCESS,
+    LOGOUT_SUCESS, RESET,
     USER_LOADED,
     USER_LOADING
 } from "./constants";
@@ -51,7 +51,7 @@ export const login = ({email, password}) => dispatch => {
             })
         })
         .catch(err => {
-            handleError(dispatch, err, LOGIN_FAIL);
+            handleError(dispatch, err);
             dispatch({
                 type: LOGIN_FAIL
             });
@@ -84,10 +84,9 @@ export const tokenConfig = getState => {
     return config;
 };
 
-export const handleError = (dispatch, err, id) => {
+export const handleError = (dispatch, err, id, cleanupAction) => {
     dispatch(returnErrors(err.response.data, err.response.status, id, dispatch));
 
-    console.log(err.response.status);
     if (err.response.status === 401) {
         dispatch(loadUser());
     }

@@ -9,7 +9,7 @@ class ActiveCases extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            district: "",
+            district: '',
             weekCounter: this.getWeek(new Date()),
             monthCounter: new Date().getMonth(),
             year: new Date().getFullYear(),
@@ -22,13 +22,13 @@ class ActiveCases extends Component {
 
     handleCounterIncrement = () => {
         let maxDate = new Date();
+
+        // This date is used as it is always in the last week of the year.
         maxDate.setDate(28);
         maxDate.setMonth(11);
         maxDate.setFullYear(this.state.year);
 
         const maxWeek = this.getWeek(maxDate);
-        console.log(maxWeek);
-        console.log(maxDate);
         if (this.props.isChildrenCase) {
             if (this.state.monthCounter === 11) {
                 this.setState({monthCounter: 0});

@@ -34,25 +34,6 @@ export const addCase = (c) => {
     };
 };
 
-export const updateCase = c => {
-    return (dispatch, getState) => {
-        dispatch({type: CASE_UPDATING});
-        const body = JSON.stringify(c);
-        axios
-            .put(`${connectionString}/api/case/update/${id}`, body, tokenConfig(getState))
-            .then(res => dispatch({
-                type: CASE_UPDATED,
-                payload: res.data
-            }))
-            .then(() => dispatch(
-                showSnackbar("Flott! Du har tatt henvendelsen!", "success")
-            ))
-            .catch(err =>
-                handleError(dispatch, err)
-            );
-    };
-};
-
 export const getCases = (state, isChildrenCase) => {
     return (dispatch, getState) => {
         dispatch({type: CASES_LOADING});
@@ -88,7 +69,7 @@ export const updateCaseStatus = (case_id, user_id, state, isChildrenCase) => {
 
         axios
             .put(`${connectionString}/api/case/updateCaseState/${case_id}`, body, tokenConfig(getState))
-            .then(res => dispatch({
+            .then(() => dispatch({
                 type: CASE_UPDATED
             }))
             .then(() => {
@@ -97,35 +78,54 @@ export const updateCaseStatus = (case_id, user_id, state, isChildrenCase) => {
             .then(() => dispatch(
                 showSnackbar("Flott! Du har tatt henvendelsen!", "success")
             ))
-            .catch(err => {
+            .catch((err) => {
                     if (err.response.status === 404) {
                         dispatch({
-                            type: NO_CASES_FOUD
+                            type: NO_CASES_FOUND
                         })
                             .then(() => {
                                 dispatch(showSnackbar("Ingen saker funnet", "warning"));
                             });
                     } else {
+                        dispatch(getCases(0, isChildrenCase));
                         handleError(dispatch, err)
                     }
                 }
-            );
+            )
     }
 };
 
-export const getWaitingTime = (priority, district, isChildrenCase) => {
+export function getWaitingTime(priority, district, isChildrenCase, registeredDate) {
     return (dispatch, getState) => {
+        const body = JSON.stringify(
+            {
+                priority,
+                district,
+                isChildrenCase,
+                registeredDate
+            }
+        );
         dispatch({type: CALCULATING_WAITING_TIME});
-        axios
-            .get(`${connectionString}/api/case/waitingTime/${priority}/${district}/${isChildrenCase}`, tokenConfig(getState))
+        return axios
+            .post(`${connectionString}/api/case/waitingTime`, body, tokenConfig(getState))
             .then((res) => {
                 dispatch({
                     type: CALCULATED_WAITING_TIME,
                     payload: res.data
-                })
+                });
+                return res.data
             })
-            .then(()=>{
-                dispatch(showSnackbar('En startdato har blitt foreslått. Vennligst sjekk at denne stemmer.', 'info'));
+            .then((data) => {
+                const waitingTime = data.waitingTime;
+                const deviation = data.deviation;
+
+                const readableWaitingTime = isChildrenCase ? Math.round(waitingTime / 30) : Math.ceil(waitingTime / 7);
+                const readableDeviationTime = isChildrenCase ? Math.round(deviation / 30) : Math.ceil(deviation / 7);
+                const feedbackWaitingTimeString = `${readableWaitingTime} ${isChildrenCase ? (readableWaitingTime > 1 ? 'måneder' : 'måned') : (readableWaitingTime > 1 ? 'uker' : 'uke')}`;
+                const feedbackDeviationString = `Dette vil gi et avvik på ${readableDeviationTime} ${isChildrenCase ? 'måneder' : 'uker'}.`;
+                dispatch(showSnackbar(`Basert på ventende saker og prionøkkel, har en stardato om ${feedbackWaitingTimeString} blitt foreslått.
+                \n${readableDeviationTime > 1 ? feedbackDeviationString : ''}
+                \nVennligst sjekk at dette stemmer.`, 'info', null));
             });
     }
-};
+}

@@ -28,7 +28,6 @@ class App extends Component {
     render() {
         return (
             <Provider store={store}>
-                <CustomizedSnackbars/>
                 <Router>
                     <Switch>
                         <Route path="/login" component={LoginScreen}/>
@@ -59,6 +58,7 @@ class App extends Component {
                                       />}/>
                     </Switch>
                 </Router>
+                <CustomizedSnackbars/>
             </Provider>
         );
     }

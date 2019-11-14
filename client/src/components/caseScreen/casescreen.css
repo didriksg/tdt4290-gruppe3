@@ -25,11 +25,11 @@
         'gericanr gericainput gericainput '
         'prio priograd priograd'
         'aldersgruppe barnvoksen barnvoksen'
+        'bydel bydelbox bydelbox'
         'registreringsdato RegDate RegDate'
         'oppstartsdato StartDate StartDate'
         'kategori kategorifelt kategorifelt'
         'henvendtfra sted sted'
-        'bydel bydelbox bydelbox'
         'viktig viktigknapp viktigknapp'
         'avbrytknapp tom lagnysakknapp';
     grid-gap: 1rem;
