@@ -1,5 +1,5 @@
 import React from "react";
-import "./loginscreen.css";
+//import "./loginscreen.css";
 import {connect} from 'react-redux';
 import {login} from '../../actions/authActions';
 import PropTypes from 'prop-types';
@@ -7,7 +7,7 @@ import {Redirect} from "react-router-dom";
 import {Button} from '@material-ui/core';
 
 
-class LoginScreen extends React.Component {
+export class LoginScreen extends React.Component {
     static propTypes = {
         isAuthenticated: PropTypes.bool,
         error: PropTypes.object.isRequired,
