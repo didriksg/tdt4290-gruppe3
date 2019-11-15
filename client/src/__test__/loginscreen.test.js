@@ -1,12 +1,7 @@
 import React from 'react';
 import Enzyme, { shallow, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import { Provider } from "react-redux";
-import configureMockStore from "redux-mock-store";
 import { LoginScreen } from '../components/loginScreen/LoginScreen';
-
-const mockStore = configureMockStore();
-const store = mockStore({});
 
 Enzyme.configure({adapter: new Adapter() });
 
@@ -16,7 +11,6 @@ describe('Loginscreen component', () => {
         isAuthenticated={false} login={() => {}}/>);
 
     it('Should render without errors', () => {
-
 
         const wrapper = component.find('.logincontainer');
 
@@ -31,7 +25,5 @@ describe('Loginscreen component', () => {
         expect(wrapper.length).toBe(2);
 
     });
-
-
 
 });

@@ -14,7 +14,7 @@ const style = {
 };
 
 
-class LogoutButton extends Component {
+export class LogoutButton extends Component {
     static propTypes = {
         error: PropTypes.object.isRequired,
         logout: PropTypes.func.isRequired,
@@ -30,7 +30,7 @@ class LogoutButton extends Component {
 
     render() {
         return (
-            <Button
+            <Button className='logoutbutton'
                 onClick={() => {
                     this.onButtonClick();
                 }}
