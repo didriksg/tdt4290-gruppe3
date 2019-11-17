@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
-import {connect} from "react-redux";
 import "./WeekNavigator.css";
 import {numberToMonth} from "../overviewBoard/OverviewBoard";
+import {Button} from '@material-ui/core';
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 
 class WeekNavigator extends Component {
 
@@ -12,11 +14,15 @@ class WeekNavigator extends Component {
     render() {
         return (
             <div className="navigator">
-                <button className="navButton" onClick={() => this.props.decrementCallback()}>{"<"}</button>
+                <Button className="navButton" onClick={() => this.props.decrementCallback()}>
+                    <ArrowBackIosIcon/>
+                </Button>
                 <div className="nav">
                     {(this.props.isChildrenCase ? numberToMonth(this.props.monthCounter) : `Uke ${this.props.weekCounter}`) + `, ${this.props.year}`}
                 </div>
-                <button className="navButton" onClick={() => this.props.incrementCallback()}>{">"}</button>
+                <Button className="navButton" onClick={() => this.props.incrementCallback()}>
+                    <ArrowForwardIosIcon/>
+                </Button>
             </div>
         );
     }

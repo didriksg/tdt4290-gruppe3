@@ -91,7 +91,6 @@ export default function CustomizedSnackbars() {
     const time = uiState.time;
     const open = uiState.open;
 
-    console.log(time);
 
     function handleClose() {
         dispatch(clearSnackbar());

@@ -4,7 +4,7 @@ import bcrypt from 'bcryptjs';
 import {users} from '../dummy_data/dummyUsers';
 // Categories and config files
 import {bcryptSaltRounds, mongodbConnectionString, mongodbDatabaseName, mongodbPort} from '../config/default';
-import {categories, districts, referralCodes} from '../config/definitions';
+import {adultCategories, districts, adultReferralCodes} from '../config/definitions';
 // Models
 import User from '../models/User';
 import Case from '../models/Case';
@@ -63,9 +63,9 @@ const genCases = async function generateDummyCases() {
         const description = "En kul beskrivelse.";
         const startupDate = new Date(startYear, startMonth, startDay);
         const registeredDate = new Date(registerYear, registeredMonth, registeredDay);
-        const category = categories[Math.floor(Math.random() * categories.length)];
+        const category = adultCategories[Math.floor(Math.random() * adultCategories.length)];
         const district = districts[Math.floor(Math.random() * districts.length)];
-        const referral = referralCodes[Math.floor(Math.random() * referralCodes.length)];
+        const referral = adultReferralCodes[Math.floor(Math.random() * adultReferralCodes.length)];
         const important = false //Math.random() >= 0.9;
 
         const newCase = new Case({

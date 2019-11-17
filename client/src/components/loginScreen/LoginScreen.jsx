@@ -19,7 +19,7 @@ class LoginScreen extends React.Component {
     };
 
     onLoginButtonClick = e => {
-        e.preventDefault();
+        // e.preventDefault();
         const {email, password} = this.state;
 
         const user = {
@@ -47,6 +47,12 @@ class LoginScreen extends React.Component {
         this.setState({[e.target.name]: e.target.value});
     };
 
+    handleEnter = (e) => {
+        if (e.key === 'Enter') {
+            this.onLoginButtonClick()
+        }
+    };
+
     render() {
         if (this.props.isAuthenticated === true && this.props.token !== null) {
             return <Redirect to="/"/>;
@@ -66,15 +72,14 @@ class LoginScreen extends React.Component {
                     </div>
                     <h1>Enhet for Ergoterapitjeneste</h1>
                     <div className="inputfelter">
-                        <form>
                             <input
                                 className="usernamebox"
                                 type="text"
-                                size="42"
                                 id="email"
                                 name="email"
                                 placeholder="Brukernavn"
                                 onChange={this.onChange}
+                                onKeyDown={this.handleEnter}
                             >
 
                             </input>
@@ -82,17 +87,14 @@ class LoginScreen extends React.Component {
                             <input
                                 className="usernamebox"
                                 type="password"
-                                size="42"
                                 id="password"
                                 name="password"
                                 placeholder="Passord"
                                 onChange={this.onChange}
+                                onKeyDown={this.handleEnter}
                             >
 
                             </input>
-
-                        </form>
-
                     </div>
 
                     <div className="loginbutton">

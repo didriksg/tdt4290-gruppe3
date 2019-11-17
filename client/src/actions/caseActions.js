@@ -12,6 +12,7 @@ import {
 } from "./constants";
 import {handleError, tokenConfig} from "./authActions";
 import {showSnackbar} from "./snackbarActions";
+import {numberToMonth} from "../components/overviewBoard/OverviewBoard";
 
 const connectionString = API_CONNECTION_STR;
 
@@ -19,7 +20,7 @@ export const addCase = (c) => {
     return (dispatch, getState) => {
         dispatch({type: ADDING_CASE});
         const body = JSON.stringify(c);
-        axios
+        return axios
             .post(`${connectionString}/api/case/add`, body, tokenConfig(getState))
             .then(res => dispatch({
                 type: ADD_CASE,
@@ -119,11 +120,18 @@ export function getWaitingTime(priority, district, isChildrenCase, registeredDat
                 const waitingTime = data.waitingTime;
                 const deviation = data.deviation;
 
-                const readableWaitingTime = isChildrenCase ? Math.round(waitingTime / 30) : Math.ceil(waitingTime / 7);
-                const readableDeviationTime = isChildrenCase ? Math.round(deviation / 30) : Math.ceil(deviation / 7);
-                const feedbackWaitingTimeString = `${readableWaitingTime} ${isChildrenCase ? (readableWaitingTime > 1 ? 'måneder' : 'måned') : (readableWaitingTime > 1 ? 'uker' : 'uke')}`;
-                const feedbackDeviationString = `Dette vil gi et avvik på ${readableDeviationTime} ${isChildrenCase ? 'måneder' : 'uker'}.`;
-                dispatch(showSnackbar(`Basert på ventende saker og prionøkkel, har en stardato om ${feedbackWaitingTimeString} blitt foreslått.
+                let readableDeviationTime = Math.ceil(deviation / 7);
+                let feedbackWaitingTimeString;
+                if (isChildrenCase) {
+                        let today = new Date(registeredDate);
+                        today.setDate(today.getDate() + waitingTime);
+                        feedbackWaitingTimeString = new Date(registeredDate).getMonth() === today.getMonth() ? `i denne måneden` : `i ${numberToMonth(today.getMonth())} ${today.getFullYear()}`;
+                } else {
+                    const readableWaitingTime = Math.ceil(waitingTime / 7);
+                    feedbackWaitingTimeString = `om ${readableWaitingTime} ${readableWaitingTime > 1 ? 'uker' : 'uke'}`;
+                }
+                const feedbackDeviationString = `Dette vil gi et avvik på ${readableDeviationTime} uker'.`;
+                dispatch(showSnackbar(`Basert på ventende saker og prionøkkel, har en stardato ${feedbackWaitingTimeString} blitt foreslått.
                 \n${readableDeviationTime > 1 ? feedbackDeviationString : ''}
                 \nVennligst sjekk at dette stemmer.`, 'info', null));
             });

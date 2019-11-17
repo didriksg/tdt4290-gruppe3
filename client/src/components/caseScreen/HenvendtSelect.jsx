@@ -4,7 +4,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import {referralCodes} from "../../../definitions";
+import {adultReferralCodes, childrenReferralCodes} from "../../../definitions";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -26,9 +26,10 @@ export default function SimpleSelect(props) {
     }, []);
 
     let elements = [];
+    const referrals = props.isChildrenCase ? childrenReferralCodes : adultReferralCodes;
 
-    for (let i = 0; i < referralCodes.length; i++) {
-        elements.push(<MenuItem value={referralCodes[i]}>{referralCodes[i]}</MenuItem>);
+    for (let i = 0; i < referrals.length; i++) {
+        elements.push(<MenuItem value={referrals[i]}>{referrals[i]}</MenuItem>);
     }
 
     /*outlined-age-simple is a type property for material-ui*/

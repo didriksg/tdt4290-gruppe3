@@ -18,6 +18,7 @@ import CustomizedSnackbars from "./components/Snackbar";
 
 const store = configureStore();
 
+
 class App extends Component {
     constructor(props) {
         super(props);

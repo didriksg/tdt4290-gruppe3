@@ -5,7 +5,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
-import {categories} from '../../../definitions'
+import {adultCategories} from '../../../definitions'
+import {childrenCategories} from '../../../definitions'
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -27,6 +28,7 @@ export default function SimpleSelect(props) {
     }, []);
 
     let elements = [];
+    const categories = props.isChildrenCase ? childrenCategories : adultCategories;
 
     for (let i = 0; i < categories.length; i++) {
         elements.push(<MenuItem value={categories[i]}>{categories[i]}</MenuItem>);

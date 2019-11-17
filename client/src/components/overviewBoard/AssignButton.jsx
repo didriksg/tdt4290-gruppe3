@@ -37,7 +37,7 @@ function AssignButton(props) {
     return (
         <div>
             <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-                Tildel sak
+                Velg henvisning
             </Button>
             <Dialog
                 open={open}
@@ -45,7 +45,7 @@ function AssignButton(props) {
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"
             >
-                <DialogTitle id="alert-dialog-title">{"Ønsker du å tildele deg saken med ID nummer: "}{props.idNumber}{"?"}</DialogTitle>
+                <DialogTitle id="alert-dialog-title">{"Ønsker du å tildele deg henvisningen med ID nummer: "}{props.idNumber}{"?"}</DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
                         Prioritet: {props.priority} <br/>
@@ -58,7 +58,7 @@ function AssignButton(props) {
                         Avbryt
                     </Button>
                     <Button onClick={handleAssignCase} color="primary" autoFocus>
-                        Tildel sak
+                        Tildel henvisning
                     </Button>
                 </DialogActions>
             </Dialog>

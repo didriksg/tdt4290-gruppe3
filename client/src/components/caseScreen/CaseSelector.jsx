@@ -7,9 +7,6 @@ import BydelSelect from "./BydelSelect";
 import KategoriSelect from "./KategoriSelect";
 import HenvendtSelect from "./HenvendtSelect";
 import {Button} from '@material-ui/core';
-import WeekPicker from "../WeekPicker";
-import MuiPickersUtilsProvider from "material-ui-pickers/MuiPickersUtilsProvider";
-import MomentUtils from "@date-io/moment"
 
 import {addCase, getWaitingTime} from "../../actions/caseActions";
 import moment from "moment";
@@ -28,7 +25,7 @@ class CaseSelector extends React.Component {
             isChildrenCase: '',
             referral: '',
             registeredDate: new Date(),
-            startDate: new Date(),
+            startDate: null,
             category: '',
             district: '',
             suggestedWaitTime: null,
@@ -41,8 +38,8 @@ class CaseSelector extends React.Component {
 
         this.setState({[target.name]: target.value}, () => {
             if (target.name === 'priority'
-            || target.name === 'district'
-            || target.name === 'isChildrenCase') {
+                || target.name === 'district'
+                || target.name === 'isChildrenCase') {
                 this.suggestStartupDate();
             }
         })
@@ -97,10 +94,13 @@ class CaseSelector extends React.Component {
                 district: this.state.district,
             };
 
-            this.props.addCase(caseObj);
-            this.resetFields();
+            this.props.addCase(caseObj)
+                .then(() => {
+                    this.resetFields();
+                });
         }
     };
+
 
     resetFields = () => {
         this.setState({
@@ -109,11 +109,30 @@ class CaseSelector extends React.Component {
             isChildrenCase: '',
             referral: '',
             registeredDate: new Date(),
-            startDate: new Date(),
+            startDate: null,
             category: '',
             district: '',
             suggestedWaitTime: null
         });
+    };
+
+    handleNumber = (e) => {
+        if (this.validateNumber(e.key)) {
+            e.preventDefault();
+        }
+    };
+
+    validateNumber = (number) => {
+        const re = /^[0-9\b]+$/;
+
+        // if value is not blank, then test the regex
+        return (number === '' || re.test(number) === false)
+    };
+
+    handlePaste = (e) => {
+        if (this.validateNumber(e.clipboardData.getData('Text'))) {
+            e.preventDefault();
+        }
     };
 
 
@@ -132,10 +151,11 @@ class CaseSelector extends React.Component {
                         <div className="gericainput">
                             <input
                                 className="inputboxer"
-                                type="number"
                                 name='id'
                                 value={this.state.id}
                                 onChange={this.handleEventChange}
+                                onKeyPress={this.handleNumber}
+                                onPaste={this.handlePaste}
                             >
                             </input>
                         </div>
@@ -150,7 +170,9 @@ class CaseSelector extends React.Component {
 
                         <div className="henvendtfra"> Henvendelse fra:</div>
                         <div className="sted">
-                            <HenvendtSelect handleFunction={this.handleEventChange} value={this.state.referral}
+                            <HenvendtSelect handleFunction={this.handleEventChange}
+                                            value={this.state.referral}
+                                            isChildrenCase={this.state.isChildrenCase}
                                             name={'referral'}/>
                         </div>
 
@@ -169,7 +191,8 @@ class CaseSelector extends React.Component {
 
                         <div className="registreringsdato">Registreringsdato:</div>
                         <div className="RegDate">
-                            <DatePicker handleFunction={this.handleDateChange} value={this.state.registeredDate}
+                            <DatePicker handleFunction={this.handleDateChange}
+                                        value={this.state.registeredDate}
                                         name={'registeredDate'}/>
                             {/*<MuiPickersUtilsProvider utils={MomentUtils} moment={moment}>*/}
                             {/*    <WeekPicker/>*/}
@@ -178,14 +201,18 @@ class CaseSelector extends React.Component {
 
                         <div className="oppstartsdato">Oppstartsdato:</div>
                         <div className="StartDate">
-                            <DatePicker handleFunction={this.handleDateChange} value={this.state.startDate}
+                            <DatePicker handleFunction={this.handleDateChange}
+                                        value={this.state.startDate}
+                                        minDate={this.state.registeredDate}
                                         name={'startDate'}/>
                         </div>
 
 
                         <div className="kategori"> Kategori:</div>
                         <div className="kategorifelt">
-                            <KategoriSelect handleFunction={this.handleEventChange} value={this.state.category}
+                            <KategoriSelect handleFunction={this.handleEventChange}
+                                            value={this.state.category}
+                                            isChildrenCase={this.state.isChildrenCase}
                                             name={'category'}/>
                         </div>
 
