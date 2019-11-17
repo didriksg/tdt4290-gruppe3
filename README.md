@@ -1,5 +1,5 @@
-# Ergoterapitjenesten i Trondheim app ting
-[NAME OF APP] is an app created to help Ergotjenesten i Trondheim with their workflow. The app is based on having a React frontend and 
+# ErgoWeb
+ErgoWeb is an app created to help Ergotjenesten i Trondheim with their workflow. The app is based on having a React frontend and 
 NodeJS using Express backend, and a MongoDB NoSQL database.
 
 ## Getting started
