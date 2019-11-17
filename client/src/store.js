@@ -5,7 +5,7 @@ import logger from 'redux-logger';
 import rootReducer from './reducers';
 
 export default function configureStore(preloadedState) {
-    const middlewares = [thunkMiddleware, logger];
+    const middlewares = [thunkMiddleware];
     const middlewareEnhancer = applyMiddleware(...middlewares);
 
     const enhancers = [middlewareEnhancer];

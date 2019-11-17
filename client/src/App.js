@@ -18,6 +18,7 @@ import CustomizedSnackbars from "./components/Snackbar";
 
 const store = configureStore();
 
+
 class App extends Component {
     constructor(props) {
         super(props);
@@ -28,7 +29,6 @@ class App extends Component {
     render() {
         return (
             <Provider store={store}>
-                <CustomizedSnackbars/>
                 <Router>
                     <Switch>
                         <Route path="/login" component={LoginScreen}/>
@@ -59,6 +59,7 @@ class App extends Component {
                                       />}/>
                     </Switch>
                 </Router>
+                <CustomizedSnackbars/>
             </Provider>
         );
     }

@@ -7,7 +7,7 @@ import {
     CASE_UPDATING,
     CASES_LOADED,
     CASES_LOADING,
-    NO_CASES_FOUND
+    NO_CASES_FOUND, RESET
 } from "../actions/constants";
 
 const initialState = {
@@ -37,6 +37,7 @@ export default function (state = initialState, action) {
             };
         case CASE_UPDATED:
         case ADD_CASE:
+        case RESET:
             return {
                 ...state,
                 isLoading: false,

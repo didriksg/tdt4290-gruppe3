@@ -20,7 +20,7 @@ import LoadingScreen from "../loadingScreen/LoadingScreen";
 
 
 const headCells = [
-    {id: 'idNumber', numeric: false, disablePadding: false, label: 'IDNummer'},
+    {id: 'idNumber', numeric: false, disablePadding: false, label: 'ID Nummer'},
     {id: 'category', numeric: true, disablePadding: false, label: 'Kategori'},
     {id: 'priority', numeric: true, disablePadding: false, label: 'Prioritet'},
     {id: 'referral', numeric: true, disablePadding: false, label: 'Henvist fra'},
@@ -186,7 +186,6 @@ function OverviewBoard(props) {
         let prevYearCases = cases.filter(x => x.modifiedStartupDate.year < props.year);
         let currentCases = cases.filter(x => x.modifiedStartupDate.year === props.year);
         let sortedCases;
-        console.log(currentCases);
         if  (props.isChildrenCase) {
             sortedCases= currentCases
                 .filter(x => x.modifiedStartupDate.date <= props.monthCounter)
@@ -195,7 +194,6 @@ function OverviewBoard(props) {
                 .filter(x => x.modifiedStartupDate.date <= props.weekCounter)
         }
 
-        console.log(sortedCases);
         return prevYearCases.concat(sortedCases);
     };
 

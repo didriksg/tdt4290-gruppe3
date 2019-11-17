@@ -11,7 +11,7 @@
     "3": 3,
     "4": 4
   },
-  "categories": [
+  "adultCategories": [
     "B",
     "C",
     "D",
@@ -27,7 +27,7 @@
     "TI",
     "HDR"
   ],
-  "referralCodes": [
+  "adultReferralCodes": [
     "1",
     "2",
     "3",
@@ -43,5 +43,35 @@
     "13",
     "14",
     "15"
+  ],
+
+  "childrenCategories" : [
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "H",
+    "I",
+    "J",
+    "K",
+    "L",
+    "M",
+    "N"
+  ],
+  "childrenReferralCodes": [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10",
+    "11",
+    "12"
   ]
 }

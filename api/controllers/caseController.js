@@ -287,6 +287,12 @@ export const updateCaseState = function updateCaseState(req, res) {
                     if (currentState === 0) {
                         c.userResponsible = userId
                     }
+
+                    if (currentState === 1) {
+                        // TODO: Dispatch Snackbar
+                        return res.status(405)
+                            .json({msg: `Saken er allerede tatt.`});
+                    }
                     break;
                 }
                 case 2: {
@@ -295,6 +301,7 @@ export const updateCaseState = function updateCaseState(req, res) {
                         return res.status(405)
                             .json({msg: `Changing from state ${currentState} to ${newState} is not allowed`});
                     }
+
                     break;
                 }
                 default: {
@@ -323,18 +330,25 @@ export const updateCaseState = function updateCaseState(req, res) {
         });
 };
 
-
+/**
+ * Calculate the expected waiting time for a case.
+ */
 export const getWaitingTime = function getWaitingTime(req, res) {
-    const priority = req.params.priority;
-    const district = req.params.district;
-    const isChildrenCase = req.params.isChildrenCase;
+    // Extract data from request body
+    const priority = req.body.priority;
+    const district = req.body.district;
+    const isChildrenCase = req.body.isChildrenCase;
+    const registeredDate = req.body.registeredDate;
 
+    // Simple data validation
     if (priority === null
         || priority === undefined
         || district === undefined
         || district === null
         || isChildrenCase === undefined
         || isChildrenCase === null
+        || registeredDate === null
+        || registeredDate === undefined
     ) {
         return res.status(400)
             .json({
@@ -342,9 +356,46 @@ export const getWaitingTime = function getWaitingTime(req, res) {
             })
     }
 
-    const waitingTime = priorityToWaitingTimeInDays[priority];
-    return res.status(200)
-        .json({
-            waitingTimeInDays: {waitingTime}
+    const defaultWaitingTime = priorityToWaitingTimeInDays[priority];
+
+    // Used for calculating difference between two UTC dates.
+    const _MS_PER_DAY = 1000 * 60 * 60 * 24;
+
+    // Search for cases with given parameters.
+    Case.find({
+        priority: priority,
+        district: district,
+        isChildrenCase: isChildrenCase
+    })
+        // Find the case with the longest waiting time
+        .then((cases) => {
+            let maxDate = new Date();
+            cases.forEach((c) => {
+                const currentStartDate = new Date(c.startupDate);
+                if (maxDate <= currentStartDate) {
+                    maxDate = currentStartDate;
+                }
+            });
+
+            return maxDate
+        })
+        // Specify whether default waiting time, or the case with the longest waiting time that is the furthest away from today.
+        .then((maxDate) => {
+            const currentDate = new Date();
+            const utc1 = Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate());
+            const utc2 = Date.UTC(maxDate.getFullYear(), maxDate.getMonth(), maxDate.getDate());
+
+            const daysDifference = Math.floor((utc2 - utc1) / _MS_PER_DAY);
+
+            return Math.max(daysDifference, defaultWaitingTime)
+        })
+        // Return results
+        .then((actualWaitingTime) => {
+            return res.status(200)
+                .json({
+                    waitingTime: actualWaitingTime !== undefined ? actualWaitingTime : defaultWaitingTime,
+                    deviation: actualWaitingTime > defaultWaitingTime ? actualWaitingTime - defaultWaitingTime : 0
+                });
         });
+
 };

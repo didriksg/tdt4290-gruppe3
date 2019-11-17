@@ -13,7 +13,8 @@ export default function (state = initialState, action) {
                 ...state,
                 open: true,
                 message: action.message,
-                variant: action.variant
+                variant: action.variant,
+                time: action.time,
             };
         case SNACKBAR_CLEAR:
             return {

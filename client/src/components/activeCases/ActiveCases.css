@@ -1,0 +1,25 @@
+.activeCases {
+    display: flex;
+    flex-direction: column;
+}
+
+.weekPicker {
+    margin-top:auto;
+    margin-bottom: 0.5rem;
+}
+
+.districtPicker {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 1rem
+}
+
+.navigators{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);;
+    grid-template-areas:
+            "empty weekPicker districtPicker";
+    justify-content: center;
+    /*background-color: green;*/
+
+}

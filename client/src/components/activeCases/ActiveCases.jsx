@@ -3,12 +3,13 @@ import DistrictFilterButton from "./DistrictFilterButton";
 import OverviewBoard from "../overviewBoard/OverviewBoard";
 import Header from "../header/Header";
 import WeekNavigator from "../weekNavigator/WeekNavigator";
+import "./ActiveCases.css";
 
 class ActiveCases extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            district: "",
+            district: '',
             weekCounter: this.getWeek(new Date()),
             monthCounter: new Date().getMonth(),
             year: new Date().getFullYear(),
@@ -20,6 +21,14 @@ class ActiveCases extends Component {
     };
 
     handleCounterIncrement = () => {
+        let maxDate = new Date();
+
+        // This date is used as it is always in the last week of the year.
+        maxDate.setDate(28);
+        maxDate.setMonth(11);
+        maxDate.setFullYear(this.state.year);
+
+        const maxWeek = this.getWeek(maxDate);
         if (this.props.isChildrenCase) {
             if (this.state.monthCounter === 11) {
                 this.setState({monthCounter: 0});
@@ -28,7 +37,7 @@ class ActiveCases extends Component {
                 this.setState({monthCounter: this.state.monthCounter + 1});
             }
         } else {
-            if (this.state.weekCounter === 52) {
+            if (this.state.weekCounter === maxWeek) {
                 this.setState({weekCounter: 1});
                 this.setState({year: ++this.state.year});
             } else {
@@ -38,6 +47,13 @@ class ActiveCases extends Component {
     };
 
     handleCounterDecrement = () => {
+        let maxDate = new Date();
+        maxDate.setDate(28);
+        maxDate.setMonth(11);
+        maxDate.setFullYear(this.state.year - 1);
+
+        const maxWeek = this.getWeek(maxDate);
+
         if (this.props.isChildrenCase) {
             if (this.state.monthCounter === 0) {
                 this.setState({monthCounter: 11});
@@ -47,7 +63,7 @@ class ActiveCases extends Component {
             }
         } else {
             if (this.state.weekCounter === 1) {
-                this.setState({weekCounter: 52});
+                this.setState({weekCounter: maxWeek});
                 this.setState({year: --this.state.year});
             } else {
                 this.setState({weekCounter: this.state.weekCounter - 1})
@@ -69,17 +85,25 @@ class ActiveCases extends Component {
 
     render() {
         return (
-            <div>
+            <div className="activeCases">
                 <Header/>
-                <div className="filterButton">
-                    <DistrictFilterButton parentCallback={this.callbackFunction}/>
+
+                <div className="navigators">
+                    <div className="empty"/>
+
+                    <div className="weekPicker" >
+                    <WeekNavigator
+                        isChildrenCase={this.props.isChildrenCase}
+                                weekCounter={this.state.weekCounter}
+                                monthCounter={this.state.monthCounter}
+                                year={this.state.year}
+                                incrementCallback={this.handleCounterIncrement}
+                                decrementCallback={this.handleCounterDecrement}/>
+                    </div>
+                    <div className="districtPicker">
+                        <DistrictFilterButton parentCallback={this.callbackFunction}/>
+                    </div>
                 </div>
-                <WeekNavigator isChildrenCase={this.props.isChildrenCase}
-                               weekCounter={this.state.weekCounter}
-                               monthCounter={this.state.monthCounter}
-                               year={this.state.year}
-                               incrementCallback={this.handleCounterIncrement}
-                               decrementCallback={this.handleCounterDecrement}/>
                 <OverviewBoard
                     weekCounter={this.state.weekCounter}
                     monthCounter={this.state.monthCounter}

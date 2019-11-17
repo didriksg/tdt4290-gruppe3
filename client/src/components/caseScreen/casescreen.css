@@ -25,15 +25,15 @@
         'gericanr gericainput gericainput '
         'prio priograd priograd'
         'aldersgruppe barnvoksen barnvoksen'
+        'bydel bydelbox bydelbox'
         'registreringsdato RegDate RegDate'
         'oppstartsdato StartDate StartDate'
         'kategori kategorifelt kategorifelt'
         'henvendtfra sted sted'
-        'bydel bydelbox bydelbox'
         'viktig viktigknapp viktigknapp'
         'avbrytknapp tom lagnysakknapp';
-    grid-gap: 1rem;
-    padding: 1rem;
+    grid-gap: 0.8rem;
+    padding: 0.8rem;
     justify-content: center;
 }
 
@@ -114,8 +114,12 @@
     display: inline-grid;
     align-items: center;
 }
-.priograd { 
-    grid-area: priograd; 
+.priograd {
+    grid-area: priograd;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
 }
 
 .henvendtfra{
@@ -159,6 +163,7 @@
 
 .inputboxer{
     border-radius: 5px;
+    width: 96.5%;
     border: 1px solid grey;
     padding: 0.2rem;
     font-family: sans-serif;

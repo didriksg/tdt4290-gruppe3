@@ -7,8 +7,17 @@ import {
     KeyboardDatePicker,
 } from '@material-ui/pickers';
 
+
+
 export default function MaterialUIPickers(props) {
     // The first commit of Material-UI
+
+    const formatDate = (date) => {
+        console.log(date);
+        return date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate();
+    };
+
+
     return (
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
             <Grid container justify="center">
@@ -16,7 +25,9 @@ export default function MaterialUIPickers(props) {
                     disableToolbar
                     name={props.name}
                     variant="inline"
-                    format="MM/dd/yyyy"
+                    autoOk={true}
+                    minDate={props.minDate ? props.minDate : new Date('1900-01-01')}
+                    format="dd/MM/yyyy"
                     margin="normal"
                     id="date-picker-inline"
                     value={props.value}
