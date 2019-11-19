@@ -5,6 +5,7 @@ import {login} from '../../actions/authActions';
 import PropTypes from 'prop-types';
 import {Redirect} from "react-router-dom";
 import {Button} from '@material-ui/core';
+import LoadingScreen from "../loadingScreen/LoadingScreen";
 
 
 class LoginScreen extends React.Component {
@@ -60,23 +61,24 @@ class LoginScreen extends React.Component {
         return (
 
             <div className="logincontainer">
+                {this.props.isLoading ? <LoadingScreen/> :
+                    <div className="loginelements">
 
-                <div className="loginelements">
-
-                    <div className="logo">
-                        <img
-                            src="https://upload.wikimedia.org/wikipedia/commons/c/ce/Trondheim_komm.svg"
-                            width="70" height="80"
-                            alt="Trondheim kommune logo"
-                        />
-                    </div>
-                    <h1>Enhet for Ergoterapitjeneste</h1>
-                    <div className="inputfelter">
+                        <div className="logo">
+                            <img
+                                src="https://upload.wikimedia.org/wikipedia/commons/c/ce/Trondheim_komm.svg"
+                                width="70" height="80"
+                                alt="Trondheim kommune logo"
+                            />
+                        </div>
+                        <h1>Enhet for Ergoterapitjeneste</h1>
+                        <div className="inputfelter">
                             <input
                                 className="usernamebox"
                                 type="text"
                                 id="email"
                                 name="email"
+                                value={this.state.email}
                                 placeholder="Brukernavn"
                                 onChange={this.onChange}
                                 onKeyDown={this.handleEnter}
@@ -95,16 +97,17 @@ class LoginScreen extends React.Component {
                             >
 
                             </input>
-                    </div>
+                        </div>
 
-                    <div className="loginbutton">
-                        <Button variant="contained"
-                                color="primary"
-                                onClick={(e) => this.onLoginButtonClick(e)}>Login
-                        </Button>
-                    </div>
+                        <div className="loginbutton">
+                            <Button variant="contained"
+                                    color="primary"
+                                    onClick={(e) => this.onLoginButtonClick(e)}>Login
+                            </Button>
+                        </div>
 
-                </div>
+                    </div>
+                }
             </div>
         )
     }
@@ -113,6 +116,7 @@ class LoginScreen extends React.Component {
 
 const mapStateToProps = state => ({
     isAuthenticated: state.auth.isAuthenticated,
+    isLoading: state.auth.isLoading,
     token: state.auth.token,
     error: state.error,
 });

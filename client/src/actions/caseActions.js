@@ -122,16 +122,19 @@ export function getWaitingTime(priority, district, isChildrenCase, registeredDat
 
                 let readableDeviationTime = Math.ceil(deviation / 7);
                 let feedbackWaitingTimeString;
+
                 if (isChildrenCase) {
-                        let today = new Date(registeredDate);
-                        today.setDate(today.getDate() + waitingTime);
-                        feedbackWaitingTimeString = new Date(registeredDate).getMonth() === today.getMonth() ? `i denne måneden` : `i ${numberToMonth(today.getMonth())} ${today.getFullYear()}`;
+                    let today = new Date(registeredDate);
+                    today.setDate(today.getDate() + waitingTime);
+                    feedbackWaitingTimeString = new Date(registeredDate).getMonth() === today.getMonth() ? `i denne måneden` : `i ${numberToMonth(today.getMonth())} ${today.getFullYear()}`;
                 } else {
                     const readableWaitingTime = Math.ceil(waitingTime / 7);
                     feedbackWaitingTimeString = `om ${readableWaitingTime} ${readableWaitingTime > 1 ? 'uker' : 'uke'}`;
                 }
-                const feedbackDeviationString = `Dette vil gi et avvik på ${readableDeviationTime} uker'.`;
-                dispatch(showSnackbar(`Basert på ventende saker og prionøkkel, har en stardato ${feedbackWaitingTimeString} blitt foreslått.
+
+                const feedbackDeviationString = `Dette vil gi et avvik på ${readableDeviationTime} uker.`;
+
+                dispatch(showSnackbar(`En oppstartsdato ${feedbackWaitingTimeString} blitt foreslått.
                 \n${readableDeviationTime > 1 ? feedbackDeviationString : ''}
                 \nVennligst sjekk at dette stemmer.`, 'info', null));
             });

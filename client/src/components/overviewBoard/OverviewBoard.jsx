@@ -3,17 +3,7 @@ import AssignButton from "./AssignButton";
 
 import PropTypes from 'prop-types';
 import {makeStyles} from '@material-ui/core/styles';
-import {
-    Paper,
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableRow,
-    TableSortLabel,
-    Toolbar,
-    Typography
-} from '@material-ui/core';
+import {Paper, Table, TableBody, TableCell, TableHead, TableRow, TableSortLabel, Toolbar, Typography} from '@material-ui/core';
 import {connect} from "react-redux";
 import {getCases, updateCaseStatus} from "../../actions/caseActions";
 import LoadingScreen from "../loadingScreen/LoadingScreen";
@@ -38,7 +28,7 @@ function desc(a, b, orderBy) {
     if (b[orderBy] > a[orderBy]) {
         return 1;
     }
-    
+
     return 0;
 }
 
@@ -53,7 +43,7 @@ function stableSort(array, cmp) {
             return order;
         return a[1] - b[1];
     });
-    
+
     return stabilizedThis.map(el => el[0]);
 }
 
@@ -171,8 +161,6 @@ function OverviewBoard(props) {
     }, []);
 
 
-
-
     // Filter props.cases based on district
     const filterDistrictList = () => {
         return props.districtState !== "" ?
@@ -186,11 +174,11 @@ function OverviewBoard(props) {
         let prevYearCases = cases.filter(x => x.modifiedStartupDate.year < props.year);
         let currentCases = cases.filter(x => x.modifiedStartupDate.year === props.year);
         let sortedCases;
-        if  (props.isChildrenCase) {
-            sortedCases= currentCases
+        if (props.isChildrenCase) {
+            sortedCases = currentCases
                 .filter(x => x.modifiedStartupDate.date <= props.monthCounter)
         } else {
-            sortedCases=currentCases
+            sortedCases = currentCases
                 .filter(x => x.modifiedStartupDate.date <= props.weekCounter)
         }
 
@@ -201,7 +189,7 @@ function OverviewBoard(props) {
         const cases = filterDistrictList();
         return filterDateList(cases);
     };
-    
+
     return (
         <div className={classes.root}>
             {props.isLoading ? <LoadingScreen/> :
@@ -224,11 +212,13 @@ function OverviewBoard(props) {
                                 {stableSort(filterCases(), getSorting(order, orderBy))
                                     .map((row, index) => {
                                         const labelId = `enhanced-table-checkbox-${index}`;
+                                        const color = (index % 2) === 0 ? 'white' : '#F1F1F1';
                                         return (
                                             <TableRow
-                                                hover
+                                                hover={true}
                                                 tabIndex={-1}
                                                 key={row.idNumber}
+                                                style={{backgroundColor: color}}
                                             >
                                                 <TableCell component="th" id={labelId} scope="row">{row.idNumber}</TableCell>
                                                 <TableCell align="right">{row.category}</TableCell>

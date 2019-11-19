@@ -12,19 +12,15 @@ import {
 
 const initialState = {
     isLoading: false,
+    calculatingWaitingTime: false,
     cases: [],
 };
 
 export default function (state = initialState, action) {
     switch (action.type) {
-        case CASES_LOADING:
-            return {
-                ...state,
-                isLoading: true,
-            };
         case CASE_UPDATING:
         case ADDING_CASE:
-        case CALCULATING_WAITING_TIME:
+        case CASES_LOADING:
             return {
                 ...state,
                 isLoading: true,
@@ -34,6 +30,11 @@ export default function (state = initialState, action) {
                 ...state,
                 isLoading: false,
                 cases: action.payload
+            };
+        case CALCULATING_WAITING_TIME:
+            return {
+                ...state,
+                calculatingWaitingTime: true,
             };
         case CASE_UPDATED:
         case ADD_CASE:
@@ -52,7 +53,7 @@ export default function (state = initialState, action) {
         case CALCULATED_WAITING_TIME: {
             return {
                 ...state,
-                isLoading: false,
+                calculatingWaitingTime: false,
                 waitingTime: action.payload
             }
         }

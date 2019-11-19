@@ -5,12 +5,12 @@ import {Link} from 'react-router-dom';
 
 const style = {
     appBar: {
-        marginRight:'-8px',
-        marginLeft:'-8px',
-        marginTop:'-8px',
-        top:0,
+        marginRight: '-8px',
+        marginLeft: '-8px',
+        marginTop: '-8px',
+        top: 0,
         position: 'sticky',
-        zIndex:100
+        zIndex: 100
     }
 };
 
