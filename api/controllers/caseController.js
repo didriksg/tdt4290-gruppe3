@@ -219,7 +219,7 @@ export const getCaseById = function getCaseById(req, res) {
 };
 
 /**
- * Get all cases with the provided gerica ID.
+ * Get all cases with the provided ID number.
  **/
 export const getCasesByIdNumber = function getCasesByIdNumber(req, res) {
     // Extract ID

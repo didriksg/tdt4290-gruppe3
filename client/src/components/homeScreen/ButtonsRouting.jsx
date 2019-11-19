@@ -43,7 +43,7 @@ export default function RoutingButtons() {
                                     style={style.buttons}
                                     component={Link} to={"/barn"}
                                 >
-                                    Henvisninger barn
+                                    Barn
                                 </Button>
                             </Grid>
                             <Grid item>
@@ -54,7 +54,7 @@ export default function RoutingButtons() {
                                     style={style.buttons}
                                     component={Link} to={"/voksen"}
                                 >
-                                    Henvisninger voksen
+                                    Voksen
                                 </Button>
                             </Grid>
                             <Grid item>
@@ -66,7 +66,7 @@ export default function RoutingButtons() {
                                     style={style.buttons}
                                     component={Link} to={"/ny"}
                                 >
-                                    Registrer ny henvisning
+                                    Registrer ny
                                 </Button>
                             </Grid>
                         </Grid>

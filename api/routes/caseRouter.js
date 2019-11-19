@@ -24,11 +24,6 @@ caseRouter.get('/list/:state/:isChildrenCase', auth, list);
 // @access  Private
 caseRouter.get('/:id', auth, getCaseById);
 
-// @route   GET api/case/idNumber
-// @desc    Get case with given idNumber
-// @access  Private
-caseRouter.get('/idNumber/:id', auth, getCasesByIdNumber);
-
 // @route   GET api/case/updateCaseState/:id
 // @desc    Get case with given idNumber
 // @access  Private
