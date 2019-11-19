@@ -1,7 +1,6 @@
 import React from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {updateCaseStatus} from '../../actions/caseActions';
-import PropTypes from 'prop-types';
 
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -45,7 +44,8 @@ function AssignButton(props) {
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"
             >
-                <DialogTitle id="alert-dialog-title">{"Ønsker du å tildele deg henvisningen med ID nummer: "}{props.idNumber}{"?"}</DialogTitle>
+                <DialogTitle
+                    id="alert-dialog-title">{"Ønsker du å tildele deg henvisningen med ID nummer: "}{props.idNumber}{"?"}</DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
                         Prioritet: {props.priority} <br/>

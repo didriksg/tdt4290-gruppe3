@@ -91,14 +91,14 @@ class ActiveCases extends Component {
                 <div className="navigators">
                     <div className="empty"/>
 
-                    <div className="weekPicker" >
-                    <WeekNavigator
-                        isChildrenCase={this.props.isChildrenCase}
-                                weekCounter={this.state.weekCounter}
-                                monthCounter={this.state.monthCounter}
-                                year={this.state.year}
-                                incrementCallback={this.handleCounterIncrement}
-                                decrementCallback={this.handleCounterDecrement}/>
+                    <div className="weekPicker">
+                        <WeekNavigator
+                            isChildrenCase={this.props.isChildrenCase}
+                            weekCounter={this.state.weekCounter}
+                            monthCounter={this.state.monthCounter}
+                            year={this.state.year}
+                            incrementCallback={this.handleCounterIncrement}
+                            decrementCallback={this.handleCounterDecrement}/>
                     </div>
                     <div className="districtPicker">
                         <DistrictFilterButton parentCallback={this.callbackFunction}/>

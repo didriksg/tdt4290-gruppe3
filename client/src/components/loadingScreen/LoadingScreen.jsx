@@ -1,5 +1,4 @@
 import React from 'react';
-import {css} from '@emotion/core';
 // Another way to import. This is recommended to reduce bundle size
 import ClipLoader from 'react-spinners/ClipLoader';
 import "./LoadingScreen.css";

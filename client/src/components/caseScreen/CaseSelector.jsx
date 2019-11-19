@@ -12,9 +12,18 @@ import {addCase, getWaitingTime} from "../../actions/caseActions";
 import moment from "moment";
 import "moment/locale/nb";
 import {connect} from "react-redux";
+import LoadingScreen from "../loadingScreen/LoadingScreen";
+import ClipLoader from "react-spinners/ClipLoader";
 
 moment.locale("nb");
 
+const style = {
+    loadingIcon: {
+        display: 'block',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+    }
+};
 class CaseSelector extends React.Component {
     constructor(props) {
         super(props);
@@ -59,13 +68,14 @@ class CaseSelector extends React.Component {
             && this.state.registeredDate !== null
             && this.state.district !== ''
         ) {
-
-            this.props.getWaitingTime(this.state.priority, this.state.district, this.state.isChildrenCase, this.state.registeredDate)
-                .then(() => {
-                    let starting = new Date(this.state.registeredDate);
-                    starting.setDate(starting.getDate() + this.props.waitingTime.waitingTime);
-                    this.setState({startDate: starting})
-                });
+            this.setState({startDate: null}, () => {
+                this.props.getWaitingTime(this.state.priority, this.state.district, this.state.isChildrenCase, this.state.registeredDate)
+                    .then(() => {
+                        let starting = new Date(this.state.registeredDate);
+                        starting.setDate(starting.getDate() + this.props.waitingTime.waitingTime);
+                        this.setState({startDate: starting})
+                    });
+            })
         }
     };
 
@@ -74,8 +84,8 @@ class CaseSelector extends React.Component {
             && this.state.priority !== ''
             && this.state.isChildrenCase !== ''
             && this.state.referral !== ''
-            && this.state.registeredDate !== ''
-            && this.state.startDate !== ''
+            && this.state.registeredDate !== null
+            && this.state.startDate !== null
             && this.state.category !== ''
             && this.state.district !== '';
     };
@@ -139,99 +149,103 @@ class CaseSelector extends React.Component {
     render() {
         return (
             <div className="casecontainer">
+                {this.props.isLoading ? <LoadingScreen/> :
+                    <div className="caseelements">
 
-                <div className="caseelements">
-
-                    <h1>Ny henvendelse</h1>
-
-                    <div className="elementsingrid">
+                        <h1>Ny henvendelse</h1>
+                        <div className="elementsingrid">
 
 
-                        <div className="gericanr">IDnr:</div>
-                        <div className="gericainput">
-                            <input
-                                className="inputboxer"
-                                name='id'
-                                value={this.state.id}
-                                onChange={this.handleEventChange}
-                                onKeyPress={this.handleNumber}
-                                onPaste={this.handlePaste}
+                            <div className="gericanr">IDnr:</div>
+                            <div className="gericainput">
+                                <input
+                                    className="inputboxer"
+                                    name='id'
+                                    value={this.state.id}
+                                    onChange={this.handleEventChange}
+                                    onKeyPress={this.handleNumber}
+                                    onPaste={this.handlePaste}
+                                >
+                                </input>
+                            </div>
+
+
+                            <div className="prio"> Prioritet:</div>
+                            <div className="priograd">
+                                <RadioButtons handleFunction={this.handleEventChange} value={this.state.priority}
+                                              name={'priority'}/>
+                            </div>
+
+
+                            <div className="henvendtfra"> Henvendelse fra:</div>
+                            <div className="sted">
+                                <HenvendtSelect handleFunction={this.handleEventChange}
+                                                value={this.state.referral}
+                                                isChildrenCase={this.state.isChildrenCase}
+                                                name={'referral'}/>
+                            </div>
+
+
+                            <div className="aldersgruppe"> Aldersgruppe:</div>
+                            <div className="barnvoksen">
+                                <BarnVoksenSelect handleFunction={this.handleEventChange} value={this.state.isChildrenCase}
+                                                  name={'isChildrenCase'}/>
+                            </div>
+
+                            <div className="bydel">Bydel:</div>
+                            <div className="bydelbox">
+                                <BydelSelect handleFunction={this.handleEventChange} value={this.state.district}
+                                             name={'district'}/>
+                            </div>
+
+                            <div className="registreringsdato">Registreringsdato:</div>
+                            <div className="RegDate">
+                                <DatePicker handleFunction={this.handleDateChange}
+                                            value={this.state.registeredDate}
+                                            name={'registeredDate'}/>
+                                {/*<MuiPickersUtilsProvider utils={MomentUtils} moment={moment}>*/}
+                                {/*    <WeekPicker/>*/}
+                                {/*</MuiPickersUtilsProvider>*/}
+                            </div>
+
+                            <div className="oppstartsdato">Oppstartsdato:</div>
+                            {this.props.calculatingWaitingTime ?
+                                <div className="StartDate" style={style.loadingIcon}>
+                                    <ClipLoader
+                                        color={'#123abc'}
+                                    />
+                                </div> :
+                                <div className="StartDate">
+                                    <DatePicker handleFunction={this.handleDateChange}
+                                                value={this.state.startDate}
+                                                minDate={this.state.registeredDate}
+                                                name={'startDate'}/>
+                                </div>
+                            }
+
+
+                            <div className="kategori"> Kategori:</div>
+                            <div className="kategorifelt">
+                                <KategoriSelect handleFunction={this.handleEventChange}
+                                                value={this.state.category}
+                                                isChildrenCase={this.state.isChildrenCase}
+                                                name={'category'}/>
+                            </div>
+
+
+                            <Button variant="contained" onClick={this.resetFields} color="secondary">Tøm felter</Button>
+                            <div/>
+                            <Button variant="contained"
+                                    color="primary"
+                                    onClick={this.handleSendCase}
+                                    disabled={!this.isReadyToSend()}
                             >
-                            </input>
+                                Legg til henvendelse
+                            </Button>
+
                         </div>
-
-
-                        <div className="prio"> Prioritet:</div>
-                        <div className="priograd">
-                            <RadioButtons handleFunction={this.handleEventChange} value={this.state.priority}
-                                          name={'priority'}/>
-                        </div>
-
-
-                        <div className="henvendtfra"> Henvendelse fra:</div>
-                        <div className="sted">
-                            <HenvendtSelect handleFunction={this.handleEventChange}
-                                            value={this.state.referral}
-                                            isChildrenCase={this.state.isChildrenCase}
-                                            name={'referral'}/>
-                        </div>
-
-
-                        <div className="aldersgruppe"> Aldersgruppe:</div>
-                        <div className="barnvoksen">
-                            <BarnVoksenSelect handleFunction={this.handleEventChange} value={this.state.isChildrenCase}
-                                              name={'isChildrenCase'}/>
-                        </div>
-
-                        <div className="bydel">Bydel:</div>
-                        <div className="bydelbox">
-                            <BydelSelect handleFunction={this.handleEventChange} value={this.state.district}
-                                         name={'district'}/>
-                        </div>
-
-                        <div className="registreringsdato">Registreringsdato:</div>
-                        <div className="RegDate">
-                            <DatePicker handleFunction={this.handleDateChange}
-                                        value={this.state.registeredDate}
-                                        name={'registeredDate'}/>
-                            {/*<MuiPickersUtilsProvider utils={MomentUtils} moment={moment}>*/}
-                            {/*    <WeekPicker/>*/}
-                            {/*</MuiPickersUtilsProvider>*/}
-                        </div>
-
-                        <div className="oppstartsdato">Oppstartsdato:</div>
-                        <div className="StartDate">
-                            <DatePicker handleFunction={this.handleDateChange}
-                                        value={this.state.startDate}
-                                        minDate={this.state.registeredDate}
-                                        name={'startDate'}/>
-                        </div>
-
-
-                        <div className="kategori"> Kategori:</div>
-                        <div className="kategorifelt">
-                            <KategoriSelect handleFunction={this.handleEventChange}
-                                            value={this.state.category}
-                                            isChildrenCase={this.state.isChildrenCase}
-                                            name={'category'}/>
-                        </div>
-
-
-                        <Button variant="contained" onClick={this.resetFields} color="secondary">Tøm felter</Button>
-                        <div/>
-                        <Button variant="contained"
-                                color="primary"
-                                onClick={this.handleSendCase}
-                                disabled={!this.isReadyToSend()}
-                        >
-                            Legg til henvendelse
-                        </Button>
-
                     </div>
-
-                </div>
-
-
+                }
             </div>
         )
     }
@@ -240,6 +254,8 @@ class CaseSelector extends React.Component {
 
 const mapStateToProps = state => ({
     waitingTime: state.caseState.waitingTime,
+    calculatingWaitingTime: state.caseState.calculatingWaitingTime,
+    isLoading: state.caseState.isLoading,
 });
 
 export default connect(

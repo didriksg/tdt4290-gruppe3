@@ -2,7 +2,7 @@ import axios from 'axios';
 import {clearErrors, returnErrors} from "./errorActions";
 import {
     API_CONNECTION_STR,
-    AUTH_ERROR,
+    AUTH_ERROR, LOGIN_ATTEMPT,
     LOGIN_FAIL,
     LOGIN_SUCESS,
     LOGOUT_SUCESS, RESET,
@@ -33,6 +33,7 @@ export const loadUser = () => (dispatch, getState) => {
 };
 
 export const login = ({email, password}) => dispatch => {
+    dispatch({type: LOGIN_ATTEMPT});
     const config = {
         headers: {
             'Content-Type': 'application/json'
