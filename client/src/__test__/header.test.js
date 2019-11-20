@@ -17,4 +17,20 @@ describe('Header component', () => {
 
     });
 
+    it('Button should render without errors', () => {
+
+        const wrapper = component.find('.back-button');
+        expect(wrapper.length).toBe(1);
+
+    });
+
+    it('Button should render with correct text', () => {
+
+        const wrapper = component.find('.back-button');
+        expect(wrapper.text()).toBe("Tilbake til forsiden");
+
+    });
+
+
+
 });

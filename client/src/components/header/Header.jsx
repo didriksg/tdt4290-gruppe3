@@ -20,6 +20,7 @@ class Header extends Component {
                         <Toolbar>
                             <Grid container sm alignItems="flex-start" justify="flex-end" direction="row">
                                 <Button
+                                    className="back-button"
                                     variant="contained"
                                     color="primary"
                                     component={Link}
