@@ -38,6 +38,4 @@ describe('DistrictFilterButton component', () => {
 
     });
 
-
-
 });
