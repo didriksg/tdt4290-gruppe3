@@ -9,6 +9,7 @@ import caseRouter from './routes/caseRouter';
 import userRouter from './routes/userRouter';
 
 const app = express();
+
 app.use(express.json());
 app.use(cors());
 
@@ -30,3 +31,17 @@ app.use('/api/case', caseRouter);
 
 // Make app listen a given port
 app.listen(apiPort, () => console.log('Server is running on port: ' + apiPort));
+
+
+/*
+
+Uncomment to apply rate limiter
+
+//import rateLimit from "express-rate-limit";
+//const limiter = rateLimit({
+//  windowMs: 10 * 60 * 1000,
+//  max: 100
+//});
+app.use(limiter);
+
+*/

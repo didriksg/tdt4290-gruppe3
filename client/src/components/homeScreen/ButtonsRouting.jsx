@@ -74,35 +74,35 @@ export default function RoutingButtons() {
                 </Grid>
             </div>
 
-            <div>
-                <h1 style={style.headings}>Profil</h1>
-                <Grid container>
-                    <Grid item sm={12}>
-                        <Grid container justify="center" spacing={2}>
-                            <Grid item>
-                                <Button
-                                    variant="outlined"
-                                    color="primary"
-                                    style={style.buttons}
-                                    component={Link} to={"/arkiv"}
-                                >
-                                    Min profil
-                                </Button>
-                            </Grid>
-                            <Grid item>
-                                <Button
-                                    variant="outlined"
-                                    color="primary"
-                                    style={style.buttons}
-                                    component={Link} to={"/arkiv"}
-                                >
-                                    Administratorpanel
-                                </Button>
-                            </Grid>
-                        </Grid>
-                    </Grid>
-                </Grid>
-            </div>
+            {/*<div>*/}
+            {/*    <h1 style={style.headings}>Profil</h1>*/}
+            {/*    <Grid container>*/}
+            {/*        <Grid item sm={12}>*/}
+            {/*            <Grid container justify="center" spacing={2}>*/}
+            {/*                <Grid item>*/}
+            {/*                    <Button*/}
+            {/*                        variant="outlined"*/}
+            {/*                        color="primary"*/}
+            {/*                        style={style.buttons}*/}
+            {/*                        component={Link} to={"/arkiv"}*/}
+            {/*                    >*/}
+            {/*                        Min profil*/}
+            {/*                    </Button>*/}
+            {/*                </Grid>*/}
+            {/*                <Grid item>*/}
+            {/*                    <Button*/}
+            {/*                        variant="outlined"*/}
+            {/*                        color="primary"*/}
+            {/*                        style={style.buttons}*/}
+            {/*                        component={Link} to={"/arkiv"}*/}
+            {/*                    >*/}
+            {/*                        Administratorpanel*/}
+            {/*                    </Button>*/}
+            {/*                </Grid>*/}
+            {/*            </Grid>*/}
+            {/*        </Grid>*/}
+            {/*    </Grid>*/}
+            {/*</div>*/}
         </div>
     )
 };
