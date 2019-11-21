@@ -79,3 +79,4 @@ When deploying the system to a server, it is important to remember a few things:
 
 ### .babelrc
 1. When running `npm test` in the `/api` folder, you may have to edit the `.babelrc` file in that folder for the tests to run without errors. Simply open the `.babelrc` file in your code editor and remove `presets: ["es2015"]`. This will make the tests run, but the application will not work properly when running `docker-compose up`. To make it run again, when done with testing, simply change back the `.babelrc` file by adding back `presets: ["es2015"]` and the application should work. 
+2. Similarly, when running `npm test` in the `/client` folder, you may have to edit the `.babelrc` file in that folder for the tests to run without errors. Simply open the `.babelrc` file in your code editor and change `env` and `react` under `presets` to `@babel/preset-env` and `@babel/preset-react` respectively. You may be prompted to install these packages. 
