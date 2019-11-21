@@ -9,6 +9,17 @@ import caseRouter from './routes/caseRouter';
 import userRouter from './routes/userRouter';
 
 const app = express();
+
+//Uncomment to apply rate limiter
+
+//import rateLimit from "express-rate-limit";
+//const limiter = rateLimit({
+//  windowMs: 10 * 60 * 1000,
+//  max: 100
+//});
+//app.use(limiter);
+
+
 app.use(express.json());
 app.use(cors());
 
